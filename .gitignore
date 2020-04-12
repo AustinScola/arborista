@@ -1,2 +1,8 @@
-# setup.py dist directory
+# Ignore compiled bytecode files.
+*.pyc
+
+# Ignore setup.py dist directory.
 dist
+
+# Ignore mypy cache.
+.mypy_cache
