@@ -3,6 +3,10 @@ import argparse
 import logging
 from typing import List
 
+from arborista.transformation import Transformations
+from arborista.transformer import Transformer
+from arborista.tree import Tree
+
 LOGGER = logging.getLogger(__package__)
 
 
@@ -30,7 +34,10 @@ def _parse_arguments(argument_parser: argparse.ArgumentParser,
 
 def _run_transformer():
     """Run the transformer with a set of transformations on the Python code."""
-    raise NotImplementedError
+    transformations: Transformations = []
+    transformer = Transformer(transformations)
+    tree: Tree = Tree()
+    transformer.run(tree)
 
 
 def main(arguments: List[str]) -> int:

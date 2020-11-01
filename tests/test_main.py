@@ -98,8 +98,9 @@ def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: Li
 
 def test_run_transformer():
     """Test arborista.main.test_run_transformer."""
-    with pytest.raises(NotImplementedError):
+    with patch('arborista.transformer.Transformer.run') as run_mock:
         _run_transformer()
+        run_mock.assert_called_once()
 
 
 # yapf: disable # pylint: disable=line-too-long
@@ -125,6 +126,7 @@ def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argpar
         parse_arguments_mock.assert_called_once_with(argument_parser, arguments)
         set_up_logging_mock.assert_called_once()
         run_transformer_mock.assert_called_once()
+
 
 def _assert_main_return_value(return_value: int):
     """Assert that the main function returns 0."""
