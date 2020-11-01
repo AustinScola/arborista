@@ -43,7 +43,8 @@ def _run_transformer() -> None:
 def main(arguments: List[str]) -> int:
     """Main function."""
     argument_parser = _set_up_argument_parser()
-    parsed_arguments: argparse.Namespace = _parse_arguments(argument_parser, arguments)
+    parsed_arguments: argparse.Namespace = _parse_arguments(  #pylint: disable=unused-variable
+        argument_parser, arguments)
     _set_up_logging()
     _run_transformer()
     return 0
