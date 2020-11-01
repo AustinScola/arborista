@@ -11,7 +11,7 @@ from arborista.tree import Tree
     ([]),
 ])
 # yapf: enable
-def test_init(transformations: Transformations):
+def test_init(transformations: Transformations) -> None:
     """Test arborista.transformer.Transformer.__init__"""
     transformer: Transformer = Transformer(transformations)
 
@@ -19,7 +19,7 @@ def test_init(transformations: Transformations):
 
 
 def _assert_transformer_has_transformations(transformer: Transformer,
-                                            transformations: Transformations):
+                                            transformations: Transformations) -> None:
     assert transformer.transformations == transformations
 
 
@@ -28,7 +28,7 @@ def _assert_transformer_has_transformations(transformer: Transformer,
     ([], Tree()),
 ])
 # yapf: enable
-def test_run(transformations: Transformations, tree: Tree):
+def test_run(transformations: Transformations, tree: Tree) -> None:
     """Test arborista.transformer.Transformer.run"""
     transformer: Transformer = Transformer(transformations)
     with pytest.raises(NotImplementedError):

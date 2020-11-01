@@ -10,7 +10,7 @@ from arborista.transformation import Transformation
     (Node())
 ])
 # yapf: enable
-def test_maybe_transform(node: Node):
+def test_maybe_transform(node: Node) -> None:
     """Test arborista.transformation.Transformation.maybe_transform."""
     with pytest.raises(NotImplementedError):
         Transformation.maybe_transform(node)

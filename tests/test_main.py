@@ -11,14 +11,14 @@ from arborista.main import (_parse_arguments, _run_transformer, _set_up_argument
                             _set_up_logging, main)
 
 
-def test_set_up_logging():
+def test_set_up_logging() -> None:
     """Test arborista.main._set_up_logging."""
     _set_up_logging()
 
     _assert_logger_is_set_up()
 
 
-def _assert_logger_is_set_up():
+def _assert_logger_is_set_up() -> None:
     """Assert that the logger is set up with a stream handler and the correct level."""
     logger = logging.getLogger(arborista.main.__package__)
 
@@ -26,37 +26,37 @@ def _assert_logger_is_set_up():
     _assert_logger_level_is_info(logger)
 
 
-def _assert_logger_has_stream_handler(logger: logging.Logger):
+def _assert_logger_has_stream_handler(logger: logging.Logger) -> None:
     """Assert the logger has a single stream handler."""
     assert len(logger.handlers) == 1
     first_handler = logger.handlers[0]
     assert isinstance(first_handler, logging.StreamHandler)
 
 
-def _assert_logger_level_is_info(logger: logging.Logger):
+def _assert_logger_level_is_info(logger: logging.Logger) -> None:
     """Assert the logger level is info."""
     assert logger.level == logging.INFO
 
 
-def test_set_up_argument_parser():
+def test_set_up_argument_parser() -> None:
     """Test arborista.main._set_up_argument_parser."""
     argument_parser: argparse.ArgumentParser = _set_up_argument_parser()
 
     _assert_argument_parser_is_set_up(argument_parser)
 
 
-def _assert_argument_parser_is_set_up(argument_parser: argparse.ArgumentParser):
+def _assert_argument_parser_is_set_up(argument_parser: argparse.ArgumentParser) -> None:
     """Assert the argument parser description and prog match the expected values."""
     _assert_argument_parser_description(argument_parser)
     _assert_argument_parser_prog(argument_parser)
 
 
-def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser):
+def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser) -> None:
     """Assert the argument parser description matches the expected value."""
     assert argument_parser.description == 'A tree transformation tool.'
 
 
-def _assert_argument_parser_prog(argument_parser: argparse.ArgumentParser):
+def _assert_argument_parser_prog(argument_parser: argparse.ArgumentParser) -> None:
     """Assert the argument parser prog matches the expected value."""
     assert argument_parser.prog == 'python3 -m arborista'
 
@@ -89,14 +89,14 @@ def argument_parser_from_dict(dictionary: Dict[str, Any]) -> argparse.ArgumentPa
 ])
 # yapf: enable # pylint: disable=enable-too-long
 def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: List[str],
-                         expected_parsed_arguments: argparse.Namespace):
+                         expected_parsed_arguments: argparse.Namespace) -> None:
     """Test arborista.main._parse_arguments."""
     parsed_arguments: argparse.Namespace = _parse_arguments(argument_parser, arguments)
 
     assert parsed_arguments == expected_parsed_arguments
 
 
-def test_run_transformer():
+def test_run_transformer() -> None:
     """Test arborista.main.test_run_transformer."""
     with patch('arborista.transformer.Transformer.run') as run_mock:
         _run_transformer()
@@ -109,7 +109,7 @@ def test_run_transformer():
 ])
 # yapf: enable # pylint: disable=enable-too-long
 def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argparse.Namespace,
-              arguments: List[str]):
+              arguments: List[str]) -> None:
     """Test arborista.main.main."""
     with patch('arborista.main._set_up_argument_parser', return_value=argument_parser) as \
         set_up_argument_parser_mock, \
@@ -128,6 +128,6 @@ def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argpar
         run_transformer_mock.assert_called_once()
 
 
-def _assert_main_return_value(return_value: int):
+def _assert_main_return_value(return_value: int) -> None:
     """Assert that the main function returns 0."""
     assert return_value == 0

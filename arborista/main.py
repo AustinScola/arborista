@@ -10,7 +10,7 @@ from arborista.tree import Tree
 LOGGER = logging.getLogger(__package__)
 
 
-def _set_up_logging():
+def _set_up_logging() -> None:
     """Set up logging."""
     LOGGER.setLevel(logging.INFO)
 
@@ -32,7 +32,7 @@ def _parse_arguments(argument_parser: argparse.ArgumentParser,
     return parsed_arguments
 
 
-def _run_transformer():
+def _run_transformer() -> None:
     """Run the transformer with a set of transformations on the Python code."""
     transformations: Transformations = []
     transformer = Transformer(transformations)
