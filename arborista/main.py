@@ -3,6 +3,7 @@ import argparse
 import logging
 from typing import List
 
+from arborista.node import Node
 from arborista.transformation import Transformations
 from arborista.transformer import Transformer
 from arborista.tree import Tree
@@ -36,7 +37,8 @@ def _run_transformer() -> None:
     """Run the transformer with a set of transformations on the Python code."""
     transformations: Transformations = []
     transformer = Transformer(transformations)
-    tree: Tree = Tree()
+    root: Node = Node()
+    tree: Tree = Tree(root)
     transformer.run(tree)
 
 

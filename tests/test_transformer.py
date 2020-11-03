@@ -1,6 +1,7 @@
 """Test arborista.transformer."""
 import pytest
 
+from arborista.node import Node
 from arborista.transformation import Transformations
 from arborista.transformer import Transformer
 from arborista.tree import Tree
@@ -25,7 +26,7 @@ def _assert_transformer_has_transformations(transformer: Transformer,
 
 # yapf: disable
 @pytest.mark.parametrize('transformations, tree', [
-    ([], Tree()),
+    ([], Tree(root=Node())),
 ])
 # yapf: enable
 def test_run(transformations: Transformations, tree: Tree) -> None:
