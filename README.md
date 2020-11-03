@@ -1,4 +1,5 @@
 # Arborista
+![test](https://github.com/AustinScola/arborista/workflows/Python%20package/badge.svg)
 
 An abstract syntax tree transformation tool for bettering Python code.
 
