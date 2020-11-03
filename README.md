@@ -1,7 +1,10 @@
 # Arborista
 ![test](https://github.com/AustinScola/arborista/workflows/Python%20package/badge.svg)
 
-An abstract syntax tree transformation tool for bettering Python code.
+A tree transformation tool.
+
+Specifically Arborista can be used as a concrete syntax tree transformation tool for bettering
+Python code.
 
 ## Name Etymology
 
