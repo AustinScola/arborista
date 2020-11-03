@@ -3,7 +3,7 @@
 
 An abstract syntax tree transformation tool for bettering Python code.
 
-# Name Etymology
+## Name Etymology
 
 The name Arborista is a combination of the word "arborist", meaning a person who takes care of
 trees, and the suffix "ista", meaning a person who is a specialist at something. This is akin to the
