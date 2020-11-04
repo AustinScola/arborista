@@ -3,7 +3,7 @@ from arborista.node import Node
 from arborista.tree import Tree
 
 
-def test_init():
+def test_init() -> None:
     """Test arborista.tree.Tree.__init__"""
     root: Node = Node()
     tree: Tree = Tree(root)
