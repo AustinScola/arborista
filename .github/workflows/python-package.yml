@@ -22,12 +22,12 @@ jobs:
 
     - name: Test with pytest
       run: |
-        ./coverage.sh
+        ./scripts/coverage.sh
 
     - name: Lint with pylint
       run: |
-        ./lint.sh
+        ./scripts/lint.sh
 
     - name: Type Check with mypy
       run: |
-        ./type_check.sh
+        ./scripts/type_check.sh
