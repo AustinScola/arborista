@@ -1,7 +1,13 @@
 """Test arborista.nodes.python.name."""
 import pytest
 
+from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.name import Name
+
+
+def test_inheritance() -> None:
+    """Test arborista.nodes.python.name.Name inheritance."""
+    assert issubclass(Name, Atom)
 
 
 # yapf: disable

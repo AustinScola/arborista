@@ -1,10 +1,10 @@
 """A Python parameter."""
 from typing import Iterable, List
 
-from arborista.nodes.python.statement import Statement
+from arborista.nodes.python.python_node import PythonNode
 
 
-class Parameter(Statement):  # pylint: disable=too-few-public-methods
+class Parameter(PythonNode):  # pylint: disable=too-few-public-methods
     """A Python parameter."""
 
 
