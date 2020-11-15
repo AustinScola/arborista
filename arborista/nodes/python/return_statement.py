@@ -1,6 +1,6 @@
 """A Python return statement."""
-from arborista.nodes.python.simple_statement import SimpleStatement
+from arborista.nodes.python.small_statement import SmallStatement
 
 
-class ReturnStatement(SimpleStatement):  # pylint: disable=too-few-public-methods
+class ReturnStatement(SmallStatement):  # pylint: disable=too-few-public-methods
     """A Python return statement."""
