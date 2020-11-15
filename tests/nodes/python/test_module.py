@@ -4,7 +4,13 @@ from typing import Optional
 import pytest
 
 from arborista.nodes.python.module import Module
+from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.statement import StatementList, Statements
+
+
+def test_inheritance() -> None:
+    """Test arborista.nodes.python.module.Module inheritance."""
+    assert issubclass(Module, PythonNode)
 
 
 # yapf: disable
