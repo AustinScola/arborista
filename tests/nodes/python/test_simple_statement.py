@@ -3,6 +3,12 @@ import pytest
 
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.small_statement import SmallStatements
+from arborista.nodes.python.statement import Statement
+
+
+def test_inheritance() -> None:
+    """Test arborista.nodes.python.simple_statement.SimpleStatement inheritance."""
+    assert issubclass(SimpleStatement, Statement)
 
 
 # yapf: disable
