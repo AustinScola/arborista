@@ -1,4 +1,6 @@
 """Test arborista.nodes.python.parameter."""
+from typing import Any
+
 import pytest
 
 from arborista.nodes.python.name import Name
@@ -21,3 +23,15 @@ def test_init(name: Name) -> None:
     parameter: Parameter = Parameter(name)
 
     assert parameter.name == name
+
+
+# yapf: disable
+@pytest.mark.parametrize('parameter, other, expected_equality', [
+    (Parameter(Name('foo')), 'bar', False),
+    (Parameter(Name('foo')), Parameter(Name('foo')), True),
+])
+# yapf: enable
+def test_eq(parameter: Parameter, other: Any, expected_equality: bool) -> None:
+    """Test arborista.nodes.python.parameter.Parameter.__eq__."""
+    equality: bool = parameter == other
+    assert equality == expected_equality
