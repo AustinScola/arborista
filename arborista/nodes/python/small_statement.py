@@ -1,5 +1,5 @@
 """A Python small statement."""
-from typing import Iterable
+from typing import Iterable, List
 
 from arborista.nodes.python.python_node import PythonNode
 
@@ -9,3 +9,4 @@ class SmallStatement(PythonNode):  # pylint: disable=too-few-public-methods
 
 
 SmallStatements = Iterable[SmallStatement]
+SmallStatementList = List[SmallStatement]
