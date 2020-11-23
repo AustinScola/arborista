@@ -7,6 +7,8 @@ from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.python_node import PythonNode
+from arborista.nodes.python.return_statement import ReturnStatement
+from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.statement import StatementList, Statements
 
 
@@ -39,7 +41,7 @@ def test_module_init(name: str, statements: Optional[Statements], pass_statement
 @pytest.mark.parametrize('module, other, expected_equality', [
     (Module('foo'), 'bar', False),
     (Module('foo'), Module('bar'), False),
-    (Module('foo', [FunctionDefinition(Name('bar'), [], [])]), Module('foo'), False),
+    (Module('foo', [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]), Module('foo'), False),
     (Module('foo'), Module('foo'), True),
 ])
 # yapf: enable # pylint: enable=line-too-long
