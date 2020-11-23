@@ -4,15 +4,15 @@ from typing import Any
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameter import ParameterList, Parameters
-from arborista.nodes.python.statement import StatementList, Statements
+from arborista.nodes.python.suite import Suite
 
 
 class FunctionDefinition(CompoundStatement):  # pylint: disable=too-few-public-methods
     """A Python function defintion."""
-    def __init__(self, name: Name, parameters: Parameters, body: Statements):
+    def __init__(self, name: Name, parameters: Parameters, body: Suite):
         self.name: Name = name
         self.parameters: ParameterList = list(parameters)
-        self.body: StatementList = list(body)
+        self.body: Suite = body
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, FunctionDefinition):
