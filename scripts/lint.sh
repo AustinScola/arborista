@@ -8,4 +8,4 @@ ARBORISTA="$(realpath "${HERE}/..")"
 pushd "${ARBORISTA}" > /dev/null
 trap "popd > /dev/null" EXIT
 
-python3 -m pylint arborista tests
+python3 -m pylint -j 0 arborista tests
