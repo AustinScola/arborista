@@ -49,6 +49,7 @@ def _assert_argument_parser_is_set_up(argument_parser: argparse.ArgumentParser) 
     """Assert the argument parser description and prog match the expected values."""
     _assert_argument_parser_description(argument_parser)
     _assert_argument_parser_prog(argument_parser)
+    _assert_argument_parser_arguments(argument_parser)
 
 
 def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser) -> None:
@@ -59,6 +60,38 @@ def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser
 def _assert_argument_parser_prog(argument_parser: argparse.ArgumentParser) -> None:
     """Assert the argument parser prog matches the expected value."""
     assert argument_parser.prog == 'python3 -m arborista'
+
+
+def _assert_argument_parser_arguments(argument_parser: argparse.ArgumentParser) -> None:
+    """Assert the argument parser arguments match the expected arguments."""
+    arguments: List[argparse.Action] = argument_parser._get_positional_actions()  # pylint: disable=protected-access
+
+    _assert_arguemnt_parser_number_of_arguments(arguments)
+
+    file_argument: argparse.Action = arguments[0]
+
+    _assert_file_argument_is_set_up(file_argument)
+
+
+def _assert_arguemnt_parser_number_of_arguments(arguments: List[argparse.Action]) -> None:
+    """Assert that the argument parser has the expected number of arguments."""
+    assert len(arguments) == 1
+
+
+def _assert_file_argument_is_set_up(file_argument: argparse.Action) -> None:
+    """Assert that the file argument is set up."""
+    _assert_file_argument_dest(file_argument)
+    _assert_file_argument_help(file_argument)
+
+
+def _assert_file_argument_dest(file_argument: argparse.Action) -> None:
+    """Assert that the file argument has the expected destination."""
+    assert file_argument.dest == 'file'
+
+
+def _assert_file_argument_help(file_argument: argparse.Action) -> None:
+    """Assert that the file argument has the expected help."""
+    assert file_argument.help == 'file to process'
 
 
 def argument_parser_from_dict(dictionary: Dict[str, Any]) -> argparse.ArgumentParser:

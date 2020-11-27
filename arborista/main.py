@@ -23,6 +23,9 @@ def _set_up_argument_parser() -> argparse.ArgumentParser:
     """Set up a argument parser."""
     argument_parser = argparse.ArgumentParser(prog=f'python3 -m {__package__}',
                                               description='A tree transformation tool.')
+
+    argument_parser.add_argument('file', help='file to process')
+
     return argument_parser
 
 
