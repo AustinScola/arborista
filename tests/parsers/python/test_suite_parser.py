@@ -18,7 +18,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_suite, expected_suite', [
     (libcst.SimpleStatementSuite([]), SimpleStatement([])),
-    (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), Block(SimpleStatement(small_statements=[ReturnStatement()]))),
+    (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), Block([SimpleStatement(small_statements=[ReturnStatement()])])),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_suite(libcst_suite: LibcstSuite, expected_suite: Suite) -> None:

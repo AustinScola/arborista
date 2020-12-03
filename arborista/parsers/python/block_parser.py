@@ -2,7 +2,7 @@
 import libcst
 
 from arborista.nodes.python.block import Block
-from arborista.nodes.python.statement import Statement, StatementList
+from arborista.nodes.python.statement import StatementList
 from arborista.parser import Parser
 from arborista.parsers.python.statement_parser import LibcstStatements
 
@@ -18,13 +18,9 @@ class BlockParser(Parser):  # pylint: disable=too-few-public-methods
         from arborista.parsers.python.statement_parser import StatementParser  # isort: skip  # pylint: disable=cyclic-import, import-outside-toplevel
 
         libcst_body: LibcstStatements = libcst_block.body
-        body: StatementList = [
+        statements: StatementList = [
             StatementParser.parse_statement(libcst_statement) for libcst_statement in libcst_body
         ]
 
-        first_statement: Statement
-        rest_of_statements: StatementList
-        first_statement, *rest_of_statements = body
-
-        block: Block = Block(first_statement, rest_of_statements)
+        block: Block = Block(statements)
         return block
