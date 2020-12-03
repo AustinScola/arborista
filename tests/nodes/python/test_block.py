@@ -16,16 +16,16 @@ def test_inheritance() -> None:
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('statements, expected_body', [
+@pytest.mark.parametrize('body, expected_body', [
     ([ReturnStatement()], [ReturnStatement()]),
     ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()]),
     (iter([]), []),
     (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()]),
 ])
 # yapf: enable # pylint: enable=line-too-long
-def test_init(statements: Statements, expected_body: StatementList) -> None:
+def test_init(body: Statements, expected_body: StatementList) -> None:
     """Test arborista.nodes.python.block.Block.__init__."""
-    block: Block = Block(statements)
+    block: Block = Block(body)
 
     assert block.body == expected_body
 
