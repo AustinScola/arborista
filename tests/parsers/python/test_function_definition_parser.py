@@ -20,8 +20,8 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_function_definition, expected_function_definition', [
-    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block(SimpleStatement([ReturnStatement()])))),
-    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters([libcst.Param(libcst.Name('bar'))]), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[Parameter(Name('bar'))], body=Block(SimpleStatement([ReturnStatement()])))),
+    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])]))),
+    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters([libcst.Param(libcst.Name('bar'))]), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[Parameter(Name('bar'))], body=Block([SimpleStatement([ReturnStatement()])]))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_function_definition(libcst_function_definition: LibcstFunctionDefinition,
