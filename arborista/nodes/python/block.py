@@ -7,8 +7,9 @@ from arborista.nodes.python.statement import StatementList, Statements
 
 class Block(PythonNode):  # pylint: disable=too-few-public-methods
     """A Python block."""
-    def __init__(self, body: Statements):
+    def __init__(self, body: Statements, indent: str):
         self.body: StatementList = list(body)
+        self.indent: str = indent
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, Block):

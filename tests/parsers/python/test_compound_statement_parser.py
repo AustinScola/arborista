@@ -20,7 +20,7 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_compound_statement, expected_compound_statement', [
-    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])]))),
+    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    '))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_compound_statement(libcst_compound_statement: LibcstCompoundStatement,

@@ -16,25 +16,30 @@ def test_inheritance() -> None:
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('body, expected_body', [
-    ([ReturnStatement()], [ReturnStatement()]),
-    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()]),
-    (iter([]), []),
-    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()]),
+@pytest.mark.parametrize('body, expected_body, indent', [
+    ([ReturnStatement()], [ReturnStatement()], '    '),
+    ([ReturnStatement()], [ReturnStatement()], '\t'),
+    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    '),
+    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t'),
+    (iter([]), [], '   '),
+    (iter([]), [], '\t'),
+    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    '),
+    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t'),
 ])
 # yapf: enable # pylint: enable=line-too-long
-def test_init(body: Statements, expected_body: StatementList) -> None:
+def test_init(body: Statements, expected_body: StatementList, indent: str) -> None:
     """Test arborista.nodes.python.block.Block.__init__."""
-    block: Block = Block(body)
+    block: Block = Block(body, indent)
 
     assert block.body == expected_body
+    assert block.indent == indent
 
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('block, other, expected_equality', [
-    (Block([SimpleStatement([ReturnStatement()])]), 'foo', False),
-    (Block([SimpleStatement([ReturnStatement()])]), Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])]), False),
-    (Block([SimpleStatement([ReturnStatement()])]), Block([SimpleStatement([ReturnStatement()])]), True),
+    (Block([SimpleStatement([ReturnStatement()])], '   '), 'foo', False),
+    (Block([SimpleStatement([ReturnStatement()])], '   '), Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], '   '), False),
+    (Block([SimpleStatement([ReturnStatement()])], '   '), Block([SimpleStatement([ReturnStatement()])], '   '), True),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_eq(block: Block, other: Any, expected_equality: bool) -> None:

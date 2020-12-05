@@ -1,4 +1,6 @@
 """Parser for a Python block."""
+from typing import Optional
+
 import libcst
 
 from arborista.nodes.python.block import Block
@@ -21,5 +23,12 @@ class BlockParser(Parser):  # pylint: disable=too-few-public-methods
         body: StatementIterator = (StatementParser.parse_statement(libcst_statement)
                                    for libcst_statement in libcst_body)
 
-        block: Block = Block(body)
+        indent: str
+        libcst_indent: Optional[str] = libcst_block.indent
+        if libcst_indent is None:
+            indent = '    '
+        else:
+            indent = libcst_indent
+
+        block: Block = Block(body, indent)
         return block
