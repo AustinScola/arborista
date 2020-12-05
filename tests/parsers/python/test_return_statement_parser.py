@@ -13,14 +13,14 @@ def test_inheritance() -> None:
     assert issubclass(ReturnStatementParser, Parser)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('libcst_return_statement, expected_return_statement', [
     (libcst.Return(), ReturnStatement()),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_parse_return_statement(libcst_return_statement: LibcstReturnStatement,
                                 expected_return_statement: ReturnStatement) -> None:
-    """Test arborista.parsers.python.return_statement_parser.ReturnStatementParser.parse_return_statement."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.return_statement_parser.ReturnStatementParser.parse_return_statement."""  # pylint: disable=line-too-long, useless-suppression
     return_statement: ReturnStatement = ReturnStatementParser.parse_return_statement(
         libcst_return_statement)
     assert return_statement == expected_return_statement

@@ -15,27 +15,27 @@ def test_inheritance() -> None:
     assert issubclass(SmallStatementParser, Parser)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('libcst_small_statement, expected_small_statement', [
     (libcst.Return(), ReturnStatement()),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_parse_small_statement(libcst_small_statement: LibcstSmallStatement,
                                expected_small_statement: SmallStatement) -> None:
-    """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statement."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statement."""  # pylint: disable=line-too-long, useless-suppression
     small_statement: SmallStatement = SmallStatementParser.parse_small_statement(
         libcst_small_statement)
     assert small_statement == expected_small_statement
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('libcst_small_statements, expected_small_statements', [
     ([libcst.Return()], [ReturnStatement()]),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_parse_small_statements(libcst_small_statements: LibcstSmallStatements,
                                 expected_small_statements: SmallStatementList) -> None:
-    """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statements."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statements."""  # pylint: disable=line-too-long, useless-suppression
     small_statements: SmallStatementList = SmallStatementParser.parse_small_statements(
         libcst_small_statements)
     assert small_statements == expected_small_statements

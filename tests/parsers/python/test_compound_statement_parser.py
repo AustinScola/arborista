@@ -14,7 +14,7 @@ from arborista.parsers.python.compound_statement_parser import (CompoundStatemen
 
 
 def test_inheritance() -> None:
-    """Test arborista.parsers.python.compound_statement_parser.CompoundStatementParser inheritance."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.compound_statement_parser.CompoundStatementParser inheritance."""  # pylint: disable=line-too-long, useless-suppression
     assert issubclass(CompoundStatementParser, Parser)
 
 
@@ -25,7 +25,7 @@ def test_inheritance() -> None:
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_compound_statement(libcst_compound_statement: LibcstCompoundStatement,
                                   expected_compound_statement: CompoundStatement) -> None:
-    """Test arborista.parsers.python.compound_statement_parser.CompoundStatementParser.parse_compound_statement."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.compound_statement_parser.CompoundStatementParser.parse_compound_statement."""  # pylint: disable=line-too-long, useless-suppression
     compound_statement: CompoundStatement = CompoundStatementParser.parse_compound_statement(
         libcst_compound_statement)
     assert compound_statement == expected_compound_statement

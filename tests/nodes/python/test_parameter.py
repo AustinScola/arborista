@@ -13,11 +13,11 @@ def test_inheritance() -> None:
     assert issubclass(Parameter, PythonNode)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('name', [
     (Name('foo')),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_init(name: Name) -> None:
     """Test arborista.nodes.python.parameter.Parameter.__init__."""
     parameter: Parameter = Parameter(name)
