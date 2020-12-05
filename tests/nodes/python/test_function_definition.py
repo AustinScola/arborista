@@ -21,9 +21,9 @@ def test_inheritance() -> None:
 # yapf: disable
 @pytest.mark.parametrize('name, parameters, body, expected_parameters', [
     (Name('f'), [], ReturnStatement(), []),
-    (Name('f'), [], Block([SimpleStatement([ReturnStatement()])]), []),
+    (Name('f'), [], Block([SimpleStatement([ReturnStatement()])], '    '), []),
     (Name('f'), iter([]), ReturnStatement(), []),
-    (Name('f'), iter([]), Block([SimpleStatement([ReturnStatement()])]), []),
+    (Name('f'), iter([]), Block([SimpleStatement([ReturnStatement()])], '    '), []),
 ])
 # yapf: enable
 def test_function_definition_init(name: Name, parameters: Parameters, body: Suite,
