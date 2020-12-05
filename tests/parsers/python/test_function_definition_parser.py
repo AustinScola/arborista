@@ -14,7 +14,7 @@ from arborista.parsers.python.function_definition_parser import (FunctionDefinit
 
 
 def test_inheritance() -> None:
-    """Test arborista.parsers.python.function_definition_parser.FunctionDefinitionParser inheritance."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.function_definition_parser.FunctionDefinitionParser inheritance."""  # pylint: disable=line-too-long, useless-suppression
     assert issubclass(FunctionDefinitionParser, Parser)
 
 
@@ -26,7 +26,7 @@ def test_inheritance() -> None:
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_function_definition(libcst_function_definition: LibcstFunctionDefinition,
                                    expected_function_definition: FunctionDefinition) -> None:
-    """Test arborista.parsers.python.function_definition_parser.FunctionDefinitionParser.parse_function_definition."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.function_definition_parser.FunctionDefinitionParser.parse_function_definition."""  # pylint: disable=line-too-long, useless-suppression
     function_definition = FunctionDefinitionParser.parse_function_definition(
         libcst_function_definition)
     assert function_definition == expected_function_definition

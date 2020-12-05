@@ -5,7 +5,7 @@ from arborista.nodes.python.small_statement import SmallStatementList, SmallStat
 from arborista.nodes.python.statement import Statement
 
 
-class SimpleStatement(Statement):  # pylint: disable=too-few-public-methods
+class SimpleStatement(Statement):
     """A Python simple statement."""
     def __init__(self, small_statements: SmallStatements):
         self.small_statements: SmallStatementList = list(small_statements)

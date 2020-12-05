@@ -5,7 +5,7 @@ from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.statement import StatementList, Statements
 
 
-class Block(PythonNode):  # pylint: disable=too-few-public-methods
+class Block(PythonNode):
     """A Python block."""
     def __init__(self, body: Statements, indent: str):
         self.body: StatementList = list(body)

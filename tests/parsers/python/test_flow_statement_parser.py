@@ -13,13 +13,13 @@ def test_inheritance() -> None:
     assert issubclass(FlowStatementParser, Parser)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('libcst_flow_statement, expected_flow_statement', [
     (libcst.Return(), ReturnStatement()),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_parse_flow_statement(libcst_flow_statement: LibcstFlowStatement,
                               expected_flow_statement: FlowStatement) -> None:
-    """Test arborista.parsers.python.flow_statement_parser.FlowStatementParser.parse_flow_statement."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.flow_statement_parser.FlowStatementParser.parse_flow_statement."""  # pylint: disable=line-too-long, useless-suppression
     flow_statement: FlowStatement = FlowStatementParser.parse_flow_statement(libcst_flow_statement)
     assert flow_statement == expected_flow_statement

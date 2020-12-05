@@ -7,7 +7,7 @@ from arborista.nodes.python.parameter import ParameterList, Parameters
 from arborista.nodes.python.suite import Suite
 
 
-class FunctionDefinition(CompoundStatement):  # pylint: disable=too-few-public-methods
+class FunctionDefinition(CompoundStatement):
     """A Python function defintion."""
     def __init__(self, name: Name, parameters: Parameters, body: Suite):
         self.name: Name = name

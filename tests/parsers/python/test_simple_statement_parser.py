@@ -21,7 +21,7 @@ def test_inheritance() -> None:
 # yapf: enable
 def test_parse_simple_statement(libcst_simple_statement: LibcstSimpleStatement,
                                 expected_simple_statement: SimpleStatement) -> None:
-    """Test arborista.parsers.python.simple_statement_parser.SimpleStatementParser.parse_simple_statement."""  # pylint: disable=line-too-long
+    """Test arborista.parsers.python.simple_statement_parser.SimpleStatementParser.parse_simple_statement."""  # pylint: disable=line-too-long, useless-suppression
     simple_statement: SimpleStatement = SimpleStatementParser.parse_simple_statement(
         libcst_simple_statement)
     assert simple_statement == expected_simple_statement

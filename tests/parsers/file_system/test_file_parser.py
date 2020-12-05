@@ -18,7 +18,7 @@ def test_inheritance() -> None:
     (Path('foo'), 'bar', 'bar'),
 ])
 # yapf: enable
-def test_parse(file_path: Path, file_contents: str, expected_contents: str) -> None:  # pylint: disable=unused-argument
+def test_parse(file_path: Path, file_contents: str, expected_contents: str) -> None:
     """Test arborista.parsers.file_system.file_parser.FileParser.parse_file."""
     with patch('builtins.open', mock_open(read_data=file_contents)):
         contents: str = FileParser.parse_file(file_path)

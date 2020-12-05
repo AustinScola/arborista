@@ -14,11 +14,11 @@ def test_inheritance() -> None:
     assert issubclass(ParameterParser, Parser)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('libcst_parameter, expected_parameter', [
     (libcst.Param(libcst.Name('foo')), Parameter(Name('foo'))),
 ])
-# yapf: enable # pylint: enable=line-too-long
+# yapf: enable
 def test_parse_parameter(libcst_parameter: LibcstParameter, expected_parameter: Parameter) -> None:
     """Test arborista.parsers.python.parameter_parser.ParameterParser.parse_parameter."""
     parameter: Parameter = ParameterParser.parse_parameter(libcst_parameter)

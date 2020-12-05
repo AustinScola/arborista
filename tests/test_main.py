@@ -103,11 +103,11 @@ def test_run_transformer() -> None:
         run_mock.assert_called_once()
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('argument_parser, parsed_arguments, arguments', [
     (argument_parser_from_dict({}), argparse.Namespace(), []),
 ])
-# yapf: enable # pylint: disable=enable-too-long
+# yapf: enable
 def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argparse.Namespace,
               arguments: List[str]) -> None:
     """Test arborista.main.main."""
