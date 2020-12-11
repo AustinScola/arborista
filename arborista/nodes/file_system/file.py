@@ -23,3 +23,8 @@ class File(Node):
             return False
 
         return True
+
+    @property
+    def stem(self) -> str:
+        """Return the stem of the file path."""
+        return self.path.stem
