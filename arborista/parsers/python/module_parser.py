@@ -1,13 +1,14 @@
 """Parser for a Python module."""
 import libcst
 
+from arborista.nodes.file_system.file import File
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.statement import StatementList
 from arborista.parser import Parser
 from arborista.parsers.python.statement_parser import LibcstStatements, StatementParser
 
 
-class ModuleParser(Parser):  # pylint: disable=too-few-public-methods
+class ModuleParser(Parser):
     """Parser for a Python module."""
     @staticmethod
     def parse_module(name: str, string: str) -> 'Module':
@@ -17,4 +18,12 @@ class ModuleParser(Parser):  # pylint: disable=too-few-public-methods
         body: StatementList = StatementParser.parse_statements(libcst_module_body)
 
         module: Module = Module(name, body)
+        return module
+
+    @staticmethod
+    def parse_module_from_file(file_: File) -> Module:
+        """Return a module from a file."""
+        name: str = file_.stem
+        string: str = file_.contents
+        module: Module = ModuleParser.parse_module(name, string)
         return module

@@ -42,3 +42,16 @@ def test_eq(file_: File, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.file_system.file.File.__eq__."""
     equality: bool = file_ == other
     assert equality == expected_equality
+
+
+# yapf: disable
+@pytest.mark.parametrize('file_, expected_stem', [
+    (File(Path('foo'), ''), 'foo'),
+    (File(Path('foo.py'), ''), 'foo'),
+    (File(Path('foo/bar'), ''), 'bar'),
+    (File(Path('foo/bar.py'), ''), 'bar'),
+])
+# yapf: enable
+def test_stem(file_: File, expected_stem: str) -> None:
+    """Test arborista.nodes.file_system.file.File.stem."""
+    assert file_.stem == expected_stem

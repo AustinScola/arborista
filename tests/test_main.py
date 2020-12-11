@@ -2,12 +2,12 @@
 import argparse
 import logging
 from typing import Any, Dict, List, Union
-from unittest.mock import patch
+from unittest.mock import mock_open, patch
 
 import pytest
 
 import arborista.main
-from arborista.main import (_parse_arguments, _run_transformer, _set_up_argument_parser,
+from arborista.main import (_parse_arguments, _run_arborista, _set_up_argument_parser,
                             _set_up_logging, main)
 
 
@@ -49,6 +49,7 @@ def _assert_argument_parser_is_set_up(argument_parser: argparse.ArgumentParser) 
     """Assert the argument parser description and prog match the expected values."""
     _assert_argument_parser_description(argument_parser)
     _assert_argument_parser_prog(argument_parser)
+    _assert_argument_parser_arguments(argument_parser)
 
 
 def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser) -> None:
@@ -59,6 +60,38 @@ def _assert_argument_parser_description(argument_parser: argparse.ArgumentParser
 def _assert_argument_parser_prog(argument_parser: argparse.ArgumentParser) -> None:
     """Assert the argument parser prog matches the expected value."""
     assert argument_parser.prog == 'python3 -m arborista'
+
+
+def _assert_argument_parser_arguments(argument_parser: argparse.ArgumentParser) -> None:
+    """Assert the argument parser arguments match the expected arguments."""
+    arguments: List[argparse.Action] = argument_parser._get_positional_actions()  # pylint: disable=protected-access
+
+    _assert_arguemnt_parser_number_of_arguments(arguments)
+
+    file_argument: argparse.Action = arguments[0]
+
+    _assert_file_argument_is_set_up(file_argument)
+
+
+def _assert_arguemnt_parser_number_of_arguments(arguments: List[argparse.Action]) -> None:
+    """Assert that the argument parser has the expected number of arguments."""
+    assert len(arguments) == 1
+
+
+def _assert_file_argument_is_set_up(file_argument: argparse.Action) -> None:
+    """Assert that the file argument is set up."""
+    _assert_file_argument_dest(file_argument)
+    _assert_file_argument_help(file_argument)
+
+
+def _assert_file_argument_dest(file_argument: argparse.Action) -> None:
+    """Assert that the file argument has the expected destination."""
+    assert file_argument.dest == 'file'
+
+
+def _assert_file_argument_help(file_argument: argparse.Action) -> None:
+    """Assert that the file argument has the expected help."""
+    assert file_argument.help == 'file to process'
 
 
 def argument_parser_from_dict(dictionary: Dict[str, Any]) -> argparse.ArgumentParser:
@@ -96,11 +129,23 @@ def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: Li
     assert parsed_arguments == expected_parsed_arguments
 
 
-def test_run_transformer() -> None:
-    """Test arborista.main.test_run_transformer."""
-    with patch('arborista.transformer.Transformer.run') as run_mock:
-        _run_transformer()
-        run_mock.assert_called_once()
+# yapf: disable
+@pytest.mark.parametrize('parsed_arguments, file_contents, expected_file_contents_after', [
+    (argparse.Namespace(file='foo.py'), '', ''),
+])
+# yapf: enable
+def test_run_arborista(parsed_arguments: argparse.Namespace, file_contents: str,
+                       expected_file_contents_after: str) -> None:
+    """Test arborista.main.test_run_arborista."""
+    with patch('builtins.open', mock_open(read_data=file_contents)) as open_mock, \
+        patch('arborista.transformer.Transformer.run') as transformer_run_mock:
+
+        _run_arborista(parsed_arguments)
+
+        transformer_run_mock.assert_called_once()
+
+        mock_file = open_mock()
+        mock_file.write.assert_called_once_with(expected_file_contents_after)
 
 
 # yapf: disable
@@ -116,7 +161,7 @@ def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argpar
         patch('arborista.main._parse_arguments', return_value=parsed_arguments) as \
         parse_arguments_mock, \
         patch('arborista.main._set_up_logging') as set_up_logging_mock, \
-        patch('arborista.main._run_transformer') as run_transformer_mock:
+        patch('arborista.main._run_arborista') as run_arborista_mock:
 
         return_value: int = main(arguments)
 
@@ -125,7 +170,7 @@ def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argpar
         set_up_argument_parser_mock.assert_called_once()
         parse_arguments_mock.assert_called_once_with(argument_parser, arguments)
         set_up_logging_mock.assert_called_once()
-        run_transformer_mock.assert_called_once()
+        run_arborista_mock.assert_called_once()
 
 
 def _assert_main_return_value(return_value: int) -> None:
