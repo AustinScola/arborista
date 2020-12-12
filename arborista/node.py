@@ -1,5 +1,5 @@
 """A node in a tree."""
-from typing import Iterator, List, Type
+from typing import Iterable, Iterator, List, Type
 
 
 class Node():  # pylint: disable=too-few-public-methods
@@ -11,3 +11,4 @@ class Node():  # pylint: disable=too-few-public-methods
 
 
 NodeType = Type[Node]
+NodeTypes = Iterable[NodeType]
