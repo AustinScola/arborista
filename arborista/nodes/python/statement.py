@@ -4,7 +4,7 @@ from typing import Generator, Iterable, Iterator, List
 from arborista.nodes.python.python_node import PythonNode
 
 
-class Statement(PythonNode):  # pylint: disable=too-few-public-methods
+class Statement(PythonNode):
     """A Python statement."""
 
 
