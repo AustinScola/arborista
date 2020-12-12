@@ -2,5 +2,5 @@
 from arborista.nodes.python.small_statement import SmallStatement
 
 
-class FlowStatement(SmallStatement):  # pylint: disable=too-few-public-methods
+class FlowStatement(SmallStatement):
     """A Python flow statement."""

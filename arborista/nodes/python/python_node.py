@@ -2,5 +2,5 @@
 from arborista.node import Node
 
 
-class PythonNode(Node):  # pylint: disable=too-few-public-methods
+class PythonNode(Node):
     """A Python node."""
