@@ -1,6 +1,6 @@
 """A node in a tree."""
 import collections
-from typing import Iterable, Iterator, List, Type, Union
+from typing import Iterable, Iterator, List, Set, Type, Union
 
 from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTypeException
 
@@ -27,3 +27,4 @@ class Node():
 
 NodeType = Type[Node]
 NodeTypes = Iterable[NodeType]
+NodeTypeSet = Set[NodeType]
