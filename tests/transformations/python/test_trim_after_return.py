@@ -13,6 +13,11 @@ from arborista.transformation import Transformation
 from arborista.transformations.python.trim_after_return import TrimAfterReturn
 
 
+def test_node_types() -> None:
+    """Test arborista.python.transformations.trim_after_return.TrimAfterReturn.NODE_TYPES."""
+    assert TrimAfterReturn.NODE_TYPES == {SimpleStatement}
+
+
 def test_inheritance() -> None:
     """Test arborista.python.transformations.trim_after_return.TrimAfterReturn."""
     assert issubclass(TrimAfterReturn, Transformation)

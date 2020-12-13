@@ -5,6 +5,11 @@ from arborista.node import Node
 from arborista.transformation import Transformation
 
 
+def test_node_types() -> None:
+    """Test arborista.transformation.Transformation.NODE_TYPES."""
+    assert Transformation.NODE_TYPES == set()
+
+
 # yapf: disable
 @pytest.mark.parametrize('node', [
     (Node())
