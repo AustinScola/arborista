@@ -2,26 +2,27 @@
 import pytest
 
 from arborista.node import Node
-from arborista.transformation import Transformations
+from arborista.transformation import Transformations, TransformationSet
 from arborista.transformer import Transformer
 from arborista.tree import Tree
 
 
 # yapf: disable
-@pytest.mark.parametrize('transformations', [
-    ([]),
+@pytest.mark.parametrize('transformations, expected_transformations', [
+    ([], set()),
 ])
 # yapf: enable
-def test_init(transformations: Transformations) -> None:
+def test_init(transformations: Transformations,
+              expected_transformations: TransformationSet) -> None:
     """Test arborista.transformer.Transformer.__init__"""
     transformer: Transformer = Transformer(transformations)
 
-    _assert_transformer_has_transformations(transformer, transformations)
+    _assert_transformer_has_transformations(transformer, expected_transformations)
 
 
 def _assert_transformer_has_transformations(transformer: Transformer,
-                                            transformations: Transformations) -> None:
-    assert transformer.transformations == transformations
+                                            expected_transformations: TransformationSet) -> None:
+    assert transformer.transformations == expected_transformations
 
 
 # yapf: disable
