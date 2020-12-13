@@ -1,6 +1,6 @@
 """A transformation of a node."""
 from abc import ABC, abstractmethod
-from typing import Iterable, Optional
+from typing import Iterable, List, Optional
 
 from arborista.node import Node
 
@@ -15,3 +15,4 @@ class Transformation(ABC):  # pylint: disable=too-few-public-methods
 
 
 Transformations = Iterable[Transformation]
+TransformationList = List[Transformation]
