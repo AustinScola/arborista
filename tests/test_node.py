@@ -1,5 +1,5 @@
 """Test arborista.node."""
-from typing import Iterator, Type, Union
+from typing import Any, Dict, Iterator, Optional, Type, Union
 
 import pytest
 
@@ -7,6 +7,25 @@ from arborista.exception import ArboristaException
 from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTypeException
 from arborista.node import Node, NodeType, NodeTypes
 from tests.animal_nodes import Animal, Bird, Cat, Dog, Lizard, Mammal
+
+
+# yapf: disable
+@pytest.mark.parametrize('parent, pass_parent, expected_parent', [
+    (None, False, None),
+    (Animal(), False, None),
+    (Animal(), True, Animal()),
+])
+# yapf: enable
+def test_node_init(parent: Optional[Node], pass_parent: bool,
+                   expected_parent: Optional[Node]) -> None:
+    """Test arborista.node.iterate_children."""
+    keyword_arguments: Dict[str, Any] = {}
+    if pass_parent:
+        keyword_arguments['parent'] = parent
+    print(keyword_arguments)
+    node: Node = Node(**keyword_arguments)
+
+    assert node.parent == expected_parent
 
 
 def test_node_iterate_children() -> None:
