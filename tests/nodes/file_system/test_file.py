@@ -1,6 +1,6 @@
 """Test arborista.nodes.file_system.file."""
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, Optional
 
 import pytest
 
@@ -14,18 +14,28 @@ def test_inheritance() -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('path, contents, expected_path, expected_contents', [
-    (Path('foo'), '', Path('foo'), ''),
-    (Path('foo'), 'bar', Path('foo'), 'bar'),
-    (Path('foo/bar'), 'baz', Path('foo/bar'), 'baz'),
+@pytest.mark.parametrize('path, contents, parent, pass_parent, expected_path, expected_contents', [
+    (Path('foo'), '', None, False, Path('foo'), ''),
+    (Path('foo'), '', None, True, Path('foo'), ''),
+    (Path('foo'), 'bar', None, False, Path('foo'), 'bar'),
+    (Path('foo'), 'bar', None, True, Path('foo'), 'bar'),
+    (Path('foo/bar'), 'baz', None, False, Path('foo/bar'), 'baz'),
+    (Path('foo/bar'), 'baz', None, True, Path('foo/bar'), 'baz'),
 ])
 # yapf: enable
-def test_init(path: Path, contents: str, expected_path: Path, expected_contents: str) -> None:
+# pylint: disable=too-many-arguments
+def test_init(path: Path, contents: str, parent: Optional[Node], pass_parent: bool,
+              expected_path: Path, expected_contents: str) -> None:
     """Test arborista.nodes.file_system.file.File.__init__."""
-    file_: File = File(path, contents)
+    keyword_arguments: Dict[str, Any] = {}
+    if pass_parent:
+        keyword_arguments['parent'] = parent
+
+    file_: File = File(path, contents, **keyword_arguments)
 
     assert file_.path == expected_path
     assert file_.contents == expected_contents
+    assert id(file_.parent) == id(parent)
 
 
 # yapf: disable

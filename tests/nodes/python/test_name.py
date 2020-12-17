@@ -1,10 +1,12 @@
 """Test arborista.nodes.python.name."""
-from typing import Any
+from typing import Any, Dict, Optional
 
 import pytest
 
+from arborista.node import Node
 from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameter import Parameter
 
 
 def test_inheritance() -> None:
@@ -13,15 +15,22 @@ def test_inheritance() -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('value', [
-    ('f'),
+@pytest.mark.parametrize('value, parent, pass_parent', [
+    ('f', None, False),
+    ('f', None, True),
+    ('f', Parameter(Name('f')), True),
 ])
 # yapf: enable
-def test_init(value: str) -> None:
+def test_init(value: str, parent: Optional[Node], pass_parent: bool) -> None:
     """Test arborista.nodes.python.name.__init__."""
-    name: Name = Name(value)
+    keyword_arguments: Dict[str, Any] = {}
+    if pass_parent:
+        keyword_arguments['parent'] = parent
+
+    name: Name = Name(value, **keyword_arguments)
 
     assert name.value == value
+    assert id(name.parent) == id(parent)
 
 
 # yapf: disable

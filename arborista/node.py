@@ -1,12 +1,15 @@
 """A node in a tree."""
 import collections
-from typing import Iterable, Iterator, List, Set, Type, Union
+from typing import Iterable, Iterator, List, Optional, Set, Type, Union
 
 from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTypeException
 
 
 class Node():
     """A node in a tree."""
+    def __init__(self, parent: Optional['Node'] = None):
+        self.parent: Optional['Node'] = parent
+
     def iterate_children(self) -> Iterator['Node']:  # pylint: disable=no-self-use
         """Yield children of this node."""
         nodes: List[Node] = []

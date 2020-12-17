@@ -1,14 +1,16 @@
 """A file system file."""
 import os
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from arborista.node import Node
 
 
 class File(Node):
     """A file system file."""
-    def __init__(self, path: Path, contents: str):
+    def __init__(self, path: Path, contents: str, parent: Optional[Node] = None):
+        super().__init__(parent)
+
         self.path: Path = path
         self.contents: str = contents
 
