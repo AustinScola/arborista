@@ -31,3 +31,4 @@ class Node():
 NodeType = Type[Node]
 NodeTypes = Iterable[NodeType]
 NodeTypeSet = Set[NodeType]
+NodeIterator = Iterator[Node]
