@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.block import Block
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
@@ -46,3 +46,18 @@ def test_eq(simple_statement: SimpleStatement, other: Any, expected_equality: bo
     """Test arborista.nodes.python.simple_statement.__eq__."""
     equality: bool = simple_statement == other
     assert equality == expected_equality
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('simple_statement, expected_children_list', [
+    (SimpleStatement(small_statements=[]), []),
+    (SimpleStatement(small_statements=[ReturnStatement()]), [ReturnStatement()]),
+    (SimpleStatement(small_statements=[ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()]),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_iterate_children(simple_statement: SimpleStatement,
+                          expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.python.simple_statement.iterate_children."""
+    children: NodeIterator = simple_statement.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list

@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.block import Block
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
@@ -71,3 +71,17 @@ def test_eq(block: Block, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.block.Block.__eq__."""
     equality: bool = block == other
     assert equality == expected_equality
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('block, expected_children_list', [
+    (Block([SimpleStatement([ReturnStatement()])], '   '), [SimpleStatement([ReturnStatement()])]),
+    (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], '   '), [SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])]),
+    (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], '   '), [SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])]),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_iterate_children(block: Block, expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.python.block.Block.iterate_children."""
+    children: NodeIterator = block.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list

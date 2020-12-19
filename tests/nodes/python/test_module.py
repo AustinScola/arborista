@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
@@ -62,3 +62,16 @@ def test_eq(module: Module, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.module.__eq__."""
     equality: bool = module == other
     assert equality == expected_equality
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('module, expected_children_list', [
+    (Module('foo'), []),
+    (Module('foo', [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]), [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_iterate_children(module: Module, expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.python.module.iterate_children."""
+    children: NodeIterator = module.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list

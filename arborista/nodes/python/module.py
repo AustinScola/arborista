@@ -1,7 +1,7 @@
 """A Python module."""
 from typing import Any, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.statement import StatementList, Statements
 
@@ -33,3 +33,6 @@ class Module(PythonNode):
             return False
 
         return True
+
+    def iterate_children(self) -> NodeIterator:
+        yield from self.statements

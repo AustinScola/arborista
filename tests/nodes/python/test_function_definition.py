@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.block import Block
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
@@ -67,3 +67,20 @@ def test_eq(function_definition: FunctionDefinition, other: Any, expected_equali
     """Test arborista.nodes.python.function_definition.__eq__."""
     equality: bool = function_definition == other
     assert equality == expected_equality
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('function_definition, expected_children_list', [
+    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), [Name('foo'), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), [], Block([SimpleStatement([ReturnStatement()])], '    ')), [Name('foo'), Block([SimpleStatement([ReturnStatement()])], '    ')]),
+    (FunctionDefinition(Name('foo'), [Parameter(Name('x'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), [Parameter(Name('x'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), [Parameter(Name('x')), Parameter(Name('y')), Parameter(Name('z'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), Parameter(Name('y')), Parameter(Name('z')), SimpleStatement([ReturnStatement()])]),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_iterate_children(function_definition: FunctionDefinition,
+                          expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.python.function_definition.iterate_children."""
+    children: NodeIterator = function_definition.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list
