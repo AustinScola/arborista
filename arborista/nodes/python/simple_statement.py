@@ -1,7 +1,7 @@
 """A Python simple statement."""
 from typing import Any, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 from arborista.nodes.python.small_statement import SmallStatementList, SmallStatements
 from arborista.nodes.python.statement import Statement
 
@@ -20,3 +20,6 @@ class SimpleStatement(Statement):
             return False
         return all(small_statement == other_small_statement for small_statement,
                    other_small_statement in zip(self.small_statements, other.small_statements))
+
+    def iterate_children(self) -> NodeIterator:
+        yield from self.small_statements

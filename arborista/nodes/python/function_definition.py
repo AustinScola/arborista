@@ -1,7 +1,7 @@
 """A Python function defintion."""
 from typing import Any, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameter import ParameterList, Parameters
@@ -35,3 +35,8 @@ class FunctionDefinition(CompoundStatement):
             return False
 
         return True
+
+    def iterate_children(self) -> NodeIterator:
+        yield self.name
+        yield from self.parameters
+        yield self.body

@@ -1,7 +1,7 @@
 """A Python parameter."""
 from typing import Any, Iterable, List, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.python_node import PythonNode
 
@@ -17,6 +17,9 @@ class Parameter(PythonNode):
         if not isinstance(other, Parameter):
             return False
         return self.name == other.name
+
+    def iterate_children(self) -> NodeIterator:
+        yield self.name
 
 
 Parameters = Iterable[Parameter]

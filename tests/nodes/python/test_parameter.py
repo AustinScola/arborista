@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameter import Parameter
@@ -45,3 +45,15 @@ def test_eq(parameter: Parameter, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.parameter.Parameter.__eq__."""
     equality: bool = parameter == other
     assert equality == expected_equality
+
+
+# yapf: disable
+@pytest.mark.parametrize('parameter, expected_children_list', [
+    (Parameter(Name('foo')), [Name('foo')]),
+])
+# yapf: enable
+def test_iterate_children(parameter: Parameter, expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.python.parameter.Parameter.iterate_children."""
+    children: NodeIterator = parameter.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list
