@@ -10,7 +10,7 @@ class Node():
     def __init__(self, parent: Optional['Node'] = None):
         self.parent: Optional['Node'] = parent
 
-    def iterate_children(self) -> Iterator['Node']:  # pylint: disable=no-self-use
+    def iterate_children(self) -> 'NodeIterator':  # pylint: disable=no-self-use
         """Yield children of this node."""
         nodes: List[Node] = []
         return iter(nodes)
