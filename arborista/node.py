@@ -12,7 +12,7 @@ class Node():
 
     def iterate_children(self) -> 'NodeIterator':  # pylint: disable=no-self-use
         """Yield children of this node."""
-        nodes: List[Node] = []
+        nodes: NodeList = []
         return iter(nodes)
 
     def assert_is_type(self, node_types: Union['NodeType', 'NodeTypes']) -> None:
