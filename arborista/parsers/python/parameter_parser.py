@@ -19,6 +19,8 @@ class ParameterParser(Parser):
         name: Name = NameParser.parse_name(libcst_name)
 
         parameter: Parameter = Parameter(name)
+        parameter.set_parent_in_children()
+
         return parameter
 
     @staticmethod

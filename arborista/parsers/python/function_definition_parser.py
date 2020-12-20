@@ -30,4 +30,6 @@ class FunctionDefinitionParser(Parser):  # pylint: disable=too-few-public-method
         body: Suite = SuiteParser.parse_suite(libcst_body)
 
         function_definition: FunctionDefinition = FunctionDefinition(name, parameters, body)
+        function_definition.set_parent_in_children()
+
         return function_definition

@@ -7,6 +7,7 @@ from arborista.nodes.python.parameter import Parameter, ParameterList
 from arborista.parser import Parser
 from arborista.parsers.python.parameter_parser import (LibcstParameter, LibcstParameters,
                                                        ParameterParser)
+from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 
 
 def test_inheritance() -> None:
@@ -22,7 +23,9 @@ def test_inheritance() -> None:
 def test_parse_parameter(libcst_parameter: LibcstParameter, expected_parameter: Parameter) -> None:
     """Test arborista.parsers.python.parameter_parser.ParameterParser.parse_parameter."""
     parameter: Parameter = ParameterParser.parse_parameter(libcst_parameter)
+
     assert parameter == expected_parameter
+    assert_parent_set_in_children(parameter)
 
 
 # yapf: disable # pylint: disable=line-too-long
@@ -36,4 +39,7 @@ def test_parse_parameters(libcst_parameters: LibcstParameters,
                           expected_parameters: ParameterList) -> None:
     """Test arborista.parsers.python.parameter_parser.ParameterParser.parse_parameters."""
     parameters: ParameterList = ParameterParser.parse_parameters(libcst_parameters)
+
     assert parameters == expected_parameters
+    for parameter in parameters:
+        assert_parent_set_in_children(parameter)

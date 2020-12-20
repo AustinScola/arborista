@@ -11,6 +11,7 @@ from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.parser import Parser
 from arborista.parsers.python.function_definition_parser import (FunctionDefinitionParser,
                                                                  LibcstFunctionDefinition)
+from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 
 
 def test_inheritance() -> None:
@@ -29,4 +30,6 @@ def test_parse_function_definition(libcst_function_definition: LibcstFunctionDef
     """Test arborista.parsers.python.function_definition_parser.FunctionDefinitionParser.parse_function_definition."""  # pylint: disable=line-too-long, useless-suppression
     function_definition = FunctionDefinitionParser.parse_function_definition(
         libcst_function_definition)
+
     assert function_definition == expected_function_definition
+    assert_parent_set_in_children(function_definition)
