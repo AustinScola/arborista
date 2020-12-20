@@ -17,7 +17,7 @@ from tests.animal_nodes import Dog
 ])
 # yapf: enable
 def test_init(root: Optional[Node], pass_root: bool, expected_root: Optional[Node]) -> None:
-    """Test arborista.tree.Tree.__init__"""
+    """Test arborista.tree.Tree.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_root:
         keyword_arguments['root'] = root
@@ -37,6 +37,6 @@ def test_init(root: Optional[Node], pass_root: bool, expected_root: Optional[Nod
 ])
 # yapf: enable
 def test_tree_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
-    """Test arborista.tree.Tree.__eq__"""
+    """Test arborista.tree.Tree.__eq__."""
     equality: bool = tree == other
     assert equality == expected_equality
