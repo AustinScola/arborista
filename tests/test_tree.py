@@ -36,7 +36,7 @@ def test_init(root: Optional[Node], pass_root: bool, expected_root: Optional[Nod
     (Tree(root=Module('foo')), Tree(root=Module('foo')), True),
 ])
 # yapf: enable
-def test_tree_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
+def test_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
     """Test arborista.tree.Tree.__eq__."""
     equality: bool = tree == other
     assert equality == expected_equality
