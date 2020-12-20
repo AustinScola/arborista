@@ -3,9 +3,15 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
+from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
+from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameter import Parameter
+from arborista.nodes.python.return_statement import ReturnStatement
+from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
+from testing_helpers.assert_nodes_match_expected_nodes import assert_nodes_match_expected_nodes
 from tests.animal_nodes import Dog
 
 
@@ -40,3 +46,20 @@ def test_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
     """Test arborista.tree.Tree.__eq__."""
     equality: bool = tree == other
     assert equality == expected_equality
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('tree, expected_nodes', [
+    (Tree(), []),
+    (Tree(SimpleStatement([])), [SimpleStatement([])]),
+    (Tree(SimpleStatement([ReturnStatement()])), [SimpleStatement([ReturnStatement()]), ReturnStatement()]),
+    (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()])), [SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), ReturnStatement(), ReturnStatement(), ReturnStatement()]),
+    (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()])), [SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), ReturnStatement(), ReturnStatement(), ReturnStatement()]),
+    (Tree(FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()]))), [FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()])), Name('foo'), Parameter(Name('a')), Name('a'), SimpleStatement([ReturnStatement()]), ReturnStatement()]),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_walk(tree: Tree, expected_nodes: NodeList) -> None:
+    """Test arborista.tree.Tree.walk."""
+    nodes: NodeIterator = tree.walk()
+
+    assert_nodes_match_expected_nodes(nodes, expected_nodes)
