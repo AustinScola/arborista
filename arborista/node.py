@@ -27,6 +27,11 @@ class Node():
         if not is_type:
             raise UnexpectedNodeTypeException()
 
+    def set_parent_in_children(self) -> None:
+        """Set the parent for child node."""
+        for child in self.iterate_children():
+            child.parent = self
+
 
 NodeType = Type[Node]
 NodeTypes = Iterable[NodeType]
