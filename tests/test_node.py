@@ -6,6 +6,9 @@ import pytest
 from arborista.exception import ArboristaException
 from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTypeException
 from arborista.node import Node, NodeType, NodeTypes
+from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameter import Parameter
+from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 from tests.animal_nodes import Animal, Bird, Cat, Dog, Lizard, Mammal
 
 
@@ -58,3 +61,15 @@ def test_assert_is_type(node: Node, node_types: Union[NodeType, NodeTypes],
             node.assert_is_type(node_types)
     else:
         node.assert_is_type(node_types)
+
+
+# yapf: disable
+@pytest.mark.parametrize('node', [
+    (Parameter(Name('foo'))),
+])
+# yapf: enable
+def test_set_parent_in_children(node: Node) -> None:
+    """Test arborista.node.Node.set_parent_in_children."""
+    node.set_parent_in_children()
+
+    assert_parent_set_in_children(node)

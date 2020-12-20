@@ -18,7 +18,11 @@ class SimpleStatementParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_simple_statement(libcst_simple_statement: LibcstSimpleStatement) -> SimpleStatement:
         """Parse a simple statement."""
         libcst_small_statements: LibcstSmallStatements = libcst_simple_statement.body
+
         small_statements: SmallStatementList = SmallStatementParser.parse_small_statements(
             libcst_small_statements)
+
         simple_statement: SimpleStatement = SimpleStatement(small_statements)
+        simple_statement.set_parent_in_children()
+
         return simple_statement

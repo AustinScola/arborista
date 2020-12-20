@@ -31,4 +31,6 @@ class BlockParser(Parser):  # pylint: disable=too-few-public-methods
             indent = libcst_indent
 
         block: Block = Block(body, indent)
+        block.set_parent_in_children()
+
         return block

@@ -18,6 +18,8 @@ class ModuleParser(Parser):
         body: StatementList = StatementParser.parse_statements(libcst_module_body)
 
         module: Module = Module(name, body)
+        module.set_parent_in_children()
+
         return module
 
     @staticmethod
