@@ -1,10 +1,10 @@
 """A tree structure."""
 from typing import Any, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 
 
-class Tree():  # pylint: disable=too-few-public-methods
+class Tree():
     """A tree structure."""
     def __init__(self, root: Optional[Node] = None):
         self.root: Optional[Node] = root
@@ -14,3 +14,10 @@ class Tree():  # pylint: disable=too-few-public-methods
             return False
 
         return self.root == other.root
+
+    def walk(self) -> NodeIterator:
+        """Yield every node in the tree."""
+        from arborista.walk import Walk  # pylint: disable=import-outside-toplevel
+
+        walk = Walk(self)
+        return walk
