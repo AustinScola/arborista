@@ -21,3 +21,8 @@ class Tree():
 
         walk = Walk(self)
         return walk
+
+    def set_parents(self) -> None:
+        """Set all of the parent nodes in the tree."""
+        for node in self.walk():
+            node.set_parent_in_children()

@@ -12,6 +12,7 @@ from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
 from testing_helpers.assert_nodes_match_expected_nodes import assert_nodes_match_expected_nodes
+from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 from tests.animal_nodes import Dog
 
 
@@ -63,3 +64,21 @@ def test_walk(tree: Tree, expected_nodes: NodeList) -> None:
     nodes: NodeIterator = tree.walk()
 
     assert_nodes_match_expected_nodes(nodes, expected_nodes)
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('tree', [
+    (Tree()),
+    (Tree(SimpleStatement([]))),
+    (Tree(SimpleStatement([ReturnStatement()]))),
+    (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]))),
+    (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]))),
+    (Tree(FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()])))),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_set_parents(tree: Tree) -> None:
+    """Test arborista.tree.Tree.set_parents."""
+    tree.set_parents()
+
+    for node in tree.walk():
+        assert_parent_set_in_children(node)

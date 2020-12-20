@@ -2,5 +2,5 @@
 from arborista.tree import Tree
 
 
-class Python(Tree):  # pylint: disable=too-few-public-methods
+class Python(Tree):
     """A Python code tree."""
