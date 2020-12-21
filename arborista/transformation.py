@@ -1,8 +1,9 @@
 """A transformation of a node."""
 from abc import ABC, abstractmethod
-from typing import Iterable, List, Optional, Set
+from typing import Iterable, List, Set
 
 from arborista.node import Node, NodeTypeSet
+from arborista.transformation_result import TransformationResult
 
 
 class Transformation(ABC):  # pylint: disable=too-few-public-methods
@@ -11,8 +12,8 @@ class Transformation(ABC):  # pylint: disable=too-few-public-methods
 
     @classmethod
     @abstractmethod
-    def maybe_transform(cls, node: Node) -> Optional[Node]:
-        """Returns a transformed node or returns None to trim this node from the tree."""
+    def maybe_transform(cls, node: Node) -> TransformationResult:
+        """Maybe transforms nodes and returns an iterator of nodes which were removed (if any)."""
         raise NotImplementedError
 
 
