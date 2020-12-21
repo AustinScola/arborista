@@ -8,8 +8,8 @@ from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTy
 from arborista.node import Node, NodeType, NodeTypes
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameter import Parameter
+from testing_helpers.animal_nodes import Animal, Bird, Cat, Dog, Lizard, Mammal
 from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
-from tests.animal_nodes import Animal, Bird, Cat, Dog, Lizard, Mammal
 
 
 # yapf: disable

@@ -11,7 +11,7 @@ from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.statement import StatementList, Statements
-from tests.animal_nodes import Lizard
+from testing_helpers.animal_nodes import Lizard
 
 
 def test_inheritance() -> None:
