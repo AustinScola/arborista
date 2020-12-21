@@ -12,7 +12,7 @@ from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
 from testing_helpers.animal_nodes import Dog
-from testing_helpers.assert_nodes_match_expected_nodes import assert_nodes_match_expected_nodes
+from testing_helpers.assert_nodes_match import assert_nodes_match
 from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 
 
@@ -63,7 +63,7 @@ def test_walk(tree: Tree, expected_nodes: NodeList) -> None:
     """Test arborista.tree.Tree.walk."""
     nodes: NodeIterator = tree.walk()
 
-    assert_nodes_match_expected_nodes(nodes, expected_nodes)
+    assert_nodes_match(nodes, expected_nodes)
 
 
 # yapf: disable # pylint: disable=line-too-long

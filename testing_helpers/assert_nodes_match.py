@@ -4,7 +4,7 @@ import pytest
 from arborista.node import List, NodeIterator, NodeList
 
 
-def assert_nodes_match_expected_nodes(nodes: NodeIterator, expected_nodes: NodeList) -> None:
+def assert_nodes_match(nodes: NodeIterator, expected_nodes: NodeList) -> None:
     """Assert that a set of nodes matches an expected set of nodes."""
     __tracebackhide__ = True  # pylint: disable=unused-variable
     unexpected_nodes: NodeList = []

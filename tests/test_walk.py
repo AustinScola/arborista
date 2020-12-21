@@ -5,7 +5,7 @@ from arborista.node import NodeIterator, NodeList
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
 from arborista.walk import Walk
-from testing_helpers.assert_nodes_match_expected_nodes import assert_nodes_match_expected_nodes
+from testing_helpers.assert_nodes_match import assert_nodes_match
 
 
 # yapf: disable
@@ -47,4 +47,4 @@ def test_next(tree: Tree, expected_steps: NodeList) -> None:
 
     steps: NodeIterator = iter(walk)
 
-    assert_nodes_match_expected_nodes(steps, expected_steps)
+    assert_nodes_match(steps, expected_steps)
