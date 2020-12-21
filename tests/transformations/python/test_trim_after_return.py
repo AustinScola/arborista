@@ -85,6 +85,7 @@ expected_exception_7: Optional[Type[ArboristaException]] = CannotFindChildExcept
 
 # yapf: disable
 @pytest.mark.parametrize('tree, node, expected_result, expected_tree, expected_exception', [
+    (tree_0, node_0, expected_result_0, expected_tree_0, expected_exception_0),
     (tree_1, node_1, expected_result_1, expected_tree_1, expected_exception_1),
     (tree_2, node_2, expected_result_2, expected_tree_2, expected_exception_2),
     (tree_3, node_3, expected_result_3, expected_tree_3, expected_exception_3),
