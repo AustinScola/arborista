@@ -11,9 +11,9 @@ from arborista.nodes.python.parameter import Parameter
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
+from testing_helpers.animal_nodes import Dog
 from testing_helpers.assert_nodes_match_expected_nodes import assert_nodes_match_expected_nodes
 from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
-from tests.animal_nodes import Dog
 
 
 # yapf: disable
