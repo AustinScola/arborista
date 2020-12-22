@@ -132,6 +132,7 @@ def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: Li
 # yapf: disable
 @pytest.mark.parametrize('parsed_arguments, file_contents, expected_file_contents_after', [
     (argparse.Namespace(file='foo.py'), '', ''),
+    (argparse.Namespace(file='foo.py'), 'def f():return; return\n', 'def f():return\n'),
 ])
 # yapf: enable
 def test_run_arborista(parsed_arguments: argparse.Namespace, file_contents: str,
