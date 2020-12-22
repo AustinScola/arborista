@@ -137,12 +137,9 @@ def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: Li
 def test_run_arborista(parsed_arguments: argparse.Namespace, file_contents: str,
                        expected_file_contents_after: str) -> None:
     """Test arborista.main.test_run_arborista."""
-    with patch('builtins.open', mock_open(read_data=file_contents)) as open_mock, \
-        patch('arborista.transformer.Transformer.run') as transformer_run_mock:
+    with patch('builtins.open', mock_open(read_data=file_contents)) as open_mock:
 
         _run_arborista(parsed_arguments)
-
-        transformer_run_mock.assert_called_once()
 
         mock_file = open_mock()
         mock_file.write.assert_called_once_with(expected_file_contents_after)
