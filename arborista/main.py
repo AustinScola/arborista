@@ -31,7 +31,7 @@ def _set_up_argument_parser() -> argparse.ArgumentParser:
     argument_parser = argparse.ArgumentParser(prog=f'python3 -m {__package__}',
                                               description='A tree transformation tool.')
 
-    argument_parser.add_argument('file', help='file to process')
+    argument_parser.add_argument('file', type=Path, help='file to process')
 
     return argument_parser
 
@@ -45,7 +45,7 @@ def _parse_arguments(argument_parser: argparse.ArgumentParser,
 
 def _run_arborista(parsed_arguments: argparse.Namespace) -> None:
     """Run arborista."""
-    file_path: Path = Path(parsed_arguments.file)
+    file_path: Path = parsed_arguments.file
     file_: File = FileParser.parse_file(file_path)
     module: Module = ModuleParser.parse_module_from_file(file_)
     tree: Tree = Tree(module)

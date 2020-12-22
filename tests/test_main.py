@@ -1,6 +1,7 @@
 """Test arborista.main."""
 import argparse
 import logging
+from pathlib import Path
 from typing import Any, Dict, List, Union
 from unittest.mock import mock_open, patch
 
@@ -81,12 +82,18 @@ def _assert_arguemnt_parser_number_of_arguments(arguments: List[argparse.Action]
 def _assert_file_argument_is_set_up(file_argument: argparse.Action) -> None:
     """Assert that the file argument is set up."""
     _assert_file_argument_dest(file_argument)
+    _assert_file_argument_type(file_argument)
     _assert_file_argument_help(file_argument)
 
 
 def _assert_file_argument_dest(file_argument: argparse.Action) -> None:
     """Assert that the file argument has the expected destination."""
     assert file_argument.dest == 'file'
+
+
+def _assert_file_argument_type(file_argument: argparse.Action) -> None:
+    """Assert that the file argument has the expected type."""
+    assert file_argument.type == Path
 
 
 def _assert_file_argument_help(file_argument: argparse.Action) -> None:
@@ -131,8 +138,8 @@ def test_parse_arguments(argument_parser: argparse.ArgumentParser, arguments: Li
 
 # yapf: disable
 @pytest.mark.parametrize('parsed_arguments, file_contents, expected_file_contents_after', [
-    (argparse.Namespace(file='foo.py'), '', ''),
-    (argparse.Namespace(file='foo.py'), 'def f():return; return\n', 'def f():return\n'),
+    (argparse.Namespace(file=Path('foo.py')), '', ''),
+    (argparse.Namespace(file=Path('foo.py')), 'def f():return; return\n', 'def f():return\n'),
 ])
 # yapf: enable
 def test_run_arborista(parsed_arguments: argparse.Namespace, file_contents: str,
