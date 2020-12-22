@@ -10,7 +10,8 @@ from arborista.nodes.file_system.file import File
 from arborista.nodes.python.module import Module
 from arborista.parsers.file_system.file_parser import FileParser
 from arborista.parsers.python.module_parser import ModuleParser
-from arborista.transformation import Transformations
+from arborista.transformation import TransformationSet
+from arborista.transformations.python.trim_after_return import TrimAfterReturn
 from arborista.transformer import Transformer
 from arborista.tree import Tree
 
@@ -49,7 +50,7 @@ def _run_arborista(parsed_arguments: argparse.Namespace) -> None:
     module: Module = ModuleParser.parse_module_from_file(file_)
     tree: Tree = Tree(module)
 
-    transformations: Transformations = []
+    transformations: TransformationSet = {TrimAfterReturn()}
     transformer = Transformer(transformations)
     transformer.run(tree)
 
