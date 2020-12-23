@@ -7,6 +7,7 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.file_system.file_deparser import FileDeparser
 from arborista.nodes.file_system.file import File
+from arborista.nodes.sequences.text.string import String
 
 
 def test_inheritance() -> None:
@@ -16,7 +17,7 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('file_', [
-    (File(Path('foo'), 'bar')),
+    (File(Path('foo'), String('bar'))),
 ])
 # yapf: enable
 def test_deparse_file(file_: File) -> None:

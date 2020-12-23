@@ -8,6 +8,7 @@ from arborista.deparsers.file_system.file_deparser import FileDeparser
 from arborista.deparsers.python.module_deparser import ModuleDeparser
 from arborista.nodes.file_system.file import File
 from arborista.nodes.python.module import Module
+from arborista.nodes.sequences.text.string import String
 from arborista.parsers.file_system.file_parser import FileParser
 from arborista.parsers.python.module_parser import ModuleParser
 from arborista.transformation import TransformationSet
@@ -56,7 +57,8 @@ def _run_arborista(parsed_arguments: argparse.Namespace) -> None:
 
     module_after: Module = cast(Module, tree.root)
     transformed_contents: str = ModuleDeparser.deparse_module(module_after)
-    file_.contents = transformed_contents
+    string: String = String(transformed_contents)
+    file_.contents = string
     FileDeparser.deparse_file(file_)
 
 

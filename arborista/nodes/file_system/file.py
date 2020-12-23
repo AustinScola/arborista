@@ -8,11 +8,11 @@ from arborista.node import Node
 
 class File(Node):
     """A file system file."""
-    def __init__(self, path: Path, contents: str, parent: Optional[Node] = None):
+    def __init__(self, path: Path, contents: Node, parent: Optional[Node] = None):
         super().__init__(parent)
 
         self.path: Path = path
-        self.contents: str = contents
+        self.contents: Node = contents
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, File):

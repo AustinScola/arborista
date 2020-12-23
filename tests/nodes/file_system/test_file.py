@@ -6,6 +6,7 @@ import pytest
 
 from arborista.node import Node
 from arborista.nodes.file_system.file import File
+from arborista.nodes.sequences.text.string import String
 
 
 def test_inheritance() -> None:
@@ -15,16 +16,16 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('path, contents, parent, pass_parent, expected_path, expected_contents', [
-    (Path('foo'), '', None, False, Path('foo'), ''),
-    (Path('foo'), '', None, True, Path('foo'), ''),
-    (Path('foo'), 'bar', None, False, Path('foo'), 'bar'),
-    (Path('foo'), 'bar', None, True, Path('foo'), 'bar'),
-    (Path('foo/bar'), 'baz', None, False, Path('foo/bar'), 'baz'),
-    (Path('foo/bar'), 'baz', None, True, Path('foo/bar'), 'baz'),
+    (Path('foo'), String(), None, False, Path('foo'), String()),
+    (Path('foo'), String(), None, True, Path('foo'), String()),
+    (Path('foo'), String('bar'), None, False, Path('foo'), String('bar')),
+    (Path('foo'), String('bar'), None, True, Path('foo'), String('bar')),
+    (Path('foo/bar'), String('baz'), None, False, Path('foo/bar'), String('baz')),
+    (Path('foo/bar'), String('baz'), None, True, Path('foo/bar'), String('baz')),
 ])
 # yapf: enable
 # pylint: disable=too-many-arguments
-def test_init(path: Path, contents: str, parent: Optional[Node], pass_parent: bool,
+def test_init(path: Path, contents: Node, parent: Optional[Node], pass_parent: bool,
               expected_path: Path, expected_contents: str) -> None:
     """Test arborista.nodes.file_system.file.File.__init__."""
     keyword_arguments: Dict[str, Any] = {}
@@ -40,12 +41,12 @@ def test_init(path: Path, contents: str, parent: Optional[Node], pass_parent: bo
 
 # yapf: disable
 @pytest.mark.parametrize('file_, other, expected_equality', [
-    (File(Path('foo'), ''), 'bar', False),
-    (File(Path('foo'), 'bar'), File(Path('baz'), 'bar'), False),
-    (File(Path('foo'), 'bar'), File(Path('foo'), 'baz'), False),
-    (File(Path('foo'), 'bar'), File(Path('foo'), 'bar'), True),
-    (File(Path('foo'), 'bar'), File(Path('foo/../foo'), 'bar'), True),
-    (File(Path('foo/../foo'), 'bar'), File(Path('foo'), 'bar'), True),
+    (File(Path('foo'), String()), 'bar', False),
+    (File(Path('foo'), String('bar')), File(Path('baz'), String('bar')), False),
+    (File(Path('foo'), String('bar')), File(Path('foo'), String('baz')), False),
+    (File(Path('foo'), String('bar')), File(Path('foo'), String('bar')), True),
+    (File(Path('foo'), String('bar')), File(Path('foo/../foo'), String('bar')), True),
+    (File(Path('foo/../foo'), String('bar')), File(Path('foo'), String('bar')), True),
 ])
 # yapf: enable
 def test_eq(file_: File, other: Any, expected_equality: bool) -> None:
@@ -56,10 +57,10 @@ def test_eq(file_: File, other: Any, expected_equality: bool) -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('file_, expected_stem', [
-    (File(Path('foo'), ''), 'foo'),
-    (File(Path('foo.py'), ''), 'foo'),
-    (File(Path('foo/bar'), ''), 'bar'),
-    (File(Path('foo/bar.py'), ''), 'bar'),
+    (File(Path('foo'), String()), 'foo'),
+    (File(Path('foo.py'), String()), 'foo'),
+    (File(Path('foo/bar'), String()), 'bar'),
+    (File(Path('foo/bar.py'), String()), 'bar'),
 ])
 # yapf: enable
 def test_stem(file_: File, expected_stem: str) -> None:
