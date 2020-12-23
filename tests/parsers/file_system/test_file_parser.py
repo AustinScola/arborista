@@ -5,6 +5,7 @@ from unittest.mock import mock_open, patch
 import pytest
 
 from arborista.nodes.file_system.file import File
+from arborista.nodes.sequences.text.string import String
 from arborista.parser import Parser
 from arborista.parsers.file_system.file_parser import FileParser
 
@@ -16,7 +17,7 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('file_path, file_contents, expected_file', [
-    (Path('foo'), 'bar', File(Path('foo'), 'bar')),
+    (Path('foo'), 'bar', File(Path('foo'), String('bar'))),
 ])
 # yapf: enable
 def test_parse_file(file_path: Path, file_contents: str, expected_file: File) -> None:

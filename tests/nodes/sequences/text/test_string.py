@@ -1,5 +1,5 @@
 """Test arborista.nodes.sequences.text.string."""
-from typing import Any, Dict, Optional, List
+from typing import Any, Dict, List, Optional
 
 import pytest
 
