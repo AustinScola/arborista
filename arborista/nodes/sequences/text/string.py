@@ -6,7 +6,7 @@ from arborista.node import Node
 
 class String(Node):
     """A string of characters."""
-    def __init__(self, value: str, parent: Optional[Node] = None):
+    def __init__(self, value: str='', parent: Optional[Node] = None):
         super().__init__(parent)
 
         self.value: str = value
