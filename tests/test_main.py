@@ -8,8 +8,15 @@ from unittest.mock import mock_open, patch
 import pytest
 
 import arborista.main
-from arborista.main import (_parse_arguments, _run_arborista, _set_up_argument_parser,
-                            _set_up_logging, main)
+from arborista.main import (_deparse, _parse, _parse_arguments, _run_arborista,
+                            _set_up_argument_parser, _set_up_logging, _transform, main)
+from arborista.nodes.file_system.file import File
+from arborista.nodes.python.function_definition import FunctionDefinition
+from arborista.nodes.python.module import Module
+from arborista.nodes.python.name import Name
+from arborista.nodes.python.return_statement import ReturnStatement
+from arborista.nodes.python.simple_statement import SimpleStatement
+from arborista.tree import Tree
 
 
 def test_set_up_logging() -> None:
@@ -151,6 +158,48 @@ def test_run_arborista(parsed_arguments: argparse.Namespace, file_contents: str,
 
         mock_file = open_mock()
         mock_file.write.assert_called_once_with(expected_file_contents_after)
+
+
+# yapf: disable
+@pytest.mark.parametrize('parsed_arguments, file_contents, expected_tree', [
+    (argparse.Namespace(file=Path('foo.py')), '', Tree(File(Path('foo.py'), Module('foo', [])))),
+])
+# yapf: enable
+def test_parse(parsed_arguments: argparse.Namespace, file_contents: str,
+               expected_tree: Tree) -> None:
+    """Test arborista.main._parse."""
+    with patch('builtins.open', mock_open(read_data=file_contents)):
+        tree: Tree = _parse(parsed_arguments)
+
+    assert tree == expected_tree
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('tree, expected_transformed_tree', [
+    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement(), ReturnStatement()]))]))), Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()]))])))),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_transform(tree: Tree, expected_transformed_tree: Tree) -> None:
+    """Test arborista.main._transform."""
+    transformed_tree: Tree = _transform(tree)
+
+    assert transformed_tree == expected_transformed_tree
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('tree, expected_file_contents', [
+    (Tree(File(Path('foo.py'), Module('foo', []))), ''),
+    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()]))]))), 'def foo():return\n'),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_deparse(tree: Tree, expected_file_contents: str) -> None:
+    """Test arborista.main._deparse."""
+    with patch('builtins.open', mock_open()) as open_mock:
+
+        _deparse(tree)
+
+        mock_file = open_mock()
+        mock_file.write.assert_called_once_with(expected_file_contents)
 
 
 # yapf: disable

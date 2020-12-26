@@ -2,16 +2,14 @@
 import argparse
 import logging
 from pathlib import Path
-from typing import List, cast
+from typing import List
 
-from arborista.deparsers.file_system.file_deparser import FileDeparser
-from arborista.deparsers.python.module_deparser import ModuleDeparser
-from arborista.nodes.file_system.file import File
-from arborista.nodes.python.module import Module
-from arborista.nodes.sequences.text.string import String
-from arborista.parsers.file_system.file_parser import FileParser
-from arborista.parsers.python.module_parser import ModuleParser
+from arborista.nodes.file_system.path_node import PathNode
 from arborista.transformation import TransformationSet
+from arborista.transformations.file_system.deparsers.deparse_file import DeparseFile
+from arborista.transformations.file_system.parsers.path_to_file import PathToFile
+from arborista.transformations.python.deparsers.module_to_string import ModuleToString
+from arborista.transformations.python.parsers.file_to_module import FileToModule
 from arborista.transformations.python.trim_after_return import TrimAfterReturn
 from arborista.transformer import Transformer
 from arborista.tree import Tree
@@ -46,20 +44,35 @@ def _parse_arguments(argument_parser: argparse.ArgumentParser,
 
 def _run_arborista(parsed_arguments: argparse.Namespace) -> None:
     """Run arborista."""
-    file_path: Path = parsed_arguments.file
-    file_: File = FileParser.parse_file(file_path)
-    module: Module = ModuleParser.parse_module_from_file(file_)
-    tree: Tree = Tree(module)
+    tree: Tree = _parse(parsed_arguments)
+    transformed_tree: Tree = _transform(tree)
+    _deparse(transformed_tree)
 
+
+def _parse(parsed_arguments: argparse.Namespace) -> Tree:
+    """Parse the tree."""
+    file_path: Path = parsed_arguments.file
+    tree: Tree = Tree(root=PathNode(file_path))
+
+    transformations: TransformationSet = {PathToFile(), FileToModule()}
+    transformer: Transformer = Transformer(transformations)
+    tree = transformer.run(tree)
+
+    return tree
+
+
+def _transform(tree: Tree) -> Tree:
+    """Transform the tree."""
     transformations: TransformationSet = {TrimAfterReturn()}
     transformer = Transformer(transformations)
-    transformer.run(tree)
+    transformed_tree: Tree = transformer.run(tree)
+    return transformed_tree
 
-    module_after: Module = cast(Module, tree.root)
-    transformed_contents: str = ModuleDeparser.deparse_module(module_after)
-    string: String = String(transformed_contents)
-    file_.contents = string
-    FileDeparser.deparse_file(file_)
+
+def _deparse(tree: Tree) -> None:
+    transformations: TransformationSet = {ModuleToString(), DeparseFile()}
+    transformer = Transformer(transformations)
+    transformer.run(tree)
 
 
 def main(arguments: List[str]) -> int:
