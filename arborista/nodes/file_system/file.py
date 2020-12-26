@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from typing import Any, Optional
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator
 
 
 class File(Node):
@@ -25,6 +25,9 @@ class File(Node):
             return False
 
         return True
+
+    def iterate_children(self) -> NodeIterator:
+        yield self.contents
 
     @property
     def stem(self) -> str:
