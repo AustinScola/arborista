@@ -4,8 +4,9 @@ from typing import Any, Dict, Optional
 
 import pytest
 
-from arborista.node import Node
+from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.file_system.file import File
+from arborista.nodes.python.module import Module
 from arborista.nodes.sequences.text.string import String
 
 
@@ -53,6 +54,19 @@ def test_eq(file_: File, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.file_system.file.File.__eq__."""
     equality: bool = file_ == other
     assert equality == expected_equality
+
+
+# yapf: disable
+@pytest.mark.parametrize('file_, expected_children_list', [
+    (File(Path('foo.py'), String()), [String()]),
+    (File(Path('foo.py'), Module('foo', [])), [Module('foo', [])]),
+])
+# yapf: enable
+def test_iterate_children(file_: File, expected_children_list: NodeList) -> None:
+    """Test arborista.nodes.file_system.file.File.iterate_children."""
+    children: NodeIterator = file_.iterate_children()
+    children_list: NodeList = list(children)
+    assert children_list == expected_children_list
 
 
 # yapf: disable
