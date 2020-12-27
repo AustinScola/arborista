@@ -25,7 +25,7 @@ def test_node_init(parent: Optional[Node], pass_parent: bool,
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
         keyword_arguments['parent'] = parent
-    print(keyword_arguments)
+
     node: Node = Node(**keyword_arguments)
 
     assert node.parent == expected_parent
