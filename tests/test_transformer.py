@@ -1,15 +1,19 @@
 """Test arborista.transformer."""
+from pathlib import Path
 from typing import Dict
 
 import pytest
 
 from arborista.node import NodeType
+from arborista.nodes.file_system.file import File
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
+from arborista.nodes.sequences.text.string import String
 from arborista.transformation import Transformations, TransformationSet
+from arborista.transformations.python.deparsers.module_to_string import ModuleToString
 from arborista.transformations.python.trim_after_return import TrimAfterReturn
 from arborista.transformer import Transformer
 from arborista.tree import Tree
@@ -45,6 +49,8 @@ def _assert_transformer_has_node_type_to_transformations(
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('transformations, tree, expected_transformed_tree', [
     ([TrimAfterReturn], Tree(root=FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement(), ReturnStatement()]))), Tree(root=FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])))),
+    ([ModuleToString], Tree(root=File(Path('foo.py'), Module('foo', []))), Tree(root=File(Path('foo.py'), String()))),
+    ([ModuleToString], Tree(root=Module('foo', [])), Tree(root=String())),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_run(transformations: Transformations, tree: Tree, expected_transformed_tree: Tree) -> None:

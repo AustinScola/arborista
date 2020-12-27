@@ -21,39 +21,67 @@ class Transformer():  # pylint: disable=too-few-public-methods
             for node_type in transformation.NODE_TYPES:
                 self._node_type_to_transformations[node_type].add(transformation)
 
-    def run(self, tree: Tree) -> Tree:
+    def run(self, tree: Tree) -> Tree:  # pylint: disable=too-many-branches
         """Return a transformed tree."""
         tree.set_parents()
 
-        node_queue: Deque = deque([tree.root])
-        removed_node_ids: Set[int] = set()
-        while True:
-            try:
-                node = node_queue.pop()
-            except IndexError:
+        while True:  # pylint: disable=too-many-nested-blocks
+            tree_changed: bool = False
+
+            node_queue: Deque = deque([tree.root])
+            removed_node_ids: Set[int] = set()
+
+            while True:
+                try:
+                    node = node_queue.pop()
+                except IndexError:
+                    break
+
+                if id(node) in removed_node_ids:
+                    continue
+
+                while True:
+                    node_is_root: bool = node is tree.root
+
+                    node_type: NodeType = type(node)
+                    transformations: TransformationSet = self._get_transformations_for_node_type(
+                        node_type)
+
+                    change_made: bool = False
+                    node_type_changed: bool = False
+                    while not node_type_changed:
+
+                        transformation_result: TransformationResult
+                        change_made = False
+                        for transformation in transformations:
+                            transformation_result = transformation.maybe_transform(node)
+                            node = transformation_result.transformed_node
+                            change_made = change_made or transformation_result.changed
+
+                            if transformation_result.transformed_node is None:
+                                if node_is_root:
+                                    tree.root = None
+
+                            transformed_node_type = type(transformation_result.transformed_node)
+                            if transformed_node_type != node_type:
+                                node_type_changed = True
+                                if node_is_root:
+                                    tree.root = node
+                                break
+
+                        if not change_made:
+                            break
+
+                    tree_changed = tree_changed or change_made
+                    if not change_made:
+                        break
+
+                if node is not None:
+                    children: NodeIterator = node.iterate_children()
+                    node_queue.extend(children)
+
+            if not tree_changed:
                 break
-
-            if id(node) in removed_node_ids:
-                continue
-
-            node_type: NodeType = type(node)
-            transformations: TransformationSet = self._get_transformations_for_node_type(node_type)
-
-            transformation_result: TransformationResult
-            for transformation in transformations:
-                transformation_result = transformation.maybe_transform(node)
-                node = transformation_result.transformed_node
-
-                if transformation_result.transformed_node is None:
-                    raise NotImplementedError
-
-                transformed_node_type = type(transformation_result.transformed_node)
-                if transformed_node_type != node_type:
-                    raise NotImplementedError
-
-            if node is not None:
-                children: NodeIterator = node.iterate_children()
-                node_queue.extend(children)
 
         return tree
 
