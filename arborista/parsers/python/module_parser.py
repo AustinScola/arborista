@@ -1,15 +1,13 @@
 """Parser for a Python module."""
 import libcst
 
-from arborista.nodes.file_system.file import File
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.statement import StatementList
-from arborista.nodes.sequences.text.string import String
 from arborista.parser import Parser
 from arborista.parsers.python.statement_parser import LibcstStatements, StatementParser
 
 
-class ModuleParser(Parser):
+class ModuleParser(Parser):  # pylint: disable=too-few-public-methods
     """Parser for a Python module."""
     @staticmethod
     def parse_module(name: str, string: str) -> 'Module':
@@ -20,20 +18,5 @@ class ModuleParser(Parser):
 
         module: Module = Module(name, body)
         module.set_parent_in_children()
-
-        return module
-
-    @staticmethod
-    def parse_module_from_file(file_: File) -> Module:
-        """Return a module from a file."""
-        name: str = file_.stem
-
-        if not isinstance(file_.contents, String):
-            raise NotImplementedError
-
-        string_node = file_.contents
-        string: str = string_node.value
-
-        module: Module = ModuleParser.parse_module(name, string)
 
         return module
