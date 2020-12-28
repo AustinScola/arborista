@@ -20,4 +20,5 @@ def test_inheritance() -> None:
 def test_deparse_parameter(parameter: Parameter, expected_string: str) -> None:
     """Test arborista.deparsers.python.parameter_deparser.ParameterDeparser.deparse_parameter."""
     string: str = ParameterDeparser.deparse_parameter(parameter)
+
     assert string == expected_string

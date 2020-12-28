@@ -24,4 +24,5 @@ def test_inheritance() -> None:
 def test_parse_suite(libcst_suite: LibcstSuite, expected_suite: Suite) -> None:
     """Test arborista.parsers.python.suite_parser.SuiteParser.parse_suite."""
     suite: Suite = SuiteParser.parse_suite(libcst_suite)
+
     assert suite == expected_suite

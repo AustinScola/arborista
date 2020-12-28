@@ -21,4 +21,5 @@ def test_inheritance() -> None:
 def test_eq(return_statement: ReturnStatement, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.return_statement.ReturnStatement.__eq__."""
     equality: bool = return_statement == other
+
     assert equality == expected_equality

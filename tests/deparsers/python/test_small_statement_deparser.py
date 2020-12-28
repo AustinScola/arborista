@@ -22,4 +22,5 @@ def test_inheritance() -> None:
 def test_deparser_small_statement(small_statement: SmallStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.small_statement_deparser.SmallStatementDeparser.deparse_small_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = SmallStatementDeparser.deparse_small_statement(small_statement)
+
     assert string == expected_string

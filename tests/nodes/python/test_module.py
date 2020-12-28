@@ -61,6 +61,7 @@ def test_module_init(name: str, statements: Optional[Statements], pass_statement
 def test_eq(module: Module, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.module.__eq__."""
     equality: bool = module == other
+
     assert equality == expected_equality
 
 
@@ -74,4 +75,5 @@ def test_iterate_children(module: Module, expected_children_list: NodeList) -> N
     """Test arborista.nodes.python.module.iterate_children."""
     children: NodeIterator = module.iterate_children()
     children_list: NodeList = list(children)
+
     assert children_list == expected_children_list

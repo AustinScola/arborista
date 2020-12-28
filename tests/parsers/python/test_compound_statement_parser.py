@@ -28,4 +28,5 @@ def test_parse_compound_statement(libcst_compound_statement: LibcstCompoundState
     """Test arborista.parsers.python.compound_statement_parser.CompoundStatementParser.parse_compound_statement."""  # pylint: disable=line-too-long, useless-suppression
     compound_statement: CompoundStatement = CompoundStatementParser.parse_compound_statement(
         libcst_compound_statement)
+
     assert compound_statement == expected_compound_statement

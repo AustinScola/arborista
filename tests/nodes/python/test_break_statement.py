@@ -21,4 +21,5 @@ def test_inheritance() -> None:
 def test_eq(break_statement: BreakStatement, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.break_statement.BreakStatement.__eq__."""
     equality: bool = break_statement == other
+
     assert equality == expected_equality

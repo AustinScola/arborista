@@ -23,4 +23,5 @@ def test_parse_return_statement(libcst_return_statement: LibcstReturnStatement,
     """Test arborista.parsers.python.return_statement_parser.ReturnStatementParser.parse_return_statement."""  # pylint: disable=line-too-long, useless-suppression
     return_statement: ReturnStatement = ReturnStatementParser.parse_return_statement(
         libcst_return_statement)
+
     assert return_statement == expected_return_statement

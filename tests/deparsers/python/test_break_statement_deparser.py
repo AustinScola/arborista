@@ -19,4 +19,5 @@ def test_inheritance() -> None:
 def test_deparse_break_statement(break_statement: BreakStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.break_statement_deparser.BreakStatementDeparser.deparse_break_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = BreakStatementDeparser.deparse_break_statement(break_statement)
+
     assert string == expected_string

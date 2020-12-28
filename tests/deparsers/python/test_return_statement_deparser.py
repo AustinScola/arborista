@@ -19,4 +19,5 @@ def test_inheritance() -> None:
 def test_deparse_return_statement(return_statement: ReturnStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.return_statement_deparser.ReturnStatementDeparser.deparse_return_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = ReturnStatementDeparser.deparse_return_statement(return_statement)
+
     assert string == expected_string

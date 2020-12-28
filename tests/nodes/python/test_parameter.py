@@ -44,6 +44,7 @@ def test_init(name: Name, parent: Optional[Node], pass_parent: bool) -> None:
 def test_eq(parameter: Parameter, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.parameter.Parameter.__eq__."""
     equality: bool = parameter == other
+
     assert equality == expected_equality
 
 
@@ -56,4 +57,5 @@ def test_iterate_children(parameter: Parameter, expected_children_list: NodeList
     """Test arborista.nodes.python.parameter.Parameter.iterate_children."""
     children: NodeIterator = parameter.iterate_children()
     children_list: NodeList = list(children)
+
     assert children_list == expected_children_list

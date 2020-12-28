@@ -220,7 +220,6 @@ def test_main(argument_parser: argparse.ArgumentParser, parsed_arguments: argpar
         return_value: int = main(arguments)
 
         _assert_main_return_value(return_value)
-
         set_up_argument_parser_mock.assert_called_once()
         parse_arguments_mock.assert_called_once_with(argument_parser, arguments)
         set_up_logging_mock.assert_called_once()

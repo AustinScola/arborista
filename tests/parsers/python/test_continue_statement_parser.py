@@ -23,4 +23,5 @@ def test_parse_continue_statement(libcst_continue_statement: LibcstContinueState
     """Test arborista.parsers.python.continue_statement_parser.ContinueStatementParser.parse_continue_statement."""  # pylint: disable=line-too-long, useless-suppression
     continue_statement: ContinueStatement = ContinueStatementParser.parse_continue_statement(
         libcst_continue_statement)
+
     assert continue_statement == expected_continue_statement

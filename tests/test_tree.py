@@ -46,6 +46,7 @@ def test_init(root: Optional[Node], pass_root: bool, expected_root: Optional[Nod
 def test_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
     """Test arborista.tree.Tree.__eq__."""
     equality: bool = tree == other
+
     assert equality == expected_equality
 
 

@@ -23,4 +23,5 @@ def test_parse_break_statement(libcst_break_statement: LibcstBreakStatement,
     """Test arborista.parsers.python.break_statement_parser.BreakStatementParser.parse_break_statement."""  # pylint: disable=line-too-long, useless-suppression
     break_statement: BreakStatement = BreakStatementParser.parse_break_statement(
         libcst_break_statement)
+
     assert break_statement == expected_break_statement

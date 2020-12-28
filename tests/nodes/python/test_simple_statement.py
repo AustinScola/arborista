@@ -45,6 +45,7 @@ def test_simple_statement_init(small_statements: SmallStatements, parent: Option
 def test_eq(simple_statement: SimpleStatement, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.simple_statement.__eq__."""
     equality: bool = simple_statement == other
+
     assert equality == expected_equality
 
 
@@ -60,4 +61,5 @@ def test_iterate_children(simple_statement: SimpleStatement,
     """Test arborista.nodes.python.simple_statement.iterate_children."""
     children: NodeIterator = simple_statement.iterate_children()
     children_list: NodeList = list(children)
+
     assert children_list == expected_children_list

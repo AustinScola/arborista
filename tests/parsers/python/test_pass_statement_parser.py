@@ -21,4 +21,5 @@ def test_parse_pass_statement(libcst_pass_statement: LibcstPassStatement,
                               expected_pass_statement: PassStatement) -> None:
     """Test arborista.parsers.python.pass_statement_parser.PassStatementParser.parse_pass_statement."""  # pylint: disable=line-too-long, useless-suppression
     pass_statement: PassStatement = PassStatementParser.parse_pass_statement(libcst_pass_statement)
+
     assert pass_statement == expected_pass_statement

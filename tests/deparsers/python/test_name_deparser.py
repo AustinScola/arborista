@@ -19,4 +19,5 @@ def test_inheritance() -> None:
 def test_deparse_name(name: Name, expected_string: str) -> None:
     """Test arborista.deparsers.python.name_deparser.NameDeparser.deparse_name."""
     string: str = NameDeparser.deparse_name(name)
+
     assert string == expected_string

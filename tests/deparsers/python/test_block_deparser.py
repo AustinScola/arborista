@@ -26,4 +26,5 @@ def test_inheritance() -> None:
 def test_deparse_block(block: Block, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.block_deparser.BlockDeparser.deparse_block."""
     string: str = BlockDeparser.deparse_block(block, indent)
+
     assert string == expected_string
