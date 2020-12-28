@@ -23,6 +23,7 @@ def test_inheritance() -> None:
 def test_parse_statement(libcst_statement: LibcstStatement, expected_statement: Statement) -> None:
     """Test arborista.parsers.python.statement_parser.StatementParser.parse_statements."""
     statement: Statement = StatementParser.parse_statement(libcst_statement)
+
     assert statement == expected_statement
 
 
@@ -35,4 +36,5 @@ def test_parse_statements(libcst_statements: LibcstStatements,
                           expected_statements: StatementList) -> None:
     """Test arborista.parsers.python.statement_parser.StatementParser.parse_statements."""
     statements: StatementList = StatementParser.parse_statements(libcst_statements)
+
     assert statements == expected_statements

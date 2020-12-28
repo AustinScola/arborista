@@ -19,4 +19,5 @@ def test_inheritance() -> None:
 def test_deparse_pass_statement(pass_statement: PassStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.pass_statement_deparser.PassStatementDeparser.deparse_pass_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = PassStatementDeparser.deparse_pass_statement(pass_statement)
+
     assert string == expected_string

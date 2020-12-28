@@ -20,4 +20,5 @@ def test_deparse_continue_statement(continue_statement: ContinueStatement,
                                     expected_string: str) -> None:
     """Test arborista.deparsers.python.continue_statement_deparser.ContinueStatementDeparser.deparse_continue_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = ContinueStatementDeparser.deparse_continue_statement(continue_statement)
+
     assert string == expected_string

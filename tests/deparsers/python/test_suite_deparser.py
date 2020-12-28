@@ -27,4 +27,5 @@ def test_inheritance() -> None:
 def test_deparse_suite(suite: Suite, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.suite_deparser.SuiteDeparser.deparse_suite."""
     string: str = SuiteDeparser.deparse_suite(suite, indent)
+
     assert string == expected_string

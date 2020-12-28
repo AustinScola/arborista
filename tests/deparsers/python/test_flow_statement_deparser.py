@@ -24,4 +24,5 @@ def test_inheritance() -> None:
 def test_deparse_flow_statement(flow_statement: FlowStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.flow_statement_deparser.FlowStatementDeparser.deparse_flow_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = FlowStatementDeparser.deparse_flow_statement(flow_statement)
+
     assert string == expected_string

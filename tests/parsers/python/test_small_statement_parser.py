@@ -27,6 +27,7 @@ def test_parse_small_statement(libcst_small_statement: LibcstSmallStatement,
     """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statement."""  # pylint: disable=line-too-long, useless-suppression
     small_statement: SmallStatement = SmallStatementParser.parse_small_statement(
         libcst_small_statement)
+
     assert small_statement == expected_small_statement
 
 
@@ -40,4 +41,5 @@ def test_parse_small_statements(libcst_small_statements: LibcstSmallStatements,
     """Test arborista.parsers.python.small_statement_parser.SmallStatementParser.parse_small_statements."""  # pylint: disable=line-too-long, useless-suppression
     small_statements: SmallStatementList = SmallStatementParser.parse_small_statements(
         libcst_small_statements)
+
     assert small_statements == expected_small_statements

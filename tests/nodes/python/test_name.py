@@ -42,4 +42,5 @@ def test_init(value: str, parent: Optional[Node], pass_parent: bool) -> None:
 def test_eq(name: Name, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.name.__eq__."""
     equality: bool = name == other
+
     assert equality == expected_equality

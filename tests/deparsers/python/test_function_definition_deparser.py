@@ -34,4 +34,5 @@ def test_deparse_function_definition(function_definition: FunctionDefinition, in
     """Test arborista.deparsers.python.function_definition_deparser.FunctionDefinitionDeparser.deparse_function_definition."""  # pylint: disable=line-too-long, useless-suppression
     string: str = FunctionDefinitionDeparser.deparse_function_definition(
         function_definition, indent)
+
     assert string == expected_string

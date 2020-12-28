@@ -26,4 +26,5 @@ def test_deparse_compound_statement(compound_statement: CompoundStatement, inden
                                     expected_string: str) -> None:
     """Test arborista.deparsers.python.compound_statement_deparser.CompoundStatementDeparser.deparse_compound_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = CompoundStatementDeparser.deparse_compound_statement(compound_statement, indent)
+
     assert string == expected_string

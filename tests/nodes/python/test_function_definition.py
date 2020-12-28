@@ -66,6 +66,7 @@ def test_function_definition_init(name: Name, parameters: Parameters, body: Suit
 def test_eq(function_definition: FunctionDefinition, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.function_definition.__eq__."""
     equality: bool = function_definition == other
+
     assert equality == expected_equality
 
 
@@ -83,4 +84,5 @@ def test_iterate_children(function_definition: FunctionDefinition,
     """Test arborista.nodes.python.function_definition.iterate_children."""
     children: NodeIterator = function_definition.iterate_children()
     children_list: NodeList = list(children)
+
     assert children_list == expected_children_list

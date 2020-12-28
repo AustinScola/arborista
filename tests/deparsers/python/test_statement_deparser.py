@@ -25,4 +25,5 @@ def test_inheritance() -> None:
 def test_deparse_statement(statement: Statement, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.statement_deparser.StatementDeparser.deparse_statement."""
     string: str = StatementDeparser.deparse_statement(statement, indent)
+
     assert string == expected_string

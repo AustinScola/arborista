@@ -32,6 +32,7 @@ def test_iter(tree: Tree) -> None:
     walk: Walk = Walk(tree)
 
     steps: NodeIterator = iter(walk)
+
     assert steps == walk
 
 

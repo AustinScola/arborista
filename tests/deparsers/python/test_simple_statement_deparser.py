@@ -29,4 +29,5 @@ def test_deparse_simple_statement(simple_statement: SimpleStatement, indent: str
                                   expected_string: str) -> None:
     """Test arborista.deparsers.python.simple_statement_deparser.SimpleStatementDeparser.deparse_simple_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = SimpleStatementDeparser.deparse_simple_statement(simple_statement, indent)
+
     assert string == expected_string

@@ -70,6 +70,7 @@ def test_init(body: Statements, expected_body: StatementList, indent: str, paren
 def test_eq(block: Block, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.python.block.Block.__eq__."""
     equality: bool = block == other
+
     assert equality == expected_equality
 
 
@@ -84,4 +85,5 @@ def test_iterate_children(block: Block, expected_children_list: NodeList) -> Non
     """Test arborista.nodes.python.block.Block.iterate_children."""
     children: NodeIterator = block.iterate_children()
     children_list: NodeList = list(children)
+
     assert children_list == expected_children_list
