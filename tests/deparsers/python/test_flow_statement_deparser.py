@@ -3,6 +3,7 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.flow_statement_deparser import FlowStatementDeparser
+from arborista.nodes.python.break_statement import BreakStatement
 from arborista.nodes.python.flow_statement import FlowStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 
@@ -14,6 +15,7 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('flow_statement, expected_string', [
+    (BreakStatement(), 'break'),
     (ReturnStatement(), 'return'),
 ])
 # yapf: enable
