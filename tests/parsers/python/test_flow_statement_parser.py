@@ -3,6 +3,7 @@ import libcst
 import pytest
 
 from arborista.nodes.python.break_statement import BreakStatement
+from arborista.nodes.python.continue_statement import ContinueStatement
 from arborista.nodes.python.flow_statement import FlowStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.parser import Parser
@@ -17,6 +18,7 @@ def test_inheritance() -> None:
 # yapf: disable
 @pytest.mark.parametrize('libcst_flow_statement, expected_flow_statement', [
     (libcst.Break(), BreakStatement()),
+    (libcst.Continue(), ContinueStatement()),
     (libcst.Return(), ReturnStatement()),
 ])
 # yapf: enable
