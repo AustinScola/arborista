@@ -72,3 +72,7 @@ Another relatively wild idea would be to include (or write) lexer and parser gen
 to producing lexers and parsers, nodes could also be generated and methods to convert the nodes back
 to strings. This would mean that to add support for a computer programming language, (or any
 context-free grammer language) only the specification of the language would need to be provided.
+
+Some transformations of one language also make sense in another language, and so these could be
+generalized. Transformations of code from one lanaguage to another could also be created, but the
+usefullness of these is debatable.
