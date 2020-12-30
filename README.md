@@ -8,7 +8,7 @@ Python code.
 
 ## Name Etymology
 
-The name Arborista is a combination of the word "arborist", meaning a person who takes care of
+The name "Arborista" is a combination of the word "arborist", meaning a person who takes care of
 trees, and the suffix "ista", meaning a person who is a specialist at something. This is akin to the
 word "barista", meaning a person who is a specialist at making coffee.
 
