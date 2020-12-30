@@ -3,7 +3,7 @@
 
 A tree transformation tool.
 
-Specifically Arborista can be used as a concrete syntax tree transformation tool for bettering
+Specifically, Arborista can be used as a concrete syntax tree transformation tool for bettering
 Python code.
 
 ## Name Etymology
