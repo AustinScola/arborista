@@ -3,12 +3,12 @@
 
 A tree transformation tool.
 
-Specifically Arborista can be used as a concrete syntax tree transformation tool for bettering
+Specifically, Arborista can be used as a concrete syntax tree transformation tool for bettering
 Python code.
 
 ## Name Etymology
 
-The name Arborista is a combination of the word "arborist", meaning a person who takes care of
+The name "Arborista" is a combination of the word "arborist", meaning a person who takes care of
 trees, and the suffix "ista", meaning a person who is a specialist at something. This is akin to the
 word "barista", meaning a person who is a specialist at making coffee.
 
@@ -23,7 +23,7 @@ tested and then applied.
 To make the most of Arborista, developers should tend to Arborista so that Arborista can tend to
 their code. In this way, Arborista will serve to multiply their productivity.
 
-The part of Arborista that needs tending to is its transformations and its domain.
+The parts of Arborista that need tending to are its transformations and its domain.
 
 In terms of the transformations, that means that poorly configured transformations need to be
 modified or removed and new transformations should be added. The following is a process for this:
@@ -35,7 +35,7 @@ multiple places, then they should write a transformation to do it for them, and 
 transformations.
 
 This process is similar to how when a bug is discovered, a test should be written which catches the
-bug, then the bug should be fixed.
+bug, then the code should be altered to make all tests pass.
 
 When it comes to the domain of Arborista, developers can add support for new types of tree
 structures so that Arborista can tend to more for them.
@@ -68,8 +68,11 @@ One wild idea for Arborista is that it could learn from the approval and denial 
 of transformations as well as the activity of developers in order to propose changes to its own set
 of transformations (or change its set of transformations automatically).
 
-Another relatively wild idea would be to include (or write) lexer and parser generators for BNF or
-EBNF. In addition to producing lexers and parsers, nodes could also be generated and methods to
-convert the nodes back to strings. This would mean that to add support for a computer programming
-language, (or any context-free grammer language) only the specification of the language would need
-to be provided.
+Another relatively wild idea would be to include (or write) lexer and parser generators. In addition
+to producing lexers and parsers, nodes could also be generated and methods to convert the nodes back
+to strings. This would mean that to add support for a computer programming language, (or any
+context-free grammer language) only the specification of the language would need to be provided.
+
+Some transformations of one language also make sense in another language, and so these could be
+generalized. Transformations of code from one lanaguage to another could also be created, but the
+usefullness of these is debatable.
