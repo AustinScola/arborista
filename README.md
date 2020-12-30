@@ -68,8 +68,7 @@ One wild idea for Arborista is that it could learn from the approval and denial 
 of transformations as well as the activity of developers in order to propose changes to its own set
 of transformations (or change its set of transformations automatically).
 
-Another relatively wild idea would be to include (or write) lexer and parser generators for BNF or
-EBNF. In addition to producing lexers and parsers, nodes could also be generated and methods to
-convert the nodes back to strings. This would mean that to add support for a computer programming
-language, (or any context-free grammer language) only the specification of the language would need
-to be provided.
+Another relatively wild idea would be to include (or write) lexer and parser generators. In addition
+to producing lexers and parsers, nodes could also be generated and methods to convert the nodes back
+to strings. This would mean that to add support for a computer programming language, (or any
+context-free grammer language) only the specification of the language would need to be provided.
