@@ -35,7 +35,7 @@ multiple places, then they should write a transformation to do it for them, and 
 transformations.
 
 This process is similar to how when a bug is discovered, a test should be written which catches the
-bug, then the bug should be fixed.
+bug, then the code should be altered to make all tests pass.
 
 When it comes to the domain of Arborista, developers can add support for new types of tree
 structures so that Arborista can tend to more for them.
