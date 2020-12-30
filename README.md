@@ -23,7 +23,7 @@ tested and then applied.
 To make the most of Arborista, developers should tend to Arborista so that Arborista can tend to
 their code. In this way, Arborista will serve to multiply their productivity.
 
-The part of Arborista that needs tending to is its transformations and its domain.
+The parts of Arborista that need tending to are its transformations and its domain.
 
 In terms of the transformations, that means that poorly configured transformations need to be
 modified or removed and new transformations should be added. The following is a process for this:
