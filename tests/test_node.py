@@ -21,7 +21,7 @@ from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_c
 # yapf: enable
 def test_node_init(parent: Optional[Node], pass_parent: bool,
                    expected_parent: Optional[Node]) -> None:
-    """Test arborista.node.iterate_children."""
+    """Test arborista.node.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
         keyword_arguments['parent'] = parent
