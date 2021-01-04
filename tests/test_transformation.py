@@ -3,6 +3,7 @@ import pytest
 
 from arborista.node import Node
 from arborista.transformation import Transformation
+from testing_helpers.animal_nodes import Dog
 
 
 def test_node_types() -> None:
@@ -12,7 +13,7 @@ def test_node_types() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('node', [
-    (Node())
+    (Dog())
 ])
 # yapf: enable
 def test_maybe_transform(node: Node) -> None:

@@ -1,5 +1,6 @@
 """Test arborista.node."""
 from typing import Any, Dict, Iterator, Optional, Type, Union
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -26,16 +27,30 @@ def test_node_init(parent: Optional[Node], pass_parent: bool,
     if pass_parent:
         keyword_arguments['parent'] = parent
 
-    node: Node = Node(**keyword_arguments)
+    mock_node = MagicMock(Node)
+    Node.__init__(mock_node, **keyword_arguments)
 
-    assert node.parent == expected_parent
+    assert mock_node.parent == expected_parent
+
+
+# yapf: disable
+@pytest.mark.parametrize('other', [
+    ('foo'),
+])
+# yapf: enable
+def test_eq(other: Any) -> None:
+    """Test arborista.node.__eq__."""
+    mock_node = MagicMock(Node, __eq__=Node.__eq__)
+
+    with pytest.raises(NotImplementedError):
+        mock_node == other  # pylint: disable=pointless-statement
 
 
 def test_node_iterate_children() -> None:
     """Test arborista.node.iterate_children."""
-    node: Node = Node()
+    mock_node = MagicMock(Node)
 
-    children_iterator: Iterator[Node] = node.iterate_children()
+    children_iterator: Iterator[Node] = Node.iterate_children(mock_node)
 
     assert list(children_iterator) == []
 
