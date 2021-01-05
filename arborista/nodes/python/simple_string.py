@@ -1,5 +1,5 @@
 """A Python simple string."""
-from typing import Any, Iterable, Optional
+from typing import Any, Iterable, List, Optional
 
 from arborista.node import Node
 from arborista.nodes.python.string import String
@@ -23,3 +23,4 @@ class SimpleString(String):
 
 
 SimpleStrings = Iterable[SimpleString]
+SimpleStringList = List[SimpleString]
