@@ -1,0 +1,29 @@
+"""A Python joined string."""
+from typing import Any, Iterable, Iterator, List, Optional, Union
+
+from arborista.node import Node
+from arborista.nodes.python.formatted_string import FormattedString
+from arborista.nodes.python.simple_string import SimpleString
+from arborista.nodes.python.string import String
+
+
+class JoinedString(String):
+    """A Python joined string."""
+    def __init__(self,
+                 strings: Iterable[Union[SimpleString, FormattedString]],
+                 parent: Optional[Node] = None):
+        super().__init__(parent)
+
+        self.strings: List[Union[SimpleString, FormattedString]] = list(strings)
+
+    def __eq__(self, other: Any) -> bool:
+        if not isinstance(other, JoinedString):
+            return False
+
+        if self.strings != other.strings:
+            return False
+
+        return True
+
+    def iterate_children(self) -> Iterator[Union[SimpleString, FormattedString]]:
+        yield from self.strings
