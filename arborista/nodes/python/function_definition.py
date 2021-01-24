@@ -1,6 +1,7 @@
 """A Python function defintion."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.name import Name
@@ -21,10 +22,8 @@ class FunctionDefinition(CompoundStatement):
         self.parameters: ParameterList = list(parameters)
         self.body: Suite = body
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, FunctionDefinition):
-            return False
-
         if self.name != other.name:
             return False
 

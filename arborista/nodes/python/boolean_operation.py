@@ -1,6 +1,7 @@
 """A Python boolean operation."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.boolean_operator import BooleanOperator
 from arborista.nodes.python.expression import Expression
@@ -19,12 +20,11 @@ class BooleanOperation(Expression):
         self.operator: BooleanOperator = operator
         self.right: Expression = right
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, BooleanOperation):
-            return False
-
-        return (self.left == other.left and self.operator == other.operator
-                and self.right == other.right)
+        equality: bool = (self.left == other.left and self.operator == other.operator
+                          and self.right == other.right)
+        return equality
 
     def iterate_children(self) -> NodeIterator:
         yield self.left

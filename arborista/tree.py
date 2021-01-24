@@ -1,6 +1,7 @@
 """A tree structure."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterator
 
 
@@ -9,11 +10,10 @@ class Tree():
     def __init__(self, root: Optional[Node] = None):
         self.root: Optional[Node] = root
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, Tree):
-            return False
-
-        return self.root == other.root
+        equality: bool = self.root == other.root
+        return equality
 
     def walk(self) -> NodeIterator:
         """Yield every node in the tree."""

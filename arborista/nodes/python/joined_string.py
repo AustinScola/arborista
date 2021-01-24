@@ -1,6 +1,7 @@
 """A Python joined string."""
 from typing import Any, Iterable, Iterator, List, Optional, Union
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node
 from arborista.nodes.python.formatted_string import FormattedString
 from arborista.nodes.python.simple_string import SimpleString
@@ -16,10 +17,8 @@ class JoinedString(String):
 
         self.strings: List[Union[SimpleString, FormattedString]] = list(strings)
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, JoinedString):
-            return False
-
         if self.strings != other.strings:
             return False
 

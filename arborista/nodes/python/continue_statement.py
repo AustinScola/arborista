@@ -1,12 +1,12 @@
 """A Python continue statement."""
 from typing import Any
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.nodes.python.flow_statement import FlowStatement
 
 
 class ContinueStatement(FlowStatement):
     """A Python continue statement."""
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, ContinueStatement):
-            return False
         return True
