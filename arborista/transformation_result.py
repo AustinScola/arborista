@@ -1,6 +1,7 @@
 """The result of a transformation."""
 from typing import Any, Optional, Set
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterable, NodeList
 
 
@@ -12,10 +13,8 @@ class TransformationResult():  # pylint: disable=too-few-public-methods
         self.changed: bool = changed
         self.removed_nodes: NodeList = list(removed_nodes)
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, TransformationResult):
-            return False
-
         if self.transformed_node != other.transformed_node:
             return False
 

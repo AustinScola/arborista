@@ -1,6 +1,7 @@
 """A string of characters."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node
 
 
@@ -11,8 +12,7 @@ class String(Node):
 
         self.value: str = value
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, String):
-            return False
-
-        return self.value == other.value
+        equality: bool = self.value == other.value
+        return equality

@@ -1,6 +1,7 @@
 """A Python block."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.statement import StatementList, Statements
@@ -14,11 +15,10 @@ class Block(PythonNode):
         self.body: StatementList = list(body)
         self.indent: str = indent
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, Block):
-            return False
-
-        return self.body == other.body
+        equality: bool = self.body == other.body
+        return equality
 
     def iterate_children(self) -> NodeIterator:
         yield from self.body

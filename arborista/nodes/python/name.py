@@ -1,6 +1,7 @@
 """A Python name."""
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node
 from arborista.nodes.python.atom import Atom
 
@@ -12,7 +13,7 @@ class Name(Atom):
 
         self.value: str = value
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, Name):
-            return False
-        return self.value == other.value
+        equality: bool = self.value == other.value
+        return equality

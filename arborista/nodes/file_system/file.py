@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 from typing import Any, Optional
 
+from arborista.decorators.equality.equal_type import equal_type
 from arborista.node import Node, NodeIterator
 
 
@@ -14,10 +15,8 @@ class File(Node):
         self.path: Path = path
         self.contents: Node = contents
 
+    @equal_type
     def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, File):
-            return False
-
         if os.path.normpath(self.path) != os.path.normpath(other.path):
             return False
 
