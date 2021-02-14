@@ -1,7 +1,8 @@
 """A Python break statement."""
 from typing import Any
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.nodes.python.flow_statement import FlowStatement
 
 

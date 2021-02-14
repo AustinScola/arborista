@@ -1,7 +1,8 @@
 """A string of characters."""
 from typing import Any, Optional
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node
 
 
