@@ -57,7 +57,7 @@ def test_init(body: Statements, expected_body: StatementList, indent: str, paren
 
     assert block.body == expected_body
     assert block.indent == indent
-    assert id(block.parent) == id(parent)
+    assert block.parent is parent
 
 
 # yapf: disable # pylint: disable=line-too-long

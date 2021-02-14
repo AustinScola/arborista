@@ -15,18 +15,17 @@ def test_inheritance() -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('value, parent, pass_parent, expected_parent', [
-    (0, None, False, None),
-    (0.0, None, False, None),
-    (0, None, True, None),
-    (0.0, None, True, None),
-    (0, Dog(), True, Dog()),
-    (0.0, Dog(), True, Dog()),
+@pytest.mark.parametrize('value, parent, pass_parent', [
+    (0, None, False),
+    (0.0, None, False),
+    (0, None, True),
+    (0.0, None, True),
+    (0, Dog(), True),
+    (0.0, Dog(), True),
 
 ])
 # yapf: enable
-def test_init(value: Union[int, float], parent: Optional[Node], pass_parent: bool,
-              expected_parent: Optional[Node]) -> None:
+def test_init(value: Union[int, float], parent: Optional[Node], pass_parent: bool) -> None:
     """Test arborista.nodes.python.imaginary.Imaginary.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
@@ -35,7 +34,7 @@ def test_init(value: Union[int, float], parent: Optional[Node], pass_parent: boo
     imaginary = Imaginary(value, **keyword_arguments)
 
     assert imaginary.value == value
-    assert imaginary.parent == expected_parent
+    assert imaginary.parent is parent
 
 
 # yapf: disable

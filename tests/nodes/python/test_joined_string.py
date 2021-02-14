@@ -49,8 +49,8 @@ def test_init(strings: Iterable[Union[SimpleString, FormattedString]], parent: O
 
     joined_string = JoinedString(strings, **keyword_arguments)
 
-    assert joined_string.parent is parent
     assert joined_string.strings == expected_strings
+    assert joined_string.parent is parent
 
 
 # yapf: disable # pylint: disable=line-too-long

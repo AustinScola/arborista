@@ -14,14 +14,13 @@ def test_inheritance() -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('path, parent, pass_parent, expected_parent', [
-    (Path('foo.py'), None, False, None),
-    (Path('foo.py'), None, True, None),
-    (Path('foo.py'), PathNode(Path('foo.py')), True, PathNode(Path('foo.py'))),
+@pytest.mark.parametrize('path, parent, pass_parent', [
+    (Path('foo.py'), None, False),
+    (Path('foo.py'), None, True),
+    (Path('foo.py'), PathNode(Path('foo.py')), True),
 ])
 # yapf: enable
-def test_init(path: Path, parent: Optional[Node], pass_parent: bool,
-              expected_parent: Optional[Node]) -> None:
+def test_init(path: Path, parent: Optional[Node], pass_parent: bool) -> None:
     """Test arborista.nodes.file_system.path_node.PathNode.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
@@ -30,7 +29,7 @@ def test_init(path: Path, parent: Optional[Node], pass_parent: bool,
     path_node: PathNode = PathNode(path, **keyword_arguments)
 
     assert path_node.path == path
-    assert path_node.parent == expected_parent
+    assert path_node.parent is parent
 
 
 # yapf: disable

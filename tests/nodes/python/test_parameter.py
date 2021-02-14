@@ -32,7 +32,7 @@ def test_init(name: Name, parent: Optional[Node], pass_parent: bool) -> None:
     parameter: Parameter = Parameter(name, **keyword_arguments)
 
     assert parameter.name == name
-    assert id(parameter.parent) == id(parent)
+    assert parameter.parent is parent
 
 
 # yapf: disable

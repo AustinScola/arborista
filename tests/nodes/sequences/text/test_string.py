@@ -14,17 +14,17 @@ def test_inheritance() -> None:
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('value, pass_value, parent, pass_parent, expected_value, expected_parent', [
-    (None, False, None, False, '', None),
-    (None, False, Dog(), True, '', Dog()),
-    ('foo', True, None, False, 'foo', None),
-    ('foo', True, None, True, 'foo', None),
-    ('foo', True, Dog(), True, 'foo', Dog()),
+@pytest.mark.parametrize('value, pass_value, parent, pass_parent, expected_value', [
+    (None, False, None, False, ''),
+    (None, False, Dog(), True, ''),
+    ('foo', True, None, False, 'foo'),
+    ('foo', True, None, True, 'foo'),
+    ('foo', True, Dog(), True, 'foo'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 # pylint: disable=too-many-arguments
 def test_init(value: Optional[str], pass_value: bool, parent: Optional[Node], pass_parent: bool,
-              expected_value: str, expected_parent: Optional[Node]) -> None:
+              expected_value: str) -> None:
     """Test arborista.nodes.sequences.text.string.String.__init__."""
     arguments: List[Any] = []
     if pass_value:
@@ -37,7 +37,7 @@ def test_init(value: Optional[str], pass_value: bool, parent: Optional[Node], pa
     string: String = String(*arguments, **keyword_arguments)
 
     assert string.value == expected_value
-    assert string.parent == expected_parent
+    assert string.parent is parent
 
 
 # yapf: disable
