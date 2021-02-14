@@ -15,14 +15,13 @@ def test_inheritance() -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('value, parent, pass_parent, expected_parent', [
-    (0.0, None, False, None),
-    (0.0, None, True, None),
-    (0.0, Dog(), True, Dog()),
+@pytest.mark.parametrize('value, parent, pass_parent', [
+    (0.0, None, False),
+    (0.0, None, True),
+    (0.0, Dog(), True),
 ])
 # yapf: enable
-def test_init(value: int, parent: Optional[Node], pass_parent: bool,
-              expected_parent: Optional[Node]) -> None:
+def test_init(value: int, parent: Optional[Node], pass_parent: bool) -> None:
     """Test arborista.nodes.python.float.Float.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
@@ -31,7 +30,7 @@ def test_init(value: int, parent: Optional[Node], pass_parent: bool,
     float_ = Float(value, **keyword_arguments)
 
     assert float_.value == value
-    assert float_.parent == expected_parent
+    assert float_.parent is parent
 
 
 # yapf: disable

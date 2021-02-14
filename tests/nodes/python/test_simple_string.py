@@ -14,18 +14,17 @@ def test_inheritance() -> None:
     assert issubclass(SimpleString, String)
 
 
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('value, pass_value, parent, pass_parent, expected_value, expected_parent', [
-    (None, False, None, False, '', None),
-    ('', False, None, True, '', None),
-    ('foo', True, None, False, 'foo', None),
-    ('foo', True, None, True, 'foo', None),
-    ('foo', True, Dog(), True, 'foo', Dog()),
+# yapf: disable
+@pytest.mark.parametrize('value, pass_value, parent, pass_parent, expected_value', [
+    (None, False, None, False, ''),
+    ('', False, None, True, ''),
+    ('foo', True, None, False, 'foo'),
+    ('foo', True, None, True, 'foo'),
+    ('foo', True, Dog(), True, 'foo'),
 ])
-# yapf: enable # pylint: enable=line-too-long
-# pylint: disable=too-many-arguments
+# yapf: enable
 def test_init(value: Optional[str], pass_value: bool, parent: Optional[Node], pass_parent: bool,
-              expected_value: str, expected_parent: Optional[Node]) -> None:
+              expected_value: str) -> None:
     """Test arborista.nodes.python.simple_string.SimpleString.__init__."""
     arguments: List[Any] = []
     if pass_value:
@@ -38,7 +37,7 @@ def test_init(value: Optional[str], pass_value: bool, parent: Optional[Node], pa
     simple_string = SimpleString(*arguments, **keyword_arguments)
 
     assert simple_string.value == expected_value
-    assert simple_string.parent == expected_parent
+    assert simple_string.parent is parent
 
 
 # yapf: disable

@@ -37,7 +37,7 @@ def test_init(path: Path, contents: Node, parent: Optional[Node], pass_parent: b
 
     assert file_.path == expected_path
     assert file_.contents == expected_contents
-    assert id(file_.parent) == id(parent)
+    assert file_.parent is parent
 
 
 # yapf: disable
