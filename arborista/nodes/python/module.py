@@ -1,7 +1,8 @@
 """A Python module."""
 from typing import Any, Optional
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.statement import StatementList, Statements

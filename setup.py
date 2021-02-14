@@ -20,5 +20,5 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.6',
-    install_requires=['libcst'],
+    install_requires=['libcst', 'seligimus==0.1.1'],
 )

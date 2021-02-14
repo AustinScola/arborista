@@ -1,7 +1,8 @@
 """A Python ellipsis."""
 from typing import Any
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.nodes.python.atom import Atom
 
 

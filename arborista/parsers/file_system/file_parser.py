@@ -2,8 +2,8 @@
 from pathlib import Path
 
 from arborista.nodes.file_system.file import File
-from arborista.parser import Parser
 from arborista.nodes.sequences.text.string import String
+from arborista.parser import Parser
 
 
 class FileParser(Parser):  # pylint: disable=too-few-public-methods

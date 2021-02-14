@@ -1,7 +1,8 @@
 """A Python function defintion."""
 from typing import Any, Optional
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.name import Name

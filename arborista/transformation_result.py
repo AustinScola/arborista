@@ -1,7 +1,8 @@
 """The result of a transformation."""
 from typing import Any, Optional, Set
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node, NodeIterable, NodeList
 
 

@@ -1,7 +1,8 @@
 """A Python simple string."""
 from typing import Any, Iterable, List, Optional
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node
 from arborista.nodes.python.string import String
 

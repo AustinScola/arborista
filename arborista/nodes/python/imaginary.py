@@ -1,7 +1,8 @@
 """A Python imaginary."""
 from typing import Any, Optional, Union
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node
 from arborista.nodes.python.number import Number
 

@@ -1,7 +1,8 @@
 """A Python joined string."""
 from typing import Any, Iterable, Iterator, List, Optional, Union
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node
 from arborista.nodes.python.formatted_string import FormattedString
 from arborista.nodes.python.simple_string import SimpleString

@@ -1,7 +1,8 @@
 """A Python simple statement."""
 from typing import Any, Optional
 
-from arborista.decorators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.equal_type import equal_type
+
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.small_statement import SmallStatementList, SmallStatements
 from arborista.nodes.python.statement import Statement
