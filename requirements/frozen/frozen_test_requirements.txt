@@ -2,7 +2,7 @@ astroid==2.5
 attrs==20.3.0
 coverage==5.4
 dataclasses==0.8
-importlib-metadata==3.5.0
+importlib-metadata==3.6.0
 iniconfig==1.1.1
 isort==5.7.0
 lazy-object-proxy==1.5.2
@@ -18,7 +18,7 @@ pyparsing==2.4.7
 pytest==6.2.1
 pytest-cov==2.10.1
 PyYAML==5.4.1
-seligimus==0.2.0
+seligimus==0.6.1
 toml==0.10.2
 typed-ast==1.4.2
 typing-extensions==3.7.4.3

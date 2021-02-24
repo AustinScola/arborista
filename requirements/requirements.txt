@@ -1,2 +1,2 @@
 libcst==0.3.16
-seligimus==0.2.0
+seligimus==0.6.1
