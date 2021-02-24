@@ -13,7 +13,7 @@ def test_inheritance() -> None:
     assert issubclass(String, Node)
 
 
-# yapf: disable # pylint: disable=line-too-long
+# yapf: disable
 @pytest.mark.parametrize('value, pass_value, parent, pass_parent, expected_value', [
     (None, False, None, False, ''),
     (None, False, Dog(), True, ''),
@@ -21,8 +21,7 @@ def test_inheritance() -> None:
     ('foo', True, None, True, 'foo'),
     ('foo', True, Dog(), True, 'foo'),
 ])
-# yapf: enable # pylint: enable=line-too-long
-# pylint: disable=too-many-arguments
+# yapf: enable
 def test_init(value: Optional[str], pass_value: bool, parent: Optional[Node], pass_parent: bool,
               expected_value: str) -> None:
     """Test arborista.nodes.sequences.text.string.String.__init__."""
