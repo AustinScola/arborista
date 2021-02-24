@@ -1,6 +1,8 @@
 """A tree structure."""
 from typing import Any, Optional
 
+from seligimus.python.decorators.operators.equality.equal_instance_attributes import \
+    equal_instance_attributes
 from seligimus.python.decorators.operators.equality.equal_type import equal_type
 
 from arborista.node import Node, NodeIterator
@@ -12,9 +14,9 @@ class Tree():
         self.root: Optional[Node] = root
 
     @equal_type
+    @equal_instance_attributes
     def __eq__(self, other: Any) -> bool:
-        equality: bool = self.root == other.root
-        return equality
+        return True
 
     def walk(self) -> NodeIterator:
         """Yield every node in the tree."""
