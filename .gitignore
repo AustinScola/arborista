@@ -11,5 +11,8 @@ dist
 # Ignore mypy cache.
 .mypy_cache
 
+# Ignore temporary files used by isort.
+.isorted
+
 # Ignore test coverage.
 .coverage
