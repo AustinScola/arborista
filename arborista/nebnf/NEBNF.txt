@@ -6,7 +6,7 @@ Symbol = value: ("[" | "]" | "{" | "}" | "(" | ")" | "<" | ">" | "'" | '"' | "="
 Underscore = value: "_";
 Character = value: (Letter | Digit | Symbol | Underscore);
 
-Identifier = value: (UppercaseLetter { LowercaseLetter | UppercaseLetter | Digit });
+Identifier = first_character: UppercaseLetter rest_of_characters: { LowercaseLetter | UppercaseLetter | Digit };
 Name = value: (Letter { Letter | Digit | Underscore });
 Terminal = string: "'" Character {Character} "'"
          | '"' Character {Character} '"';
