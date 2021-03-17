@@ -7,7 +7,7 @@ Underscore = value: "_";
 Character = value: (Letter | Digit | Symbol | Underscore);
 
 Identifier = first_character: UppercaseLetter rest_of_characters: { LowercaseLetter | UppercaseLetter | Digit };
-Name = value: (Letter { Letter | Digit | Underscore });
+Name = value: (LowercaseLetter { LowercaseLetter | Digit | Underscore });
 Terminal = string: "'" Character {Character} "'"
          | '"' Character {Character} '"';
 
