@@ -8,8 +8,10 @@ Character = value: (Letter | Digit | Symbol | Underscore);
 
 Identifier = first_character: UppercaseLetter rest_of_characters: { LowercaseLetter | UppercaseLetter | Digit };
 Name = first_character: LowercaseLetter rest_of_characters: { LowercaseLetter | Digit | Underscore };
-Terminal = string: "'" Character {Character} "'"
-         | '"' Character {Character} '"';
+
+SingleQuotedTerminal = "'" first_character: Character rest_of_characters: {Character} '"'
+DoubleQuotedTerminal = "'" first_character: Character rest_of_characters: {Character} "'"
+Terminal = SingleQuotedTerminal | DoubleQuotedTerminal
 
 LefthandSide = Identifier ;
 Righthandside = Terminal
