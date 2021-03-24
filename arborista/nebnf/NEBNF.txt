@@ -11,7 +11,7 @@ Name = first_character: LowercaseLetter rest_of_characters: { LowercaseLetter | 
 
 SingleQuotedTerminal = "'" first_character: Character rest_of_characters: {Character} '"'
 DoubleQuotedTerminal = "'" first_character: Character rest_of_characters: {Character} "'"
-Terminal = SingleQuotedTerminal | DoubleQuotedTerminal
+Terminal = value: (SingleQuotedTerminal | DoubleQuotedTerminal)
 
 LefthandSide = Identifier ;
 Righthandside = Terminal
