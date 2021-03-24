@@ -1,0 +1,62 @@
+"""Test arborista.nodes.nebnf.terminal."""
+from typing import Any, Dict, Optional, Union
+from unittest.mock import MagicMock
+
+import pytest
+
+from arborista.node import Node
+from arborista.nodes.nebnf.character import Character
+from arborista.nodes.nebnf.double_quoted_terminal import DoubleQuotedTerminal
+from arborista.nodes.nebnf.nebnf_node import NEBNFNode
+from arborista.nodes.nebnf.single_quoted_terminal import SingleQuotedTerminal
+from arborista.nodes.nebnf.terminal import Terminal, TerminalValue
+
+
+def test_terminal_value() -> None:
+    """Test arborista.nodes.nebnf.terminal.TerminalValue."""
+    assert isinstance(TerminalValue, type(Union))
+    assert TerminalValue.__args__ == (  # type: ignore[attr-defined]
+        SingleQuotedTerminal, DoubleQuotedTerminal)
+
+
+def test_inheritance() -> None:
+    """Test arborista.nodes.nebnf.terminal.Terminal inheritance."""
+    assert issubclass(Terminal, NEBNFNode)
+
+
+# yapf: disable
+@pytest.mark.parametrize('value, parent, pass_parent', [
+    (SingleQuotedTerminal(Character('a'), []), None, False),
+    (DoubleQuotedTerminal(Character('a'), []), None, False),
+    (SingleQuotedTerminal(Character('a'), []), None, True),
+    (SingleQuotedTerminal(Character('a'), []), None, False),
+    (SingleQuotedTerminal(Character('a'), []), None, True),
+    (SingleQuotedTerminal(Character('a'), []), MagicMock(Node), True),
+    (SingleQuotedTerminal(Character('a'), []), MagicMock(Node), True),
+])
+# yapf: enable
+def test_init(value: TerminalValue, parent: Optional[Node], pass_parent: bool) -> None:
+    """Test arborista.nodes.nebnf.terminal.Terminal.__init__."""
+    keyword_arguments: Dict[str, Any] = {}
+    if pass_parent:
+        keyword_arguments['parent'] = parent
+
+    terminal: Terminal = Terminal(value, **keyword_arguments)
+
+    assert terminal.value == value
+    assert terminal.parent is parent
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('terminal, other, expected_equality', [
+    (Terminal(SingleQuotedTerminal(Character('a'), [])), 1, False),
+    (Terminal(SingleQuotedTerminal(Character('a'), [])), Character('a'), False),
+    (Terminal(SingleQuotedTerminal(Character('a'), [])), Terminal(SingleQuotedTerminal(Character('b'), [])), False),
+    (Terminal(SingleQuotedTerminal(Character('a'), [])), Terminal(SingleQuotedTerminal(Character('a'), [])), True),
+])
+# yapf: enable # pylint: enable=line-too-long
+def test_eq(terminal: Terminal, other: Any, expected_equality: bool) -> None:
+    """Test arborista.nodes.nebnf.terminal.Terminal.__eq__."""
+    equality: bool = terminal == other
+
+    assert equality == expected_equality
