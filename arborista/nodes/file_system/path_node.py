@@ -2,9 +2,7 @@
 from pathlib import Path
 from typing import Any, Optional
 
-from seligimus.python.decorators.operators.equality.equal_instance_attributes import \
-    equal_instance_attributes
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.standard_equality import standard_equality
 
 from arborista.node import Node
 
@@ -16,7 +14,6 @@ class PathNode(Node):
 
         self.path: Path = path
 
-    @equal_type
-    @equal_instance_attributes
+    @standard_equality
     def __eq__(self, other: Any) -> bool:
-        return True
+        pass  # pragma: no cover
