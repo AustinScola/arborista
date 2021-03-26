@@ -49,15 +49,15 @@ def test_init(value: CharacterValue, parent: Optional[Node], pass_parent: bool) 
 
 
 # yapf: disable
-@pytest.mark.parametrize('lowercase_character, other, expected_equality', [
+@pytest.mark.parametrize('character, other, expected_equality', [
     (Character('a'), 1, False),
     (Character('a'), 'a', False),
     (Character('a'), Character('b'), False),
     (Character('a'), Character('a'), True),
 ])
 # yapf: enable
-def test_eq(lowercase_character: Character, other: Any, expected_equality: bool) -> None:
+def test_eq(character: Character, other: Any, expected_equality: bool) -> None:
     """Test arborista.nodes.nebnf.character.Character.__eq__."""
-    equality: bool = lowercase_character == other
+    equality: bool = character == other
 
     assert equality == expected_equality
