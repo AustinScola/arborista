@@ -13,7 +13,7 @@ SingleQuotedTerminal = "'" first_character: Character rest_of_characters: {Chara
 DoubleQuotedTerminal = "'" first_character: Character rest_of_characters: {Character} "'"
 Terminal = value: (SingleQuotedTerminal | DoubleQuotedTerminal)
 
-LefthandSide = Identifier ;
+LefthandSide = identifier: Identifier;
 
 RighthandSide = Terminal | Identifier | Optional | Grouping | Repetition | Alternation | Concatenation;
 Optional = "[" righthand_side: RighthandSide "]"
