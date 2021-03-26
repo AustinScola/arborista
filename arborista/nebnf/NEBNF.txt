@@ -14,13 +14,13 @@ DoubleQuotedTerminal = "'" first_character: Character rest_of_characters: {Chara
 Terminal = value: (SingleQuotedTerminal | DoubleQuotedTerminal)
 
 LefthandSide = Identifier ;
-Righthandside = Terminal
+RighthandSide = Terminal
     | Identifier
-    | "[" Righthandside "]"
-    | "(" Righthandside ")"
-    | "{" Righthandside "}"
-    | Righthandside "|" Righthandside
-    | Righthandside Righthandside;
+    | "[" RighthandSide "]"
+    | "(" RighthandSide ")"
+    | "{" RighthandSide "}"
+    | RighthandSide "|" RighthandSide
+    | RighthandSide RighthandSide;
 
-Rule = lefthand_side: LefthandSide "=" righthand_side: Righthandside ";";
+Rule = lefthand_side: LefthandSide "=" righthand_side: RighthandSide ";";
 Grammer = rules: {Rule};
