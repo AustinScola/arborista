@@ -19,7 +19,7 @@ RighthandSide = expression: (Terminal | Identifier | Option | Grouping | Repetit
 Option = "[" righthand_side: RighthandSide "]";
 Grouping = "(" righthand_side: RighthandSide ")";
 Repetition = "{" element: RighthandSide "}";
-Alternation = choice_1: RighthandSide "|" choice_2: RighthandSide;
+Alternation = first_choice: RighthandSide "|" second_choice: RighthandSide;
 Concatenation = first: RighthandSide second: RighthandSide;
 
 Rule = lefthand_side: LefthandSide "=" righthand_side: RighthandSide ";";
