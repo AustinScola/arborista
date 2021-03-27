@@ -5,10 +5,10 @@ from unittest.mock import MagicMock
 import pytest
 
 from arborista.node import Node
+from arborista.nodes.nebnf.grouping import Grouping
 from arborista.nodes.nebnf.identifier import Identifier
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
 from arborista.nodes.nebnf.option import Option
-from arborista.nodes.nebnf.grouping import Grouping
 from arborista.nodes.nebnf.righthand_side import Expression, RighthandSide
 from arborista.nodes.nebnf.terminal import Terminal
 from arborista.nodes.nebnf.uppercase_letter import UppercaseLetter
