@@ -15,7 +15,7 @@ Terminal = value: (SingleQuotedTerminal | DoubleQuotedTerminal);
 
 LefthandSide = identifier: Identifier;
 
-RighthandSide = Terminal | Identifier | Optional | Grouping | Repetition | Alternation | Concatenation;
+RighthandSide = expression: (Terminal | Identifier | Optional | Grouping | Repetition | Alternation | Concatenation);
 Optional = "[" righthand_side: RighthandSide "]";
 Grouping = "(" righthand_side: RighthandSide ")";
 Repetition = "{" element: RighthandSide "}";
