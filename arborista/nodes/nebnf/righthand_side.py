@@ -8,9 +8,10 @@ from arborista.nodes.nebnf.grouping import Grouping
 from arborista.nodes.nebnf.identifier import Identifier
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
 from arborista.nodes.nebnf.option import Option
+from arborista.nodes.nebnf.repetition import Repetition
 from arborista.nodes.nebnf.terminal import Terminal
 
-Expression = Union[Terminal, Identifier, Option, Grouping]
+Expression = Union[Terminal, Identifier, Option, Grouping, Repetition]
 
 
 class RighthandSide(NEBNFNode):

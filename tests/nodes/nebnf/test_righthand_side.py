@@ -9,6 +9,7 @@ from arborista.nodes.nebnf.grouping import Grouping
 from arborista.nodes.nebnf.identifier import Identifier
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
 from arborista.nodes.nebnf.option import Option
+from arborista.nodes.nebnf.repetition import Repetition
 from arborista.nodes.nebnf.righthand_side import Expression, RighthandSide
 from arborista.nodes.nebnf.terminal import Terminal
 from arborista.nodes.nebnf.uppercase_letter import UppercaseLetter
@@ -23,7 +24,7 @@ def test_expression() -> None:
     """Test arborista.nodes.nebnf.righthand_side.Expression."""
     assert isinstance(Expression, type(Union))
     assert Expression.__args__ == (  # type: ignore[attr-defined]
-        Terminal, Identifier, Option, Grouping)
+        Terminal, Identifier, Option, Grouping, Repetition)
 
 
 # yapf: disable
