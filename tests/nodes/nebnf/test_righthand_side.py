@@ -6,6 +6,7 @@ import pytest
 
 from arborista.node import Node
 from arborista.nodes.nebnf.alternation import Alternation
+from arborista.nodes.nebnf.concatenation import Concatenation
 from arborista.nodes.nebnf.grouping import Grouping
 from arborista.nodes.nebnf.identifier import Identifier
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
@@ -25,7 +26,7 @@ def test_expression() -> None:
     """Test arborista.nodes.nebnf.righthand_side.Expression."""
     assert isinstance(Expression, type(Union))
     assert Expression.__args__ == (  # type: ignore[attr-defined]
-        Terminal, Identifier, Option, Grouping, Repetition, Alternation)
+        Terminal, Identifier, Option, Grouping, Repetition, Alternation, Concatenation)
 
 
 # yapf: disable
