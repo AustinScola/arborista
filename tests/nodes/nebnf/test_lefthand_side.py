@@ -18,12 +18,9 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('identifier, parent, pass_parent', [
-    ('a', None, False),
-    ('a', None, True),
-    ('A', None, False),
-    ('A', None, True),
-    ('a', MagicMock(Node), True),
-    ('A', MagicMock(Node), True),
+    (Identifier(UppercaseLetter('F'), []), None, False),
+    (Identifier(UppercaseLetter('F'), []), None, True),
+    (Identifier(UppercaseLetter('F'), []), MagicMock(Node), True),
 ])
 # yapf: enable
 def test_init(identifier: Identifier, parent: Optional[Node], pass_parent: bool) -> None:
