@@ -27,4 +27,4 @@ class FlowStatementDeparser(Deparser):  # pylint: disable=too-few-public-methods
             return_statement: ReturnStatement = flow_statement
             string = ReturnStatementDeparser.deparse_return_statement(return_statement)
             return string
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover

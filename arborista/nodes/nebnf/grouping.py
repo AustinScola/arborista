@@ -7,7 +7,7 @@ from arborista.node import Node
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
 
 if TYPE_CHECKING:
-    from arborista.nodes.nebnf.righthand_side import RighthandSide
+    from arborista.nodes.nebnf.righthand_side import RighthandSide  # pragma: no cover
 
 
 class Grouping(NEBNFNode):

@@ -21,4 +21,4 @@ class SmallStatementDeparser(Deparser):  # pylint: disable=too-few-public-method
             pass_statement: PassStatement = small_statement
             string = PassStatementDeparser.deparse_pass_statement(pass_statement)
             return string
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover

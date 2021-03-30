@@ -18,6 +18,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_block, expected_block', [
     (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), Block([SimpleStatement(small_statements=[ReturnStatement()])], '   ')),
+    (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])], indent='    '), Block([SimpleStatement(small_statements=[ReturnStatement()])], '   ')),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_block(libcst_block: LibcstBlock, expected_block: Block) -> None:

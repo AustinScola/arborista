@@ -12,5 +12,3 @@ class FileDeparser(Deparser):  # pylint: disable=too-few-public-methods
         with open(file_.path, 'w') as system_file:
             if isinstance(file_.contents, String):
                 system_file.write(file_.contents.value)
-            else:
-                raise NotImplementedError

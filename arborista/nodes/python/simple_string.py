@@ -9,14 +9,10 @@ from arborista.nodes.python.string import String
 
 class SimpleString(String):
     """A Python simple string."""
-    def __init__(self, value: Optional[str] = '', parent: Optional[Node] = None):
+    def __init__(self, value: str = '', parent: Optional[Node] = None):
         super().__init__(parent)
 
-        self.value: str
-        if value is None:
-            self.value = ''
-        else:
-            self.value = value
+        self.value: str = value
 
     @equal_type
     def __eq__(self, other: Any) -> bool:

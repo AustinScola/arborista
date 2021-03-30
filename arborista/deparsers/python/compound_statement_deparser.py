@@ -17,5 +17,5 @@ class CompoundStatementDeparser(Deparser):  # pylint: disable=too-few-public-met
                 FunctionDefinitionDeparser.deparse_function_definition(function_definition, indent)
             string = function_definition_string
         else:
-            raise NotImplementedError
+            raise NotImplementedError  # pragma: no cover
         return string

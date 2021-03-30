@@ -21,5 +21,5 @@ class CompoundStatementParser(Parser):  # pylint: disable=too-few-public-methods
                 libcst_function_definition)
             compound_statement = function_definition
         else:
-            raise NotImplementedError
+            raise NotImplementedError  # pragma: no cover
         return compound_statement
