@@ -38,7 +38,7 @@ class Transformer():  # pylint: disable=too-few-public-methods
                     break
 
                 if id(node) in removed_node_ids:
-                    continue
+                    continue  # pragma: no cover
 
                 while True:
                     node_is_root: bool = node is tree.root
@@ -91,11 +91,8 @@ class Transformer():  # pylint: disable=too-few-public-methods
 
         parent_node_types: Tuple[type, ...] = node_type.__bases__
         for parent_node_type in parent_node_types:
-            try:
-                transformation_for_parent_type: TransformationSet = self._node_type_to_transformations[  # pylint: disable=line-too-long, useless-suppression
-                    parent_node_type]
-            except KeyError:
-                continue
+            transformation_for_parent_type: TransformationSet = self._node_type_to_transformations[  # pylint: disable=line-too-long, useless-suppression
+                parent_node_type]
             transformations.update(transformation_for_parent_type)
 
         return transformations

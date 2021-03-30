@@ -43,6 +43,4 @@ class TrimAfterReturn(Transformation):  # pylint: disable=too-few-public-methods
                                               small_statements[small_statement_index + 1:]
 
             simple_statement.small_statements, changed = small_statements, True
-        else:
-            raise NotImplementedError
         return TransformationResult(return_statement, changed, removed_nodes)

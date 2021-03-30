@@ -33,7 +33,7 @@ class JoinedStringParser(Parser):  # pylint: disable=too-few-public-methods
                     libcst_simple_string)
                 left_string = simple_string
             else:
-                raise NotImplementedError
+                raise NotImplementedError  # pragma: no cover
             strings.append(left_string)
 
             right_string: Union[SimpleString, FormattedString]
@@ -42,7 +42,7 @@ class JoinedStringParser(Parser):  # pylint: disable=too-few-public-methods
                 simple_string = SimpleStringParser.parse_simple_string(libcst_simple_string)
                 right_string = simple_string
             elif isinstance(libcst_right_string, LibcstFormattedString):
-                raise NotImplementedError
+                raise NotImplementedError  # pragma: no cover
             else:
                 libcst_joined_string = cast(LibcstJoinedString, libcst_right_string)
                 continue

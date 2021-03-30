@@ -32,7 +32,7 @@ class SmallStatementParser(Parser):
                 libcst_pass_statment)
             small_statement = pass_statement
             return small_statement
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @staticmethod
     def parse_small_statements(

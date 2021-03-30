@@ -21,7 +21,7 @@ class JoinedStringDeparser(Deparser):  # pylint: disable=too-few-public-methods
                 deparsed_string: str = SimpleStringDeparser.deparse_simple_string(simple_string)
                 strings.append(deparsed_string)
             else:
-                raise NotImplementedError
+                raise NotImplementedError  # pragma: no cover
 
         string = ' '.join(strings)
         return string

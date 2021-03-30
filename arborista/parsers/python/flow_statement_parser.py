@@ -38,4 +38,4 @@ class FlowStatementParser(Parser):  # pylint: disable=too-few-public-methods
                 libcst_return_statement)
             flow_statment = return_statement
             return flow_statment
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
