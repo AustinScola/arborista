@@ -18,7 +18,7 @@ LefthandSide = identifier: Identifier;
 RighthandSide = expression: (Terminal | Identifier | Option | Grouping | Repetition | Alternation | Concatenation);
 Option = name: [Name] "[" righthand_side: RighthandSide "]";
 Grouping = name: [Name] "(" righthand_side: RighthandSide ")";
-Repetition = "{" element: RighthandSide "}";
+Repetition = name: [Name] "{" element: RighthandSide "}";
 Alternation = first_choice: RighthandSide "|" second_choice: RighthandSide;
 Concatenation = first: RighthandSide second: RighthandSide;
 
