@@ -10,4 +10,5 @@ cd "${ARBORISTA}"
 source "${ARBORISTA}/scripts/library/venv.sh"
 use_venv "test" frozen_test_requirements.txt
 
-python3 -m pylint -j 0 arborista tests testing_helpers
+find . -path ./venvs -prune -false -o -name "*.py" | xargs python3 -m pylint -j 0
+

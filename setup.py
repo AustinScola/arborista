@@ -1,3 +1,4 @@
+"""A build script using setuptools for the arborista package."""
 import setuptools
 
 with open('README.md') as readme:
