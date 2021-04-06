@@ -18,6 +18,7 @@ SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowSta
 ExpressionStatement = ...
 Expression = ...
 
+Comparison = left: Expression comparison_operator: ComparisonOperator right: Expression
 ComparisonOperator = LessThan | GreaterThan | Equals | GreaterThanOrEquals | LessThanOrEquals | LessGreaterThan | NotEquals | In | NotIn | Is | IsNot
 LessThan = '<'
 GreaterThan = '>'
