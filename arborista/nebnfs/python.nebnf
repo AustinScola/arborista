@@ -17,7 +17,20 @@ SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowSta
 
 ExpressionStatement = ...
 Expression = ...
-ComparisonOperator: '<' | '>' | '==' | '>=' | '<=' | '<>' | '!=' | 'in' | 'not' 'in' | 'is' | 'is' 'not'
+
+ComparisonOperator = LessThan | GreaterThan | Equals | GreaterThanOrEquals | LessThanOrEquals | LessGreaterThan | NotEquals | In | NotIn | Is | IsNot
+LessThan = '<'
+GreaterThan = '>'
+Equals = '=='
+GreaterThanOrEquals = '>='
+LessThanOrEquals = '<='
+LessGreaterThan = '<>'
+NotEquals = '!='
+In = 'in'
+NotIn = 'not' 'in'
+Is = 'is'
+IsNot = 'is' 'not'
+
 ExpressionList = ...
 
 YieldExpression = "yield" ...
