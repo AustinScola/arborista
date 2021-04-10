@@ -3,8 +3,10 @@ import libcst
 
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.number import Number
+from arborista.nodes.python.string import String
 from arborista.parser import Parser
 from arborista.parsers.python.number_parser import LibcstNumber, NumberParser
+from arborista.parsers.python.string_parser import LibcstString, StringParser
 
 LibcstExpression = libcst.BaseExpression
 
@@ -19,6 +21,10 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
             libcst_number: LibcstNumber = libcst_expression
             number: Number = NumberParser.parse_number(libcst_number)
             expression = number
+        elif isinstance(libcst_expression, (libcst.SimpleString, libcst.FormattedString)):
+            libcst_string: LibcstString = libcst_expression
+            string: String = StringParser.parse_string(libcst_string)
+            expression = string
         else:
             raise NotImplementedError  # pragma: no cover
         return expression
