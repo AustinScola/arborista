@@ -3,10 +3,13 @@ from typing import Sequence
 
 import libcst
 
+from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.small_statement import SmallStatement, SmallStatementList
 from arborista.parser import Parser
+from arborista.parsers.python.expression_statement_parser import (ExpressionStatementParser,
+                                                                  LibcstExpressionStatement)
 from arborista.parsers.python.flow_statement_parser import FlowStatementParser, LibcstFlowStatement
 from arborista.parsers.python.pass_statement_parser import LibcstPassStatement, PassStatementParser
 
@@ -25,14 +28,19 @@ class SmallStatementParser(Parser):
             flow_statement: FlowStatement = FlowStatementParser.parse_flow_statement(
                 libcst_flow_statment)
             small_statement = flow_statement
-            return small_statement
-        if isinstance(libcst_small_statement, LibcstPassStatement):
+        elif isinstance(libcst_small_statement, LibcstPassStatement):
             libcst_pass_statment: LibcstPassStatement = libcst_small_statement
             pass_statement: PassStatement = PassStatementParser.parse_pass_statement(
                 libcst_pass_statment)
             small_statement = pass_statement
-            return small_statement
-        raise NotImplementedError  # pragma: no cover
+        elif isinstance(libcst_small_statement, LibcstExpressionStatement):
+            libcst_expression_statement: LibcstExpressionStatement = libcst_small_statement
+            expression_statement: ExpressionStatement = \
+                ExpressionStatementParser.parse_expression_statement(libcst_expression_statement)
+            small_statement = expression_statement
+        else:
+            raise NotImplementedError  # pragma: no cover
+        return small_statement
 
     @staticmethod
     def parse_small_statements(

@@ -2,6 +2,8 @@
 import libcst
 import pytest
 
+from arborista.nodes.python.expression_statement import ExpressionStatement
+from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.small_statement import SmallStatement, SmallStatementList
@@ -20,6 +22,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('libcst_small_statement, expected_small_statement', [
     (libcst.Return(), ReturnStatement()),
     (libcst.Pass(), PassStatement()),
+    (libcst.Expr(libcst.Integer('5')), ExpressionStatement(Integer(5))),
 ])
 # yapf: enable
 def test_parse_small_statement(libcst_small_statement: LibcstSmallStatement,
