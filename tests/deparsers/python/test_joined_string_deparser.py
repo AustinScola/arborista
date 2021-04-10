@@ -4,7 +4,8 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.joined_string_deparser import JoinedStringDeparser
 from arborista.nodes.python.joined_string import JoinedString
-from arborista.nodes.python.simple_string import SimpleString
+from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
+from arborista.nodes.python.string import String
 
 
 def test_inheritance() -> None:
@@ -14,8 +15,8 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('joined_string, expected_string', [
-    (JoinedString([SimpleString("'foo'"), SimpleString("'bar'")]), "'foo' 'bar'"),
-    (JoinedString([SimpleString("'foo'"), SimpleString("'bar'"), SimpleString("'baz'")]), "'foo' 'bar' 'baz'"),
+    (JoinedString([String(None, SingleQuotedShortString('foo')), String(None, SingleQuotedShortString('bar'))]), "'foo' 'bar'"),
+    (JoinedString([String(None, SingleQuotedShortString('foo')), String(None, SingleQuotedShortString('bar')), String(None, SingleQuotedShortString('baz'))]), "'foo' 'bar' 'baz'"),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_joined_string(joined_string: JoinedString, expected_string: str) -> None:

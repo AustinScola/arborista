@@ -3,7 +3,8 @@ import libcst
 import pytest
 
 from arborista.nodes.python.joined_string import JoinedString
-from arborista.nodes.python.simple_string import SimpleString
+from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
+from arborista.nodes.python.string import String
 from arborista.parser import Parser
 from arborista.parsers.python.joined_string_parser import JoinedStringParser, LibcstJoinedString
 
@@ -15,8 +16,8 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_joined_string, expected_joined_string', [
-    (libcst.ConcatenatedString(libcst.SimpleString("'foo'"), libcst.SimpleString("'bar'")), JoinedString([SimpleString("'foo'"), SimpleString("'bar'")])),
-    (libcst.ConcatenatedString(libcst.SimpleString("'foo'"), libcst.ConcatenatedString(libcst.SimpleString("'bar'"), libcst.SimpleString("'baz'"))), JoinedString([SimpleString("'foo'"), SimpleString("'bar'"), SimpleString("'baz'")])),
+    (libcst.ConcatenatedString(libcst.SimpleString("'foo'"), libcst.SimpleString("'bar'")), JoinedString([String(None, SingleQuotedShortString('foo')), String(None, SingleQuotedShortString('bar'))])),
+    (libcst.ConcatenatedString(libcst.SimpleString("'foo'"), libcst.ConcatenatedString(libcst.SimpleString("'bar'"), libcst.SimpleString("'baz'"))), JoinedString([String(None, SingleQuotedShortString('foo')), String(None, SingleQuotedShortString('bar')), String(None, SingleQuotedShortString('baz'))])),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_joined_string(libcst_joined_string: LibcstJoinedString,

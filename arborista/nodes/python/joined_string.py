@@ -1,22 +1,19 @@
 """A Python joined string."""
-from typing import Any, Iterable, Iterator, List, Optional, Union
+from typing import Any, Iterable, Iterator, List, Optional
 
 from seligimus.python.decorators.operators.equality.equal_type import equal_type
 
 from arborista.node import Node
-from arborista.nodes.python.formatted_string import FormattedString
-from arborista.nodes.python.simple_string import SimpleString
+from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.string import String
 
 
-class JoinedString(String):
+class JoinedString(Expression):
     """A Python joined string."""
-    def __init__(self,
-                 strings: Iterable[Union[SimpleString, FormattedString]],
-                 parent: Optional[Node] = None):
+    def __init__(self, strings: Iterable[String], parent: Optional[Node] = None):
         super().__init__(parent)
 
-        self.strings: List[Union[SimpleString, FormattedString]] = list(strings)
+        self.strings: List[String] = list(strings)
 
     @equal_type
     def __eq__(self, other: Any) -> bool:
@@ -25,5 +22,5 @@ class JoinedString(String):
 
         return True
 
-    def iterate_children(self) -> Iterator[Union[SimpleString, FormattedString]]:
+    def iterate_children(self) -> Iterator[String]:
         yield from self.strings
