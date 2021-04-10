@@ -2,9 +2,8 @@
 from typing import List
 
 from arborista.deparser import Deparser
-from arborista.deparsers.python.simple_string_deparser import SimpleStringDeparser
+from arborista.deparsers.python.string_deparser import StringDeparser
 from arborista.nodes.python.joined_string import JoinedString
-from arborista.nodes.python.simple_string import SimpleString
 
 
 class JoinedStringDeparser(Deparser):  # pylint: disable=too-few-public-methods
@@ -16,12 +15,8 @@ class JoinedStringDeparser(Deparser):  # pylint: disable=too-few-public-methods
 
         strings: List[str] = []
         for string_node in joined_string.strings:
-            if isinstance(string_node, SimpleString):
-                simple_string: SimpleString = string_node
-                deparsed_string: str = SimpleStringDeparser.deparse_simple_string(simple_string)
-                strings.append(deparsed_string)
-            else:
-                raise NotImplementedError  # pragma: no cover
+            deparsed_string: str = StringDeparser.deparse_string(string_node)
+            strings.append(deparsed_string)
 
         string = ' '.join(strings)
         return string
