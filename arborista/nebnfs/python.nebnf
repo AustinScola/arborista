@@ -45,8 +45,8 @@ True = 'True'
 False = 'False'
 None = 'None'
 
-String = prefix: StringPrefix value: (ShortString | LongString)
-StringPrefix = "f" | "r" | "u" | "F" | "R" | "U" | "fr" | "Fr" | "fR" | "FR" | "rf" | "Rf" | "rF" | "RF"
+String = prefix: [StringPrefix] value: (ShortString | LongString)
+StringPrefix = value: ("f" | "r" | "u" | "F" | "R" | "U" | "fr" | "Fr" | "fR" | "FR" | "rf" | "Rf" | "rF" | "RF")
 ShortString = SingleQuotedShortString | DoubleQuotedShortString
 LongString = SingleQuotedLongString | DoubleQuotedLongString
 SingleQuotedShortString = ...
