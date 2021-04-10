@@ -1,11 +1,11 @@
 """Test arborista.nodes.python.name."""
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Iterable, Optional
 
 import pytest
 
 from arborista.node import Node
 from arborista.nodes.python.atom import Atom
-from arborista.nodes.python.name import Name
+from arborista.nodes.python.name import Name, Names
 from arborista.nodes.python.parameter import Parameter
 
 
@@ -44,3 +44,9 @@ def test_eq(name: Name, other: Any, expected_equality: bool) -> None:
     equality: bool = name == other
 
     assert equality == expected_equality
+
+
+def test_names() -> None:
+    """Test arborista.nodes.python.name.Names."""
+    assert issubclass(Names, Iterable)
+    assert Names.__args__ == (Name, )  # type: ignore[attr-defined]

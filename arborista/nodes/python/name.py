@@ -1,5 +1,5 @@
 """A Python name."""
-from typing import Any, Optional
+from typing import Any, Iterable, Optional
 
 from seligimus.python.decorators.operators.equality.equal_type import equal_type
 
@@ -18,3 +18,6 @@ class Name(Atom):
     def __eq__(self, other: Any) -> bool:
         equality: bool = self.value == other.value
         return equality
+
+
+Names = Iterable[Name]
