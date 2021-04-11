@@ -86,11 +86,19 @@ ReturnStatement = "return" expressions: [ExpressionList]
 YieldStatement = YieldExpression
 RaiseStatement = "raise" [exception: Expression ["from" source_excpetion: Expression]]
 
-ImportStatement = value: ImportDottedName | ...
+ImportStatement = value: ImportDottedName | ImportFrom
+
 ImportDottedName = "import" dotted_names_as_names: DottedNameAsNames
 DottedNameAsNames = first_dotted_name_as_name: DottedNameAsName rest_of_dotted_name_as_names: ("," DottedNameAsName)*
 DottedNameAsName = dotted_name: DottedName "as" name: Name
 DottedName = Name ("." Name)*
+
+ImportFrom = "from" source: (DottedName | RelativeDottedname) "import" target: (Star | GroupedNameAsNames | NameAsNames)
+RelativeDottedName = dots: (".")+ [dotted_name: DottedName]
+Star = "*"
+GroupedNameAsNames = "(" NameAsNames ")"
+NameAsNames = first: NameAsName rest: ("," NameAsName)*
+NameAsName = name: Name ["as" new_name: Name]
 
 GlobalStatement = ...
 NonlocalStatement = ...
