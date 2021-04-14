@@ -3,7 +3,13 @@ from typing import Any
 
 import pytest
 
+from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.star import Star
+
+
+def test_inheritance() -> None:
+    """Test arborista.nodes.python.python_node.PythonNode inheritance."""
+    assert issubclass(Star, PythonNode)
 
 
 # yapf: disable
