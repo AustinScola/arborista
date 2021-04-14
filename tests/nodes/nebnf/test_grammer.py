@@ -37,17 +37,3 @@ def test_init(rules: List[Rule], parent: Optional[Node], pass_parent: bool) -> N
 
     assert grammer.rules == rules
     assert grammer.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('grammer, other, expected_equality', [
-    (Grammer([]), 'f', False),
-    (Grammer([Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), [])))]), Grammer([]), False),
-    (Grammer([Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), [])))]), Grammer([Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), [])))]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(grammer: Grammer, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.grammer.Grammer.__eq__."""
-    equality: bool = grammer == other
-
-    assert equality == expected_equality

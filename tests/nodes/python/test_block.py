@@ -61,20 +61,6 @@ def test_init(body: Statements, expected_body: StatementList, indent: str, paren
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('block, other, expected_equality', [
-    (Block([SimpleStatement([ReturnStatement()])], '   '), 'foo', False),
-    (Block([SimpleStatement([ReturnStatement()])], '   '), Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], '   '), False),
-    (Block([SimpleStatement([ReturnStatement()])], '   '), Block([SimpleStatement([ReturnStatement()])], '   '), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(block: Block, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.block.Block.__eq__."""
-    equality: bool = block == other
-
-    assert equality == expected_equality
-
-
-# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('block, expected_children_list', [
     (Block([SimpleStatement([ReturnStatement()])], '   '), [SimpleStatement([ReturnStatement()])]),
     (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], '   '), [SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])]),

@@ -1,7 +1,5 @@
 """A Python comparison."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.comparison_operator import ComparisonOperator
@@ -20,16 +18,3 @@ class Comparison(Expression):
         self.left: Expression = left
         self.comparison_operator: ComparisonOperator = comparison_operator
         self.right: Expression = right
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.left != other.left:
-            return False
-
-        if self.comparison_operator != other.comparison_operator:
-            return False
-
-        if self.right != other.right:
-            return False
-
-        return True

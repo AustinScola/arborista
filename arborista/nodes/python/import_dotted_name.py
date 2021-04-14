@@ -1,7 +1,5 @@
 """A Python import dotted name statement."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.dotted_name_as_names import DottedNameAsNames
@@ -14,10 +12,3 @@ class ImportDottedName(ImportStatement):
         super().__init__(parent)
 
         self.dotted_name_as_names: DottedNameAsNames = dotted_name_as_names
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.dotted_name_as_names != other.dotted_name_as_names:
-            return False
-
-        return True

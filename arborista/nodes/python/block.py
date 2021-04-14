@@ -1,7 +1,5 @@
 """A Python block."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.python_node import PythonNode
@@ -15,11 +13,6 @@ class Block(PythonNode):
 
         self.body: StatementList = list(body)
         self.indent: str = indent
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.body == other.body
-        return equality
 
     def iterate_children(self) -> NodeIterator:
         yield from self.body

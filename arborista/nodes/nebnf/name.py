@@ -1,7 +1,5 @@
 """A name for a part of an expression."""
-from typing import Any, List, Optional, Union
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import List, Optional, Union
 
 from arborista.node import Node
 from arborista.nodes.nebnf.digit import Digit
@@ -21,13 +19,3 @@ class Name(NEBNFNode):
         self.first_character: LowercaseLetter = first_character
         self.rest_of_characters: List[Union[LowercaseLetter, Digit,
                                             Underscore]] = rest_of_characters
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.first_character != other.first_character:
-            return False
-
-        if self.rest_of_characters != other.rest_of_characters:
-            return False
-
-        return True

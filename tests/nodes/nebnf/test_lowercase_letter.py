@@ -41,18 +41,3 @@ def test_init(value: LowercaseLetterValue, parent: Optional[Node], pass_parent: 
 
     assert lowercase_letter.value == value
     assert lowercase_letter.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('lowercase_letter, other, expected_equality', [
-    (LowercaseLetter('a'), 1, False),
-    (LowercaseLetter('a'), 'a', False),
-    (LowercaseLetter('a'), LowercaseLetter('b'), False),
-    (LowercaseLetter('a'), LowercaseLetter('a'), True),
-])
-# yapf: enable
-def test_eq(lowercase_letter: LowercaseLetter, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.lowercase_letter.LowercaseLetter.__eq__."""
-    equality: bool = lowercase_letter == other
-
-    assert equality == expected_equality

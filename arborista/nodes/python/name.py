@@ -1,7 +1,5 @@
 """A Python name."""
-from typing import Any, Iterable, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Iterable, Optional
 
 from arborista.node import Node
 from arborista.nodes.python.atom import Atom
@@ -13,11 +11,6 @@ class Name(Atom):
         super().__init__(parent)
 
         self.value: str = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-        return equality
 
 
 Names = Iterable[Name]

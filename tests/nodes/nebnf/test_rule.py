@@ -38,20 +38,3 @@ def test_init(lefthand_side: LefthandSide, righthand_side: RighthandSide, parent
     assert rule.lefthand_side == lefthand_side
     assert rule.righthand_side == righthand_side
     assert rule.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('rule, other, expected_equality', [
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 1, False),
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 'F', False),
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Rule(LefthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Rule(LefthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Rule(LefthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(rule: Rule, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.rule.Rule.__eq__."""
-    equality: bool = rule == other
-
-    assert equality == expected_equality

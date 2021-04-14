@@ -39,17 +39,3 @@ def test_init(value: StringPrefixValue, parent: Optional[Node], pass_parent: boo
 
     assert string_prefix.value == value
     assert string_prefix.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('string_prefix, other, expected_equality', [
-    (StringPrefix('f'), 'foo', False),
-    (StringPrefix('f'), StringPrefix('r'), False),
-    (StringPrefix('f'), StringPrefix('f'), True),
-])
-# yapf: enable
-def test_eq(string_prefix: StringPrefix, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.string_prefix.StringPrefix.__eq__."""
-    equality: bool = string_prefix == other
-
-    assert equality == expected_equality

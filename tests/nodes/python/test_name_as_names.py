@@ -35,17 +35,3 @@ def test_init(first: NameAsName, rest: List[NameAsName], parent: Optional[Node],
     assert name_as_names.first == first
     assert name_as_names.rest == rest
     assert name_as_names.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('name_as_names, other, expected_equality', [
-    (NameAsNames(NameAsName(Name('foo')), []), 'foo', False),
-    (NameAsNames(NameAsName(Name('foo')), []), NameAsNames(NameAsName(Name('foo')), [NameAsName(Name('bar'))]), False),
-    (NameAsNames(NameAsName(Name('foo')), [NameAsName(Name('bar'))]), NameAsNames(NameAsName(Name('foo')), [NameAsName(Name('bar'))]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(name_as_names: NameAsNames, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.name_as_names.NameAsNames.__eq__."""
-    equality: bool = name_as_names == other
-
-    assert equality == expected_equality

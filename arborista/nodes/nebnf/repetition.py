@@ -1,7 +1,5 @@
 """A repetition of righthand sides."""
-from typing import TYPE_CHECKING, Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import TYPE_CHECKING, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.name import Name
@@ -21,13 +19,3 @@ class Repetition(NEBNFNode):
 
         self.name: Optional[Name] = name
         self.element: 'RighthandSide' = element
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.name != other.name:
-            return False
-
-        if self.element != other.element:
-            return False
-
-        return True

@@ -10,7 +10,6 @@ from arborista.nodes.python.boolean_operation import BooleanOperation
 from arborista.nodes.python.boolean_operator import BooleanOperator
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.or_ import Or
 
 
 def test_inheritance() -> None:
@@ -39,22 +38,6 @@ def test_init(left: Expression, operator: BooleanOperator, right: Expression,
     assert boolean_operation.operator == operator
     assert boolean_operation.right == right
     assert boolean_operation.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('boolean_operation, other, expected_equality', [
-    (BooleanOperation(Name('a'), And(), Name('b')), 'foo', False),
-    (BooleanOperation(Name('a'), And(), Name('b')), BooleanOperation(Name('b'), And(), Name('b')), False),
-    (BooleanOperation(Name('a'), And(), Name('b')), BooleanOperation(Name('a'), Or(), Name('b')), False),
-    (BooleanOperation(Name('a'), And(), Name('b')), BooleanOperation(Name('a'), And(), Name('a')), False),
-    (BooleanOperation(Name('a'), And(), Name('b')), BooleanOperation(Name('a'), And(), Name('b')), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(boolean_operation: BooleanOperation, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.boolean_operation.BooleanOperation.__eq__."""
-    equality: bool = boolean_operation == other
-
-    assert equality == expected_equality
 
 
 # yapf: disable

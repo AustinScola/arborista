@@ -49,18 +49,3 @@ def test_init(expression: Expression, parent: Optional[Node], pass_parent: bool)
 
     assert righthand_side.expression == expression
     assert righthand_side.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('righthand_side, other, expected_equality', [
-    (RighthandSide(Identifier(UppercaseLetter('F'), [])), 1, False),
-    (RighthandSide(Identifier(UppercaseLetter('F'), [])), 'F', False),
-    (RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), [])), False),
-    (RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('F'), [])), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(righthand_side: RighthandSide, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.righthand_side.RighthandSide.__eq__."""
-    equality: bool = righthand_side == other
-
-    assert equality == expected_equality

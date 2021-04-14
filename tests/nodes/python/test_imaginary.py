@@ -35,17 +35,3 @@ def test_init(value: Union[int, float], parent: Optional[Node], pass_parent: boo
 
     assert imaginary.value == value
     assert imaginary.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('imaginary, other, expected_equality', [
-    (Imaginary(1), 'foo', False),
-    (Imaginary(1), Imaginary(2), False),
-    (Imaginary(1), Imaginary(1), True),
-])
-# yapf: enable
-def test_eq(imaginary: Imaginary, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.imaginary.Imaginary.__eq__."""
-    equality: bool = imaginary == other
-
-    assert equality == expected_equality

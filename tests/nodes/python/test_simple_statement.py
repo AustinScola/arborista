@@ -37,19 +37,6 @@ def test_simple_statement_init(small_statements: SmallStatements, parent: Option
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('simple_statement, other, expected_equality', [
-    (SimpleStatement(small_statements=[ReturnStatement()]), 'foo', False),
-    (SimpleStatement(small_statements=[ReturnStatement()]), SimpleStatement(small_statements=[ReturnStatement()]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(simple_statement: SimpleStatement, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.simple_statement.__eq__."""
-    equality: bool = simple_statement == other
-
-    assert equality == expected_equality
-
-
-# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('simple_statement, expected_children_list', [
     (SimpleStatement(small_statements=[]), []),
     (SimpleStatement(small_statements=[ReturnStatement()]), [ReturnStatement()]),

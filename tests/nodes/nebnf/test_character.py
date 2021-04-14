@@ -46,18 +46,3 @@ def test_init(value: CharacterValue, parent: Optional[Node], pass_parent: bool) 
 
     assert character.value == value
     assert character.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('character, other, expected_equality', [
-    (Character('a'), 1, False),
-    (Character('a'), 'a', False),
-    (Character('a'), Character('b'), False),
-    (Character('a'), Character('a'), True),
-])
-# yapf: enable
-def test_eq(character: Character, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.character.Character.__eq__."""
-    equality: bool = character == other
-
-    assert equality == expected_equality

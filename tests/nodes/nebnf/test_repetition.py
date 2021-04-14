@@ -43,19 +43,3 @@ def test_init(name: Optional[Name], element: RighthandSide, parent: Optional[Nod
     assert repetition.name == name
     assert repetition.element == element
     assert repetition.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('repetition, other, expected_equality', [
-    (Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 1, False),
-    (Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 'F', False),
-    (Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Repetition(Name(LowercaseLetter('m'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), False),
-    (Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Repetition(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(repetition: Repetition, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.repetition.Repetition.__eq__."""
-    equality: bool = repetition == other
-
-    assert equality == expected_equality

@@ -1,7 +1,5 @@
 """A Python boolean operation."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.boolean_operator import BooleanOperator
@@ -20,12 +18,6 @@ class BooleanOperation(Expression):
         self.left: Expression = left
         self.operator: BooleanOperator = operator
         self.right: Expression = right
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = (self.left == other.left and self.operator == other.operator
-                          and self.right == other.right)
-        return equality
 
     def iterate_children(self) -> NodeIterator:
         yield self.left

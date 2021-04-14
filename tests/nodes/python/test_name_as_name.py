@@ -38,17 +38,3 @@ def test_init(name: Name, new_name: Optional[Name], parent: Optional[Node], pass
     assert name_as_name.name == name
     assert name_as_name.new_name == new_name
     assert name_as_name.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('name_as_name, other, expected_equality', [
-    (NameAsName(Name('foo')), 'foo', False),
-    (NameAsName(Name('foo')), NameAsName(Name('foo'), Name('bar')), False),
-    (NameAsName(Name('foo'), Name('bar')), NameAsName(Name('foo'), Name('bar')), True),
-])
-# yapf: enable
-def test_eq(name_as_name: NameAsName, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.name_as_name.NameAsName.__eq__."""
-    equality: bool = name_as_name == other
-
-    assert equality == expected_equality

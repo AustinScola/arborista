@@ -36,20 +36,3 @@ def test_init(first_character: Character, rest_of_characters: List[Character],
     assert double_quoted_terminal.first_character == first_character
     assert double_quoted_terminal.rest_of_characters == rest_of_characters
     assert double_quoted_terminal.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('double_quoted_terminal, other, expected_equality', [
-    (DoubleQuotedTerminal(Character('f'), []), 'f', False),
-    (DoubleQuotedTerminal(Character('f'), []), DoubleQuotedTerminal(Character('b'), []), False),
-    (DoubleQuotedTerminal(Character('f'), [Character('o'), Character('o')]), DoubleQuotedTerminal(Character('f'), []), False),
-    (DoubleQuotedTerminal(Character('f'), [Character('o'), Character('o')]), DoubleQuotedTerminal(Character('b'), [Character('o'), Character('o')]), False),
-    (DoubleQuotedTerminal(Character('f'), [Character('o'), Character('o')]), DoubleQuotedTerminal(Character('f'), [Character('o'), Character('o')]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(double_quoted_terminal: DoubleQuotedTerminal, other: Any,
-            expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.double_quoted_terminal.DoubleQuotedTerminal.__eq__."""
-    equality: bool = double_quoted_terminal == other
-
-    assert equality == expected_equality

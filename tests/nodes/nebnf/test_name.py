@@ -38,19 +38,3 @@ def test_init(first_character: LowercaseLetter, rest_of_characters: List[Union[L
     assert name.first_character == first_character
     assert name.rest_of_characters == rest_of_characters
     assert name.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('name, other, expected_equality', [
-    (Name(LowercaseLetter('f'), []), 'f', False),
-    (Name(LowercaseLetter('f'), []), Name(LowercaseLetter('b'), []), False),
-    (Name(LowercaseLetter('f'), [LowercaseLetter('o'), LowercaseLetter('o')]), Name(LowercaseLetter('f'), []), False),
-    (Name(LowercaseLetter('f'), [LowercaseLetter('o'), LowercaseLetter('o')]), Name(LowercaseLetter('b'), [LowercaseLetter('o'), LowercaseLetter('o')]), False),
-    (Name(LowercaseLetter('f'), [LowercaseLetter('o'), LowercaseLetter('o')]), Name(LowercaseLetter('f'), [LowercaseLetter('o'), LowercaseLetter('o')]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(name: Name, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.name.Name.__eq__."""
-    equality: bool = name == other
-
-    assert equality == expected_equality

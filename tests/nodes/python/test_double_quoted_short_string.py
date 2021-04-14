@@ -32,18 +32,3 @@ def test_init(value: str, parent: Optional[Node], pass_parent: bool) -> None:
 
     assert single_quoted_short_string.value == value
     assert single_quoted_short_string.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('single_quoted_short_string, other, expected_equality', [
-    (SingleQuotedShortString('foo'), 'foo', False),
-    (SingleQuotedShortString('foo'), SingleQuotedShortString('bar'), False),
-    (SingleQuotedShortString('foo'), SingleQuotedShortString('foo'), True),
-])
-# yapf: enable
-def test_eq(single_quoted_short_string: SingleQuotedShortString, other: Any,
-            expected_equality: bool) -> None:
-    """Test arborista.nodes.python.single_quoted_short_string.SingleQuotedShortString.__eq__."""
-    equality: bool = single_quoted_short_string == other
-
-    assert equality == expected_equality

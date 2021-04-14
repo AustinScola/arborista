@@ -1,7 +1,5 @@
 """A single quoted terminal."""
-from typing import Any, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import List, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.character import Character
@@ -18,13 +16,3 @@ class SingleQuotedTerminal(NEBNFNode):
 
         self.first_character: Character = first_character
         self.rest_of_characters: List[Character] = rest_of_characters
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.first_character != other.first_character:
-            return False
-
-        if self.rest_of_characters != other.rest_of_characters:
-            return False
-
-        return True

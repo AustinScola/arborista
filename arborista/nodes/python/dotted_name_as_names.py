@@ -1,7 +1,5 @@
 """A Python dotted names as other names."""
-from typing import Any, Iterable, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Iterable, List, Optional
 
 from arborista.node import Node
 from arborista.nodes.python.dotted_name_as_name import DottedNameAsName
@@ -19,13 +17,3 @@ class DottedNameAsNames(PythonNode):
         self.first_dotted_name_as_name: DottedNameAsName = first_dotted_name_as_name
         self.rest_of_dotted_name_as_names: List[DottedNameAsName] = list(
             rest_of_dotted_name_as_names)
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.first_dotted_name_as_name != other.first_dotted_name_as_name:
-            return False
-
-        if self.rest_of_dotted_name_as_names != other.rest_of_dotted_name_as_names:
-            return False
-
-        return True

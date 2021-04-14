@@ -1,7 +1,5 @@
 """Python names to be imported as other names."""
-from typing import Any, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import List, Optional
 
 from arborista.node import Node
 from arborista.nodes.python.name_as_name import NameAsName
@@ -15,13 +13,3 @@ class NameAsNames(PythonNode):
 
         self.first: NameAsName = first
         self.rest: List[NameAsName] = rest
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.first != other.first:
-            return False
-
-        if self.rest != other.rest:
-            return False
-
-        return True

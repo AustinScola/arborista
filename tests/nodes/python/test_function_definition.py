@@ -55,22 +55,6 @@ def test_function_definition_init(name: Name, parameters: Parameters, body: Suit
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('function_definition, other, expected_equality', [
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), 'bar', False),
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()])), False),
-    (FunctionDefinition(Name('foo'), [Parameter(Name('x'))], SimpleStatement([ReturnStatement()])), FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), False),
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement(), ReturnStatement()])), False),
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(function_definition: FunctionDefinition, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.function_definition.__eq__."""
-    equality: bool = function_definition == other
-
-    assert equality == expected_equality
-
-
-# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('function_definition, expected_children_list', [
     (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), [Name('foo'), SimpleStatement([ReturnStatement()])]),
     (FunctionDefinition(Name('foo'), [], Block([SimpleStatement([ReturnStatement()])], '    ')), [Name('foo'), Block([SimpleStatement([ReturnStatement()])], '    ')]),

@@ -1,5 +1,5 @@
 """Test arborista.nodes.python.and_."""
-from typing import Any, Optional
+from typing import Optional
 from unittest.mock import MagicMock
 
 import pytest
@@ -28,16 +28,3 @@ def test_init(parent: Optional[Expression], pass_parent: bool) -> None:
     and_: And = And(**keyword_arguments)
 
     assert and_.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('and_, other, expected_equality', [
-    (And(), 'foo', False),
-    (And(), And(), True),
-])
-# yapf: enable
-def test_eq(and_: And, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.and_.And.__eq__."""
-    equality: bool = and_ == other
-
-    assert equality == expected_equality

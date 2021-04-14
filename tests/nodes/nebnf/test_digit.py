@@ -40,18 +40,3 @@ def test_init(value: DigitValue, parent: Optional[Node], pass_parent: bool) -> N
 
     assert digit.value == value
     assert digit.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('digit, other, expected_equality', [
-    (Digit('0'), 0, False),
-    (Digit('0'), '0', False),
-    (Digit('0'), Digit('1'), False),
-    (Digit('0'), Digit('0'), True),
-])
-# yapf: enable
-def test_eq(digit: Digit, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.digit.Digit.__eq__."""
-    equality: bool = digit == other
-
-    assert equality == expected_equality

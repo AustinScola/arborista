@@ -35,17 +35,3 @@ def test_init(name_as_names: NameAsNames, parent: Optional[Node], pass_parent: b
 
     assert grouped_name_as_names.name_as_names == name_as_names
     assert grouped_name_as_names.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('grouped_name_as_names, other, expected_equality', [
-    (GroupedNameAsNames(NameAsNames(NameAsName(Name('foo')), [])), 'foo', False),
-    (GroupedNameAsNames(NameAsNames(NameAsName(Name('foo')), [])), GroupedNameAsNames(NameAsNames(NameAsName(Name('bar')), [])), False),
-    (GroupedNameAsNames(NameAsNames(NameAsName(Name('foo')), [])), GroupedNameAsNames(NameAsNames(NameAsName(Name('foo')), [])), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(grouped_name_as_names: GroupedNameAsNames, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.grouped_name_as_names.GroupedNameAsNames.__eq__."""
-    equality: bool = grouped_name_as_names == other
-
-    assert equality == expected_equality
