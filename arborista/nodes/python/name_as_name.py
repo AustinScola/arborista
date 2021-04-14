@@ -1,7 +1,5 @@
 """A Python name to be imported as another name."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.name import Name
@@ -15,13 +13,3 @@ class NameAsName(PythonNode):
 
         self.name: Name = name
         self.new_name: Optional[Name] = new_name
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.name != other.name:
-            return False
-
-        if self.new_name != other.new_name:
-            return False
-
-        return True

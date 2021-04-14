@@ -1,7 +1,5 @@
 """A group of names to be imported as other names."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.name_as_names import NameAsNames
@@ -14,10 +12,3 @@ class GroupedNameAsNames(PythonNode):
         super().__init__(parent)
 
         self.name_as_names: NameAsNames = name_as_names
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.name_as_names != other.name_as_names:
-            return False
-
-        return True

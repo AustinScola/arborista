@@ -51,21 +51,6 @@ def test_module_init(name: str, statements: Optional[Statements], pass_statement
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('module, other, expected_equality', [
-    (Module('foo'), 'bar', False),
-    (Module('foo'), Module('bar'), False),
-    (Module('foo', [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]), Module('foo'), False),
-    (Module('foo'), Module('foo'), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(module: Module, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.module.__eq__."""
-    equality: bool = module == other
-
-    assert equality == expected_equality
-
-
-# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('module, expected_children_list', [
     (Module('foo'), []),
     (Module('foo', [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]), [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]),

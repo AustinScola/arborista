@@ -37,18 +37,3 @@ def test_init(dots: int, dotted_name: Optional[DottedName], parent: Optional[Nod
     assert relative_dotted_name.dots == dots
     assert relative_dotted_name.dotted_name == dotted_name
     assert relative_dotted_name.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('relative_dotted_name, other, expected_equality', [
-    (RelativeDottedName(0, DottedName(Name('foo'), [])), 'foo', False),
-    (RelativeDottedName(0, DottedName(Name('foo'), [])), RelativeDottedName(0, DottedName(Name('bar'), [])), False),
-    (RelativeDottedName(1, DottedName(Name('foo'), [])), RelativeDottedName(0, DottedName(Name('foo'), [])), False),
-    (RelativeDottedName(0, DottedName(Name('foo'), [])), RelativeDottedName(0, DottedName(Name('foo'), [])), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(relative_dotted_name: RelativeDottedName, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.relative_dotted_name.RelativeDottedName.__eq__."""
-    equality: bool = relative_dotted_name == other
-
-    assert equality == expected_equality

@@ -1,7 +1,5 @@
 """A Python module."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.python_node import PythonNode
@@ -23,16 +21,6 @@ class Module(PythonNode):
             self.statements = []
         else:
             self.statements = list(statements)
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.name != other.name:
-            return False
-
-        if self.statements != other.statements:
-            return False
-
-        return True
 
     def iterate_children(self) -> NodeIterator:
         yield from self.statements

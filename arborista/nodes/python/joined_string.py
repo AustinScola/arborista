@@ -1,7 +1,5 @@
 """A Python joined string."""
-from typing import Any, Iterable, Iterator, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Iterable, Iterator, List, Optional
 
 from arborista.node import Node
 from arborista.nodes.python.expression import Expression
@@ -14,13 +12,6 @@ class JoinedString(Expression):
         super().__init__(parent)
 
         self.strings: List[String] = list(strings)
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.strings != other.strings:
-            return False
-
-        return True
 
     def iterate_children(self) -> Iterator[String]:
         yield from self.strings

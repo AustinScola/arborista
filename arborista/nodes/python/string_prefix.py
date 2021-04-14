@@ -1,7 +1,6 @@
 """A string prefix."""
-from typing import Any, Optional
+from typing import Optional
 
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
 from typing_extensions import Literal
 
 from arborista.node import Node
@@ -17,9 +16,3 @@ class StringPrefix(PythonNode):
         super().__init__(parent)
 
         self.value: StringPrefixValue = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-
-        return equality

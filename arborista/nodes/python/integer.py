@@ -1,7 +1,5 @@
 """A Python integer."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.number import Number
@@ -12,8 +10,3 @@ class Integer(Number):
     def __init__(self, value: int, parent: Optional[Node] = None):
         super().__init__(parent)
         self.value = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-        return equality

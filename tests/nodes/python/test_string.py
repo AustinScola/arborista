@@ -42,17 +42,3 @@ def test_init(prefix: Optional[StringPrefix], value: StringValue, parent: Option
     assert string.prefix == prefix
     assert string.value == value
     assert string.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('string, other, expected_equality', [
-    (String(None, SingleQuotedShortString('foo')), 'foo', False),
-    (String(None, SingleQuotedShortString('foo')), String(StringPrefix('f'), SingleQuotedShortString('foo')), False),
-    (String(StringPrefix('f'), SingleQuotedShortString('foo')), String(StringPrefix('f'), SingleQuotedShortString('foo')), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(string: String, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.string.String.__eq__."""
-    equality: bool = string == other
-
-    assert equality == expected_equality

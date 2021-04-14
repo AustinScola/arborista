@@ -33,19 +33,6 @@ def test_init(value: str, parent: Optional[Node], pass_parent: bool) -> None:
     assert name.parent is parent
 
 
-# yapf: disable
-@pytest.mark.parametrize('name, other, expected_equality', [
-    (Name('foo'), 'bar', False),
-    (Name('foo'), Name('foo'), True),
-])
-# yapf: enable
-def test_eq(name: Name, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.name.__eq__."""
-    equality: bool = name == other
-
-    assert equality == expected_equality
-
-
 def test_names() -> None:
     """Test arborista.nodes.python.name.Names."""
     assert issubclass(Names, Iterable)

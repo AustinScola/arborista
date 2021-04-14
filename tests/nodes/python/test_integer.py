@@ -31,17 +31,3 @@ def test_init(value: int, parent: Optional[Node], pass_parent: bool) -> None:
 
     assert integer.value == value
     assert integer.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('integer, other, expected_equality', [
-    (Integer(1), 'foo', False),
-    (Integer(1), Integer(2), False),
-    (Integer(1), Integer(1), True),
-])
-# yapf: enable
-def test_eq(integer: Integer, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.integer.Integer.__eq__."""
-    equality: bool = integer == other
-
-    assert equality == expected_equality

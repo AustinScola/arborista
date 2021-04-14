@@ -31,17 +31,3 @@ def test_init(value: int, parent: Optional[Node], pass_parent: bool) -> None:
 
     assert float_.value == value
     assert float_.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('float_, other, expected_equality', [
-    (Float(1.0), 'foo', False),
-    (Float(1.0), Float(2.0), False),
-    (Float(1.0), Float(1.0), True),
-])
-# yapf: enable
-def test_eq(float_: Float, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.float.Float.__eq__."""
-    equality: bool = float_ == other
-
-    assert equality == expected_equality

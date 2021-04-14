@@ -40,18 +40,3 @@ def test_init(first_dotted_name_as_name: DottedNameAsName,
     assert dotted_name_as_names.first_dotted_name_as_name == first_dotted_name_as_name
     assert dotted_name_as_names.rest_of_dotted_name_as_names == rest_of_dotted_name_as_names
     assert dotted_name_as_names.parent == parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('dotted_name_as_names, other, expected_equality', [
-    (DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), []), 'foo', False),
-    (DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), []), DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), [DottedNameAsName(DottedName(Name('bar'), []))]), False),
-    (DottedNameAsNames(DottedNameAsName(DottedName(Name('fooey'), [])), [DottedNameAsName(DottedName(Name('bar'), []))]), DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), [DottedNameAsName(DottedName(Name('bar'), []))]), False),
-    (DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), [DottedNameAsName(DottedName(Name('bar'), []))]), DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), [])), [DottedNameAsName(DottedName(Name('bar'), []))]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(dotted_name_as_names: DottedNameAsNames, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.dotted_name_as_names.DottedNameAsNames.__eq__."""
-    equality: bool = dotted_name_as_names == other
-
-    assert equality == expected_equality

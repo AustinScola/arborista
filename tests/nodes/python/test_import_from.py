@@ -10,7 +10,6 @@ from arborista.nodes.python.grouped_name_as_names import GroupedNameAsNames
 from arborista.nodes.python.import_from import ImportFrom, Source, Target
 from arborista.nodes.python.import_statement import ImportStatement
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.name_as_name import NameAsName
 from arborista.nodes.python.name_as_names import NameAsNames
 from arborista.nodes.python.relative_dotted_name import RelativeDottedName
 from arborista.nodes.python.star import Star
@@ -51,18 +50,3 @@ def test_init(source: Source, target: Target, parent: Optional[Node], pass_paren
     assert import_from.source == source
     assert import_from.target == target
     assert import_from.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('import_from, other, expected_equality', [
-    (ImportFrom(DottedName(Name('foo'), []), Star()), 'foo', False),
-    (ImportFrom(DottedName(Name('foo'), []), Star()), ImportFrom(DottedName(Name('foo'), []), NameAsNames(NameAsName(Name('foo')), [])), False),
-    (ImportFrom(DottedName(Name('foo'), []), Star()), ImportFrom(DottedName(Name('bar'), []), Star()), False),
-    (ImportFrom(DottedName(Name('foo'), []), Star()), ImportFrom(DottedName(Name('foo'), []), Star()), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(import_from: ImportFrom, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.import_from.ImportFrom.__eq__."""
-    equality: bool = import_from == other
-
-    assert equality == expected_equality

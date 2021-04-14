@@ -36,19 +36,6 @@ def test_init(name: Name, parent: Optional[Node], pass_parent: bool) -> None:
 
 
 # yapf: disable
-@pytest.mark.parametrize('parameter, other, expected_equality', [
-    (Parameter(Name('foo')), 'bar', False),
-    (Parameter(Name('foo')), Parameter(Name('foo')), True),
-])
-# yapf: enable
-def test_eq(parameter: Parameter, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.parameter.Parameter.__eq__."""
-    equality: bool = parameter == other
-
-    assert equality == expected_equality
-
-
-# yapf: disable
 @pytest.mark.parametrize('parameter, expected_children_list', [
     (Parameter(Name('foo')), [Name('foo')]),
 ])

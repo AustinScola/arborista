@@ -33,17 +33,3 @@ def test_init(expression: Expression, parent: Optional[Node], pass_parent: bool)
 
     assert expression_statement.expression == expression
     assert expression_statement.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('expression_statement, other, expected_equality', [
-    (ExpressionStatement(Integer(5)), 'foo', False),
-    (ExpressionStatement(Integer(5)), ExpressionStatement(Integer(7)), False),
-    (ExpressionStatement(Integer(5)), ExpressionStatement(Integer(5)), True),
-])
-# yapf: enable
-def test_eq(expression_statement: ExpressionStatement, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.expression_statement.ExpressionStatement.__eq__."""
-    equality: bool = expression_statement == other
-
-    assert equality == expected_equality

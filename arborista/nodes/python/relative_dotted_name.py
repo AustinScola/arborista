@@ -1,7 +1,5 @@
 """A relative dotted name."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.dotted_name import DottedName
@@ -15,13 +13,3 @@ class RelativeDottedName(PythonNode):
 
         self.dots: int = dots
         self.dotted_name: Optional[DottedName] = dotted_name
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.dots != other.dots:
-            return False
-
-        if self.dotted_name != other.dotted_name:
-            return False
-
-        return True

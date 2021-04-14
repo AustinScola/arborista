@@ -1,7 +1,5 @@
 """A double quoted short string."""
-from typing import Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional
 
 from arborista.node import Node
 from arborista.nodes.python.short_string import ShortString
@@ -13,9 +11,3 @@ class DoubleQuotedShortString(ShortString):
         super().__init__(parent)
 
         self.value: str = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-
-        return equality

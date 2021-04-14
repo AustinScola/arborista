@@ -50,22 +50,3 @@ def test_init(strings: Iterable[String], parent: Optional[Node], pass_parent: bo
 
     assert joined_string.strings == expected_strings
     assert joined_string.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('joined_string, other, expected_equality', [
-    (JoinedString([]), 'foo', False),
-    (JoinedString([]), JoinedString([String(None, SingleQuotedShortString('foo'))]), False),
-    (JoinedString([String(None, SingleQuotedShortString('foo'))]), JoinedString([]), False),
-    (JoinedString([String(None, SingleQuotedShortString(''))]), JoinedString([String(None, SingleQuotedShortString(''))]), True),
-    (JoinedString([String(None, SingleQuotedShortString('foo'))]), JoinedString([String(None, SingleQuotedShortString('bar'))]), False),
-    (JoinedString([String(None, SingleQuotedShortString('foo'))]), JoinedString([String(None, SingleQuotedShortString('foo'))]), True),
-    (JoinedString([String(None, SingleQuotedShortString(''))]), JoinedString([String(None, SingleQuotedShortString('')), String(None, SingleQuotedShortString(''))]), False),
-    (JoinedString([String(None, SingleQuotedShortString('')), String(None, SingleQuotedShortString(''))]), JoinedString([String(None, SingleQuotedShortString('')), String(None, SingleQuotedShortString(''))]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(joined_string: JoinedString, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.python.joined_string.__eq__."""
-    equality: bool = joined_string == other
-
-    assert equality == expected_equality

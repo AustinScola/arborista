@@ -1,7 +1,5 @@
 """A Python parameter."""
-from typing import Any, Iterable, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Iterable, List, Optional
 
 from arborista.node import Node, NodeIterator
 from arborista.nodes.python.name import Name
@@ -14,11 +12,6 @@ class Parameter(PythonNode):
         super().__init__(parent)
 
         self.name: Name = name
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.name == other.name
-        return equality
 
     def iterate_children(self) -> NodeIterator:
         yield self.name
