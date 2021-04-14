@@ -39,17 +39,3 @@ def test_init(parent: Optional[Node], pass_parent: bool) -> None:
 
     assert underscore.value == '_'
     assert underscore.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('underscore, other, expected_equality', [
-    (Underscore(), 1, False),
-    (Underscore(), '_', False),
-    (Underscore(), Underscore(), True),
-])
-# yapf: enable
-def test_eq(underscore: Underscore, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.underscore.Underscore.__eq__."""
-    equality: bool = underscore == other
-
-    assert equality == expected_equality

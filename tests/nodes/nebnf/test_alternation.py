@@ -37,20 +37,3 @@ def test_init(first_choice: RighthandSide, second_choice: RighthandSide, parent:
     assert alternation.first_choice == first_choice
     assert alternation.second_choice == second_choice
     assert alternation.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('alternation, other, expected_equality', [
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 1, False),
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 'F', False),
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Alternation(RighthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Alternation(RighthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Alternation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(alternation: Alternation, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.alternation.Alternation.__eq__."""
-    equality: bool = alternation == other
-
-    assert equality == expected_equality

@@ -43,19 +43,3 @@ def test_init(name: Optional[Name], righthand_side: RighthandSide, parent: Optio
     assert option.name == name
     assert option.righthand_side == righthand_side
     assert option.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('option, other, expected_equality', [
-    (Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 1, False),
-    (Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 'F', False),
-    (Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Option(Name(LowercaseLetter('m'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), False),
-    (Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Option(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(option: Option, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.option.Option.__eq__."""
-    equality: bool = option == other
-
-    assert equality == expected_equality

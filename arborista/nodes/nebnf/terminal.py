@@ -1,7 +1,5 @@
 """A terminal."""
-from typing import Any, Optional, Union
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional, Union
 
 from arborista.node import Node
 from arborista.nodes.nebnf.double_quoted_terminal import DoubleQuotedTerminal
@@ -17,8 +15,3 @@ class Terminal(NEBNFNode):
         super().__init__(parent)
 
         self.value: TerminalValue = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-        return equality

@@ -39,18 +39,3 @@ def test_init(value: SymbolValue, parent: Optional[Node], pass_parent: bool) -> 
 
     assert symbol.value == value
     assert symbol.parent is parent
-
-
-# yapf: disable
-@pytest.mark.parametrize('lowercase_symbol, other, expected_equality', [
-    (Symbol('['), 1, False),
-    (Symbol('['), '[', False),
-    (Symbol('['), Symbol(']'), False),
-    (Symbol('['), Symbol('['), True),
-])
-# yapf: enable
-def test_eq(lowercase_symbol: Symbol, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.symbol.Symbol.__eq__."""
-    equality: bool = lowercase_symbol == other
-
-    assert equality == expected_equality

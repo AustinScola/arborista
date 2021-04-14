@@ -45,18 +45,3 @@ def test_init(value: TerminalValue, parent: Optional[Node], pass_parent: bool) -
 
     assert terminal.value == value
     assert terminal.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('terminal, other, expected_equality', [
-    (Terminal(SingleQuotedTerminal(Character('a'), [])), 1, False),
-    (Terminal(SingleQuotedTerminal(Character('a'), [])), Character('a'), False),
-    (Terminal(SingleQuotedTerminal(Character('a'), [])), Terminal(SingleQuotedTerminal(Character('b'), [])), False),
-    (Terminal(SingleQuotedTerminal(Character('a'), [])), Terminal(SingleQuotedTerminal(Character('a'), [])), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(terminal: Terminal, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.terminal.Terminal.__eq__."""
-    equality: bool = terminal == other
-
-    assert equality == expected_equality

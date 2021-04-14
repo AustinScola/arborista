@@ -1,7 +1,5 @@
 """A character."""
-from typing import Any, Optional, Union
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import Optional, Union
 
 from arborista.node import Node
 from arborista.nodes.nebnf.digit import DigitValue
@@ -19,8 +17,3 @@ class Character(NEBNFNode):
         super().__init__(parent)
 
         self.value: CharacterValue = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-        return equality

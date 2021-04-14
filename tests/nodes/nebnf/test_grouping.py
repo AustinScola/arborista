@@ -43,19 +43,3 @@ def test_init(name: Optional[Name], righthand_side: RighthandSide, parent: Optio
     assert grouping.name == name
     assert grouping.righthand_side == righthand_side
     assert grouping.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('grouping, other, expected_equality', [
-    (Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 1, False),
-    (Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), 'F', False),
-    (Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Grouping(Name(LowercaseLetter('m'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), False),
-    (Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), Grouping(Name(LowercaseLetter('n'), []), RighthandSide(Identifier(UppercaseLetter('F'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(grouping: Grouping, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.grouping.Grouping.__eq__."""
-    equality: bool = grouping == other
-
-    assert equality == expected_equality

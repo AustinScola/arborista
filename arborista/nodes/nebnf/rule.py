@@ -1,7 +1,5 @@
 """A production rule."""
-from typing import TYPE_CHECKING, Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import TYPE_CHECKING, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.lefthand_side import LefthandSide
@@ -21,13 +19,3 @@ class Rule(NEBNFNode):
 
         self.lefthand_side: LefthandSide = lefthand_side
         self.righthand_side: 'RighthandSide' = righthand_side
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.righthand_side != other.righthand_side:
-            return False
-
-        if self.lefthand_side != other.lefthand_side:
-            return False
-
-        return True

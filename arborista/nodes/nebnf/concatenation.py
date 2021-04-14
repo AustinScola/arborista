@@ -1,7 +1,5 @@
 """A concatenation of two righthand sides."""
-from typing import TYPE_CHECKING, Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import TYPE_CHECKING, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
@@ -20,13 +18,3 @@ class Concatenation(NEBNFNode):
 
         self.first: 'RighthandSide' = first
         self.second: 'RighthandSide' = second
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.first != other.first:
-            return False
-
-        if self.second != other.second:
-            return False
-
-        return True

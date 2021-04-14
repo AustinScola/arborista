@@ -1,7 +1,6 @@
 """A digit."""
-from typing import Any, Optional
+from typing import Optional
 
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
 from typing_extensions import Literal
 
 from arborista.node import Node
@@ -16,8 +15,3 @@ class Digit(NEBNFNode):
         super().__init__(parent)
 
         self.value: DigitValue = value
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        equality: bool = self.value == other.value
-        return equality

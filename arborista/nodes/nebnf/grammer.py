@@ -1,7 +1,5 @@
 """An NEBNF grammer."""
-from typing import Any, List, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import List, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.nebnf_node import NEBNFNode
@@ -14,10 +12,3 @@ class Grammer(NEBNFNode):
         super().__init__(parent)
 
         self.rules: List[Rule] = rules
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.rules != other.rules:
-            return False
-
-        return True

@@ -1,7 +1,5 @@
 """An optional righthand side."""
-from typing import TYPE_CHECKING, Any, Optional
-
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from typing import TYPE_CHECKING, Optional
 
 from arborista.node import Node
 from arborista.nodes.nebnf.name import Name
@@ -21,13 +19,3 @@ class Option(NEBNFNode):
 
         self.name: Optional[Name] = name
         self.righthand_side: 'RighthandSide' = righthand_side
-
-    @equal_type
-    def __eq__(self, other: Any) -> bool:
-        if self.name != other.name:
-            return False
-
-        if self.righthand_side != other.righthand_side:
-            return False
-
-        return True

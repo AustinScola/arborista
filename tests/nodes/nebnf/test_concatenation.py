@@ -37,20 +37,3 @@ def test_init(first: RighthandSide, second: RighthandSide, parent: Optional[Node
     assert concatenation.first == first
     assert concatenation.second == second
     assert concatenation.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('concatenation, other, expected_equality', [
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 1, False),
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), 'F', False),
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Concatenation(RighthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('E'), []))), False),
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Concatenation(RighthandSide(Identifier(UppercaseLetter('S'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), False),
-    (Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), Concatenation(RighthandSide(Identifier(UppercaseLetter('F'), [])), RighthandSide(Identifier(UppercaseLetter('B'), []))), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(concatenation: Concatenation, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.concatenation.Concatenation.__eq__."""
-    equality: bool = concatenation == other
-
-    assert equality == expected_equality

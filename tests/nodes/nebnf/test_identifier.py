@@ -38,19 +38,3 @@ def test_init(first_character: UppercaseLetter,
     assert identifier.first_character == first_character
     assert identifier.rest_of_characters == rest_of_characters
     assert identifier.parent is parent
-
-
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('identifier, other, expected_equality', [
-    (Identifier(UppercaseLetter('F'), []), 'F', False),
-    (Identifier(UppercaseLetter('F'), []), Identifier(UppercaseLetter('B'), []), False),
-    (Identifier(UppercaseLetter('F'), [LowercaseLetter('o'), LowercaseLetter('o')]), Identifier(UppercaseLetter('F'), []), False),
-    (Identifier(UppercaseLetter('F'), [LowercaseLetter('o'), LowercaseLetter('o')]), Identifier(UppercaseLetter('B'), [LowercaseLetter('o'), LowercaseLetter('o')]), False),
-    (Identifier(UppercaseLetter('F'), [LowercaseLetter('o'), LowercaseLetter('o')]), Identifier(UppercaseLetter('F'), [LowercaseLetter('o'), LowercaseLetter('o')]), True),
-])
-# yapf: enable # pylint: enable=line-too-long
-def test_eq(identifier: Identifier, other: Any, expected_equality: bool) -> None:
-    """Test arborista.nodes.nebnf.identifier.Identifier.__eq__."""
-    equality: bool = identifier == other
-
-    assert equality == expected_equality
