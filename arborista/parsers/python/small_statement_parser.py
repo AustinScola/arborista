@@ -5,12 +5,15 @@ import libcst
 
 from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
+from arborista.nodes.python.import_statement import ImportStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.small_statement import SmallStatement, SmallStatementList
 from arborista.parser import Parser
 from arborista.parsers.python.expression_statement_parser import (ExpressionStatementParser,
                                                                   LibcstExpressionStatement)
 from arborista.parsers.python.flow_statement_parser import FlowStatementParser, LibcstFlowStatement
+from arborista.parsers.python.import_statement_parser import (ImportStatementParser,
+                                                              LibcstImportStatement)
 from arborista.parsers.python.pass_statement_parser import LibcstPassStatement, PassStatementParser
 
 LibcstSmallStatement = libcst.BaseSmallStatement
@@ -38,6 +41,11 @@ class SmallStatementParser(Parser):
             expression_statement: ExpressionStatement = \
                 ExpressionStatementParser.parse_expression_statement(libcst_expression_statement)
             small_statement = expression_statement
+        elif isinstance(libcst_small_statement, (libcst.Import, libcst.ImportFrom)):
+            libcst_import_statement: LibcstImportStatement = libcst_small_statement
+            import_statement: ImportStatement = \
+                ImportStatementParser.parse_import_statement(libcst_import_statement)
+            small_statement = import_statement
         else:
             raise NotImplementedError  # pragma: no cover
         return small_statement
