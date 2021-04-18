@@ -5,7 +5,7 @@ from arborista.node import Node
 from arborista.nodes.python.number import Number
 
 
-class Imaginary(Number):
+class Imaginary(Number):  # pylint: disable=too-many-ancestors
     """A Python imaginary."""
     def __init__(self, value: Union[int, float], parent: Optional[Node] = None):
         super().__init__(parent)
