@@ -6,6 +6,9 @@ from arborista.nodes.python.block import Block
 from arborista.nodes.python.class_definition import ClassDefinition
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
+from arborista.nodes.python.if_ import If
+from arborista.nodes.python.if_statement import IfStatement
+from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
@@ -22,6 +25,7 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_compound_statement, expected_compound_statement', [
+    (libcst.If(libcst.Integer('1'), libcst.SimpleStatementSuite([libcst.Pass()])), IfStatement(If(Integer(1), SimpleStatement([PassStatement()])), [], None)),
     (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    '))),
     (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()])), ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()]))),
 ])
