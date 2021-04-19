@@ -3,6 +3,8 @@ import libcst
 
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.parser import Parser
+from arborista.parsers.python.class_definition_parser import (ClassDefinitionParser,
+                                                              LibcstClassDefinition)
 from arborista.parsers.python.function_definition_parser import (FunctionDefinitionParser,
                                                                  LibcstFunctionDefinition)
 
@@ -15,11 +17,17 @@ class CompoundStatementParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_compound_statement(
             libcst_compound_statement: LibcstCompoundStatement) -> CompoundStatement:
         """Parse a compound statement."""
+        compound_statement: CompoundStatement
         if isinstance(libcst_compound_statement, LibcstFunctionDefinition):
             libcst_function_definition: LibcstFunctionDefinition = libcst_compound_statement
             function_definition = FunctionDefinitionParser.parse_function_definition(
                 libcst_function_definition)
             compound_statement = function_definition
+        elif isinstance(libcst_compound_statement, LibcstClassDefinition):
+            libcst_class_definition: LibcstClassDefinition = libcst_compound_statement
+            class_definition = ClassDefinitionParser.parse_class_definition(libcst_class_definition)
+            compound_statement = class_definition
         else:
             raise NotImplementedError  # pragma: no cover
+
         return compound_statement
