@@ -2,7 +2,12 @@ Module = statements: [Statement]
 Statement = CompoundStatement | SimpleStatement
 
 CompoundStatement = IfStatement | WhileStatement | ForStatement | TryStatement | WithStatement | FunctionDefinition | ClassDefinition | DecoratedDefinition | AsyncStatement
-IfStatement = ...
+
+IfStatement = if: If elifs: (Elif)* [else: Else]
+If = "if" condition: Expression ":" body: Suite
+Elif = "elif" condition: Expression ":" body: Suite
+Else = "else" ":" body: Suite
+
 WhileStatement = ...
 ForStatement = ...
 TryStatement = ...
