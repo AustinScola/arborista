@@ -6,7 +6,6 @@ import libcst
 from arborista.nodes.python.block import Block
 from arborista.nodes.python.statement import StatementIterator
 from arborista.parser import Parser
-from arborista.parsers.python.statement_parser import LibcstStatements
 
 LibcstBlock = libcst.IndentedBlock
 
@@ -17,7 +16,7 @@ class BlockParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_block(libcst_block: LibcstBlock) -> Block:
         """Parser a Python block."""
 
-        from arborista.parsers.python.statement_parser import StatementParser  # isort: skip  # pylint: disable=cyclic-import, import-outside-toplevel
+        from arborista.parsers.python.statement_parser import StatementParser, LibcstStatements  # isort: skip  # pylint: disable=cyclic-import, import-outside-toplevel, line-too-long, useless-suppression
 
         libcst_body: LibcstStatements = libcst_block.body
         body: StatementIterator = (StatementParser.parse_statement(libcst_statement)
