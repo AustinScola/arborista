@@ -4,13 +4,15 @@ from typing import Union
 import libcst
 
 from arborista.nodes.python.atom import Atom
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.number import Number
 from arborista.nodes.python.string import String
 from arborista.parser import Parser
+from arborista.parsers.python.name_parser import LibcstName, NameParser
 from arborista.parsers.python.number_parser import LibcstNumber, NumberParser
 from arborista.parsers.python.string_parser import LibcstString, StringParser
 
-LibcstAtom = Union[LibcstNumber, libcst.SimpleString, libcst.FormattedString]
+LibcstAtom = Union[LibcstName, LibcstNumber, libcst.SimpleString, libcst.FormattedString]
 
 
 class AtomParser(Parser):  # pylint: disable=too-few-public-methods
@@ -20,7 +22,11 @@ class AtomParser(Parser):  # pylint: disable=too-few-public-methods
         """Parse a Python atom."""
         atom: Atom
 
-        if isinstance(libcst_atom, LibcstNumber):
+        if isinstance(libcst_atom, LibcstName):
+            libcst_name: LibcstName = libcst_atom
+            name: Name = NameParser.parse_name(libcst_name)
+            atom = name
+        elif isinstance(libcst_atom, LibcstNumber):
             libcst_number: LibcstNumber = libcst_atom
             number: Number = NumberParser.parse_number(libcst_number)
             atom = number

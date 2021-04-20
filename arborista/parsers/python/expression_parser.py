@@ -7,6 +7,7 @@ from arborista.nodes.python.expression import Expression
 from arborista.parser import Parser
 from arborista.parsers.python.atom_parser import AtomParser, LibcstAtom
 from arborista.parsers.python.comparison_parser import ComparisonParser, LibcstComparison
+from arborista.parsers.python.name_parser import LibcstName
 from arborista.parsers.python.number_parser import LibcstNumber
 
 LibcstExpression = libcst.BaseExpression
@@ -19,7 +20,7 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
         """Parse a Python expression statement."""
         expression: Expression
         if isinstance(libcst_expression,
-                      (LibcstNumber, libcst.SimpleString, libcst.FormattedString)):
+                      (LibcstName, LibcstNumber, libcst.SimpleString, libcst.FormattedString)):
             libcst_atom: LibcstAtom = libcst_expression
             atom: Atom = AtomParser.parse_atom(libcst_atom)
             expression = atom
