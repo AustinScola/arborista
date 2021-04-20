@@ -6,6 +6,7 @@ from arborista.nodes.python.comparison import Comparison
 from arborista.nodes.python.equals import Equals
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.integer import Integer
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
 from arborista.parser import Parser
@@ -24,6 +25,7 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_expression, expected_expression', [
+    (libcst.Name('foo'), Name('foo')),
     (libcst.Integer('1'), Integer(1)),
     (libcst.SimpleString("'foo'"), String(None, SingleQuotedShortString('foo'))),
     (libcst.Comparison(libcst.Integer('1'), [libcst.ComparisonTarget(libcst.Equal(), libcst.Integer('2'))]), Comparison(Integer(1), Equals(), Integer(2))),
