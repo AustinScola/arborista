@@ -2,6 +2,8 @@
 import libcst
 import pytest
 
+from arborista.nodes.python.comparison import Comparison
+from arborista.nodes.python.equals import Equals
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
@@ -20,12 +22,13 @@ def test_inheritance() -> None:
     assert issubclass(ExpressionParser, Parser)
 
 
-# yapf: disable
+# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_expression, expected_expression', [
     (libcst.Integer('1'), Integer(1)),
     (libcst.SimpleString("'foo'"), String(None, SingleQuotedShortString('foo'))),
+    (libcst.Comparison(libcst.Integer('1'), [libcst.ComparisonTarget(libcst.Equal(), libcst.Integer('2'))]), Comparison(Integer(1), Equals(), Integer(2))),
 ])
-# yapf: enable
+# yapf: enable # pylint: enable=line-too-long
 def test_parse_expression(libcst_expression: LibcstExpression,
                           expected_expression: Expression) -> None:
     """Test arborista.parsers.python.expression_parser.ExpressionParser.parse_expression."""

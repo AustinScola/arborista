@@ -7,7 +7,6 @@ from arborista.nodes.python.expression import Expression
 from arborista.parser import Parser
 from arborista.parsers.python.comparison_operator_parser import (ComparisonOperatorParser,
                                                                  LibcstComparisonOperator)
-from arborista.parsers.python.expression_parser import ExpressionParser, LibcstExpression
 
 LibcstComparison = libcst.Comparison
 
@@ -17,6 +16,9 @@ class ComparisonParser(Parser):  # pylint: disable=too-few-public-methods
     @staticmethod
     def parse_comparison(libcst_comparison: LibcstComparison) -> Comparison:
         """Parse a Python comparison operator."""
+        from arborista.parsers.python.expression_parser import (  # pylint: disable=import-outside-toplevel
+            ExpressionParser, LibcstExpression)
+
         libcst_left: LibcstExpression = libcst_comparison.left
         left: Expression = ExpressionParser.parse_expression(libcst_left)
 
