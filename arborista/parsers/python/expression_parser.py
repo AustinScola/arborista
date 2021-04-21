@@ -4,9 +4,11 @@ import libcst
 from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.comparison import Comparison
 from arborista.nodes.python.expression import Expression
+from arborista.nodes.python.function_call import FunctionCall
 from arborista.parser import Parser
 from arborista.parsers.python.atom_parser import AtomParser, LibcstAtom
 from arborista.parsers.python.comparison_parser import ComparisonParser, LibcstComparison
+from arborista.parsers.python.function_call_parser import FunctionCallParser, LibcstFunctionCall
 from arborista.parsers.python.name_parser import LibcstName
 from arborista.parsers.python.number_parser import LibcstNumber
 
@@ -28,6 +30,11 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
             libcst_comparison: LibcstComparison = libcst_expression
             comparison: Comparison = ComparisonParser.parse_comparison(libcst_comparison)
             expression = comparison
+        elif isinstance(libcst_expression, LibcstFunctionCall):
+            libcst_function_call: LibcstFunctionCall = libcst_expression
+            function_call: FunctionCall = FunctionCallParser.parse_function_call(
+                libcst_function_call)
+            expression = function_call
         else:
             raise NotImplementedError  # pragma: no cover
         return expression
