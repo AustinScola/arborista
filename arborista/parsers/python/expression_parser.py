@@ -21,8 +21,12 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_expression(libcst_expression: LibcstExpression) -> Expression:
         """Parse a Python expression statement."""
         expression: Expression
-        if isinstance(libcst_expression,
-                      (LibcstName, LibcstNumber, libcst.SimpleString, libcst.FormattedString)):
+
+        from arborista.parsers.python.dotted_name_parser import \
+            LibcstDottedName  # pylint: disable=import-outside-toplevel
+
+        if isinstance(libcst_expression, (LibcstName, LibcstDottedName, LibcstNumber,
+                                          libcst.SimpleString, libcst.FormattedString)):
             libcst_atom: LibcstAtom = libcst_expression
             atom: Atom = AtomParser.parse_atom(libcst_atom)
             expression = atom

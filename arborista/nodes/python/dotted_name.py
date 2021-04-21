@@ -2,12 +2,12 @@
 from typing import Optional
 
 from arborista.node import Node
-from arborista.nodes.python.import_statement import ImportStatement
+from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.name import Name, Names
 
 
-class DottedName(ImportStatement):
-    """A Python import dotted name."""
+class DottedName(Atom):
+    """A Python dotted name."""
     def __init__(self, first_name: Name, rest_of_names: Names, parent: Optional[Node] = None):
         super().__init__(parent)
 

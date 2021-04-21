@@ -3,6 +3,7 @@ import libcst
 import pytest
 
 from arborista.nodes.python.comparison import Comparison
+from arborista.nodes.python.dotted_name import DottedName
 from arborista.nodes.python.equals import Equals
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_call import FunctionCall
@@ -27,6 +28,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_expression, expected_expression', [
     (libcst.Name('foo'), Name('foo')),
+    (libcst.Attribute(libcst.Name('foo'), libcst.Name('bar')), DottedName(Name('foo'), [Name('bar')])),
     (libcst.Integer('1'), Integer(1)),
     (libcst.SimpleString("'foo'"), String(None, SingleQuotedShortString('foo'))),
     (libcst.Comparison(libcst.Integer('1'), [libcst.ComparisonTarget(libcst.Equal(), libcst.Integer('2'))]), Comparison(Integer(1), Equals(), Integer(2))),
