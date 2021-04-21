@@ -5,14 +5,14 @@ from unittest.mock import MagicMock
 import pytest
 
 from arborista.node import Node
+from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.dotted_name import DottedName
 from arborista.nodes.python.name import Name, Names
-from arborista.nodes.python.python_node import PythonNode
 
 
 def test_inheritance() -> None:
     """Test arborista.nodes.python.dotted_name.DottedName inheritance."""
-    assert issubclass(DottedName, PythonNode)
+    assert issubclass(DottedName, Atom)
 
 
 # yapf: disable
