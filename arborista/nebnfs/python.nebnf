@@ -55,7 +55,7 @@ LambdaDefinition = ...
 
 FunctionCall = function: Expression "(" arguments: Arguments ")"
 
-Atom = Name | True | False | None | String | JoinedString | Bytes | JoinedBytes | Number | Tuple | Group | Generator | List | ListComprehension | Dict | DictComprehension | Set | SetComprehension | Ellipses
+Atom = Name | DottedName | True | False | None | String | JoinedString | Bytes | JoinedBytes | Number | Tuple | Group | Generator | List | ListComprehension | Dict | DictComprehension | Set | SetComprehension | Ellipses
 
 Name = ...
 True = 'True'
