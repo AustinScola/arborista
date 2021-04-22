@@ -31,7 +31,7 @@ SimpleStatement = SmallStatement (";" SmallStatement)* ";" Newline
 SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowStatement | ImportStatement | GlobalStatement | NonlocalStatement | AssertStatement
 
 ExpressionStatement = Expression
-Expression = Ternary | Disjunction | Conjuction | Inversion | Comparison | LambdaDefinition | FunctionCall | ... | Atom
+Expression = Ternary | Disjunction | Conjuction | Inversion | Comparison | LambdaDefinition | FunctionCall | Subscription | ... | Atom
 Ternary = ...
 Disjunction  = ...
 Conjuction = ...
@@ -54,6 +54,12 @@ IsNot = 'is' 'not'
 LambdaDefinition = ...
 
 FunctionCall = function: Expression "(" arguments: Arguments ")"
+
+Subscription = value: Expression "[" subscripts: Subscripts "]"
+Subscripts = first: Subscript rest: ("," Subscript)* [","]
+Subscript = Index | Slice
+Index = value: Expression
+Slice = [start: Expression] ":" [end: Expression] [ ":" step: Expression ":" ]
 
 Atom = Name | DottedName | True | False | None | String | JoinedString | Bytes | JoinedBytes | Number | Tuple | Group | Generator | List | ListComprehension | Dict | DictComprehension | Set | SetComprehension | Ellipses
 
