@@ -6,7 +6,6 @@ import libcst
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.slice import Slice
 from arborista.parser import Parser
-from arborista.parsers.python.expression_parser import ExpressionParser, LibcstExpression
 
 LibcstSlice = libcst.Slice
 
@@ -16,6 +15,9 @@ class SliceParser(Parser):  # pylint: disable=too-few-public-methods
     @staticmethod
     def parse_slice(libcst_slice: LibcstSlice) -> Slice:
         """Parse a Python slice."""
+        from arborista.parsers.python.expression_parser import (  # pylint: disable=import-outside-toplevel
+            ExpressionParser, LibcstExpression)
+
         libcst_start: Optional[LibcstExpression] = libcst_slice.lower
         start: Optional[Expression]
         if libcst_start is not None:

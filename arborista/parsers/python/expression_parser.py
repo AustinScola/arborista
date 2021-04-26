@@ -5,12 +5,14 @@ from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.comparison import Comparison
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_call import FunctionCall
+from arborista.nodes.python.subscription import Subscription
 from arborista.parser import Parser
 from arborista.parsers.python.atom_parser import AtomParser, LibcstAtom
 from arborista.parsers.python.comparison_parser import ComparisonParser, LibcstComparison
 from arborista.parsers.python.function_call_parser import FunctionCallParser, LibcstFunctionCall
 from arborista.parsers.python.name_parser import LibcstName
 from arborista.parsers.python.number_parser import LibcstNumber
+from arborista.parsers.python.subscription_parser import LibcstSubscription, SubscriptionParser
 
 LibcstExpression = libcst.BaseExpression
 
@@ -39,6 +41,10 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
             function_call: FunctionCall = FunctionCallParser.parse_function_call(
                 libcst_function_call)
             expression = function_call
+        elif isinstance(libcst_expression, LibcstSubscription):
+            libcst_subscription: LibcstSubscription = libcst_expression
+            subscription: Subscription = SubscriptionParser.parse_subscription(libcst_subscription)
+            expression = subscription
         else:
             raise NotImplementedError  # pragma: no cover
         return expression
