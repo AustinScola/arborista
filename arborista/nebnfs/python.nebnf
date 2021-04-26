@@ -59,7 +59,7 @@ Subscription = value: Expression "[" subscripts: Subscripts "]"
 Subscripts = first: Subscript rest: ("," Subscript)* [","]
 Subscript = Index | Slice
 Index = value: Expression
-Slice = [start: Expression] ":" [end: Expression] [ ":" step: Expression ":" ]
+Slice = [start: Expression] ":" [end: Expression] [ ":" step: Expression ]
 
 Atom = Name | DottedName | True | False | None | String | JoinedString | Bytes | JoinedBytes | Number | Tuple | Group | Generator | List | ListComprehension | Dict | DictComprehension | Set | SetComprehension | Ellipses
 
