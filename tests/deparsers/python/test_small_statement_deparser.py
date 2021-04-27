@@ -3,9 +3,12 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.small_statement_deparser import SmallStatementDeparser
+from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
+from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.small_statement import SmallStatement
+from arborista.nodes.python.string import String
 
 
 def test_inheritance() -> None:
@@ -15,6 +18,7 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('small_statement, expected_string', [
+    (ExpressionStatement(String(None, SingleQuotedShortString('foo'))), "'foo'"),
     (ReturnStatement(), 'return'),
     (PassStatement(), 'pass'),
 ])
