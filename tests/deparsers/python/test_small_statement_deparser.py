@@ -3,7 +3,12 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.small_statement_deparser import SmallStatementDeparser
+from arborista.nodes.python.dotted_name import DottedName
+from arborista.nodes.python.dotted_name_as_name import DottedNameAsName
+from arborista.nodes.python.dotted_name_as_names import DottedNameAsNames
 from arborista.nodes.python.expression_statement import ExpressionStatement
+from arborista.nodes.python.import_dotted_name import ImportDottedName
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
@@ -16,13 +21,14 @@ def test_inheritance() -> None:
     assert issubclass(SmallStatementDeparser, Deparser)
 
 
-# yapf: disable
+# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('small_statement, expected_string', [
     (ExpressionStatement(String(None, SingleQuotedShortString('foo'))), "'foo'"),
     (ReturnStatement(), 'return'),
     (PassStatement(), 'pass'),
+    (ImportDottedName(DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), []), None), [])), 'import foo'),
 ])
-# yapf: enable
+# yapf: enable # pylint: enable=line-too-long
 def test_deparser_small_statement(small_statement: SmallStatement, expected_string: str) -> None:
     """Test arborista.deparsers.python.small_statement_deparser.SmallStatementDeparser.deparse_small_statement."""  # pylint: disable=line-too-long, useless-suppression
     string: str = SmallStatementDeparser.deparse_small_statement(small_statement)

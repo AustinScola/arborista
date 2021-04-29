@@ -2,9 +2,11 @@
 from arborista.deparser import Deparser
 from arborista.deparsers.python.expression_statement_deparser import ExpressionStatementDeparser
 from arborista.deparsers.python.flow_statement_deparser import FlowStatementDeparser
+from arborista.deparsers.python.import_statement_deparser import ImportStatementDeparser
 from arborista.deparsers.python.pass_statement_deparser import PassStatementDeparser
 from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
+from arborista.nodes.python.import_statement import ImportStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.small_statement import SmallStatement
 
@@ -24,6 +26,9 @@ class SmallStatementDeparser(Deparser):  # pylint: disable=too-few-public-method
         elif isinstance(small_statement, PassStatement):
             pass_statement: PassStatement = small_statement
             string = PassStatementDeparser.deparse_pass_statement(pass_statement)
+        elif isinstance(small_statement, ImportStatement):
+            import_statement: ImportStatement = small_statement
+            string = ImportStatementDeparser.deparse_import_statement(import_statement)
         else:
             raise NotImplementedError  # pragma: no cover
         return string
