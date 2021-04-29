@@ -109,7 +109,7 @@ ReturnStatement = "return" expressions: [ExpressionList]
 YieldStatement = YieldExpression
 RaiseStatement = "raise" [exception: Expression ["from" source_excpetion: Expression]]
 
-ImportStatement = value: ImportDottedName | ImportFrom
+ImportStatement = ImportDottedName | ImportFrom
 
 ImportDottedName = "import" dotted_names_as_names: DottedNameAsNames
 DottedNameAsNames = first_dotted_name_as_name: DottedNameAsName rest_of_dotted_name_as_names: ("," DottedNameAsName)*
