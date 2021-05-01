@@ -4,6 +4,7 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.expression_deparser import ExpressionDeparser
 from arborista.nodes.python.expression import Expression
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
 
@@ -16,6 +17,7 @@ def test_inheritance() -> None:
 # yapf: disable
 @pytest.mark.parametrize('expression, expected_string', [
     (String(None, SingleQuotedShortString('foo')), "'foo'"),
+    (Name('foo'), 'foo'),
 ])
 # yapf: enable
 def test_deparse_expression(expression: Expression, expected_string: str) -> None:
