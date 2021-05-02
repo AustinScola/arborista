@@ -7,9 +7,13 @@ from arborista.nodes.python.comparison import Comparison
 from arborista.nodes.python.equals import Equals
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_call import FunctionCall
+from arborista.nodes.python.index import Index
+from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
+from arborista.nodes.python.subscription import Subscription
+from arborista.nodes.python.subscripts import Subscripts
 
 
 def test_inheritance() -> None:
@@ -23,6 +27,7 @@ def test_inheritance() -> None:
     (Name('foo'), 'foo'),
     (Comparison(Name('foo'), Equals(), Name('bar')), 'foo == bar'),
     (FunctionCall(Name('foo'), None), 'foo()'),
+    (Subscription(Name('foo'), Subscripts(Index(Integer(0)), [])), 'foo[0]'),
 ])
 # yapf: enable
 def test_deparse_expression(expression: Expression, expected_string: str) -> None:
