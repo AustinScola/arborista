@@ -10,7 +10,7 @@ from arborista.nodes.python.suite import Suite
 class ElifDeparser(Deparser):  # pylint: disable=too-few-public-methods
     """Deparser for a Python elif statement."""
     @staticmethod
-    def deparse_elif(elif_: Elif) -> str:
+    def deparse_elif(elif_: Elif, indent: str) -> str:
         """Deparse a Python elif statement."""
         string: str
 
@@ -21,10 +21,10 @@ class ElifDeparser(Deparser):  # pylint: disable=too-few-public-methods
 
         body: Suite = elif_.body
         if isinstance(body, Block):
-            body_string = '\n' + SuiteDeparser.deparse_suite(body, '')
+            body_string = '\n' + SuiteDeparser.deparse_suite(body, indent)
         else:
             body_string = SuiteDeparser.deparse_suite(body, '')
 
-        string = f'elif {condition_string}:{body_string}'
+        string = f'{indent}elif {condition_string}:{body_string}'
 
         return string

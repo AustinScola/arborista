@@ -24,6 +24,7 @@ def test_inheritance() -> None:
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo():return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
     (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '', 'if foo:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '    ', '    if foo:pass\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_compound_statement(compound_statement: CompoundStatement, indent: str,

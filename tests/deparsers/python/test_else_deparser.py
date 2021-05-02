@@ -14,14 +14,16 @@ def test_inheritance() -> None:
     assert issubclass(ElseDeparser, Deparser)
 
 
-# yapf: disable
-@pytest.mark.parametrize('else_, expected_string', [
-    (Else(SimpleStatement([PassStatement()])), 'else:pass\n'),
-    (Else(Block([SimpleStatement([PassStatement()])], '    ')), 'else:\n    pass\n'),
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('else_, indent, expected_string', [
+    (Else(SimpleStatement([PassStatement()])), '', 'else:pass\n'),
+    (Else(SimpleStatement([PassStatement()])), '    ', '    else:pass\n'),
+    (Else(Block([SimpleStatement([PassStatement()])], '    ')), '', 'else:\n    pass\n'),
+    (Else(Block([SimpleStatement([PassStatement()])], '    ')), '    ', '    else:\n        pass\n'),
 ])
-# yapf: enable
-def test_deparse_else(else_: Else, expected_string: str) -> None:
+# yapf: enable # pylint: enable=line-too-long
+def test_deparse_else(else_: Else, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.else_deparser.ElseDeparser.deparse_else."""
-    string: str = ElseDeparser.deparse_else(else_)
+    string: str = ElseDeparser.deparse_else(else_, indent)
 
     assert string == expected_string

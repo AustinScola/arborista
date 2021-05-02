@@ -16,13 +16,15 @@ def test_inheritance() -> None:
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('elif_, expected_string', [
-    (Elif(Name('foo'), SimpleStatement([PassStatement()])), 'elif foo:pass\n'),
-    (Elif(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), 'elif foo:\n    pass\n'),
+@pytest.mark.parametrize('elif_, indent, expected_string', [
+    (Elif(Name('foo'), SimpleStatement([PassStatement()])), '', 'elif foo:pass\n'),
+    (Elif(Name('foo'), SimpleStatement([PassStatement()])), '    ', '    elif foo:pass\n'),
+    (Elif(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), '', 'elif foo:\n    pass\n'),
+    (Elif(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), '    ', '    elif foo:\n        pass\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
-def test_deparse_elif(elif_: Elif, expected_string: str) -> None:
+def test_deparse_elif(elif_: Elif, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.elif_deparser.ElifDeparser.deparse_elif."""
-    string: str = ElifDeparser.deparse_elif(elif_)
+    string: str = ElifDeparser.deparse_elif(elif_, indent)
 
     assert string == expected_string
