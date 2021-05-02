@@ -5,6 +5,7 @@ from arborista.deparser import Deparser
 from arborista.deparsers.python.atom_deparser import AtomDeparser
 from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.dotted_name import DottedName
+from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
@@ -20,6 +21,7 @@ def test_inheritance() -> None:
     (String(None, SingleQuotedShortString('foo')), "'foo'"),
     (Name('foo'), 'foo'),
     (DottedName(Name('foo'), []), 'foo'),
+    (Integer(1), '1'),
 ])
 # yapf: enable
 def test_deparse_atom(atom: Atom, expected_string: str) -> None:
