@@ -15,14 +15,16 @@ def test_inheritance() -> None:
     assert issubclass(IfDeparser, Deparser)
 
 
-# yapf: disable
-@pytest.mark.parametrize('if_, expected_string', [
-    (If(Name('foo'), SimpleStatement([PassStatement()])), 'if foo:pass\n'),
-    (If(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), 'if foo:\n    pass\n'),
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('if_, indent, expected_string', [
+    (If(Name('foo'), SimpleStatement([PassStatement()])), '', 'if foo:pass\n'),
+    (If(Name('foo'), SimpleStatement([PassStatement()])), '    ', '    if foo:pass\n'),
+    (If(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), '', 'if foo:\n    pass\n'),
+    (If(Name('foo'), Block([SimpleStatement([PassStatement()])], '    ')), '    ', '    if foo:\n        pass\n'),
 ])
-# yapf: enable
-def test_deparse_if(if_: If, expected_string: str) -> None:
+# yapf: enable # pylint: enable=line-too-long
+def test_deparse_if(if_: If, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.if_deparser.IfDeparser.deparse_if."""
-    string: str = IfDeparser.deparse_if(if_)
+    string: str = IfDeparser.deparse_if(if_, indent)
 
     assert string == expected_string

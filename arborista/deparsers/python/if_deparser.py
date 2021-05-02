@@ -10,7 +10,7 @@ from arborista.nodes.python.suite import Suite
 class IfDeparser(Deparser):  # pylint: disable=too-few-public-methods
     """Deparser for a Python if statement."""
     @staticmethod
-    def deparse_if(if_: If) -> str:
+    def deparse_if(if_: If, indent: str) -> str:
         """Deparse a Python if statement."""
         string: str
 
@@ -21,10 +21,10 @@ class IfDeparser(Deparser):  # pylint: disable=too-few-public-methods
 
         body: Suite = if_.body
         if isinstance(body, Block):
-            body_string = '\n' + SuiteDeparser.deparse_suite(body, '')
+            body_string = '\n' + SuiteDeparser.deparse_suite(body, indent)
         else:
             body_string = SuiteDeparser.deparse_suite(body, '')
 
-        string = f'if {condition_string}:{body_string}'
+        string = f'{indent}if {condition_string}:{body_string}'
 
         return string
