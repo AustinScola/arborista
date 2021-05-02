@@ -6,6 +6,7 @@ from arborista.deparsers.python.expression_deparser import ExpressionDeparser
 from arborista.nodes.python.comparison import Comparison
 from arborista.nodes.python.equals import Equals
 from arborista.nodes.python.expression import Expression
+from arborista.nodes.python.function_call import FunctionCall
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
@@ -21,6 +22,7 @@ def test_inheritance() -> None:
     (String(None, SingleQuotedShortString('foo')), "'foo'"),
     (Name('foo'), 'foo'),
     (Comparison(Name('foo'), Equals(), Name('bar')), 'foo == bar'),
+    (FunctionCall(Name('foo'), None), 'foo()'),
 ])
 # yapf: enable
 def test_deparse_expression(expression: Expression, expected_string: str) -> None:
