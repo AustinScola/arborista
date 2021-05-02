@@ -19,6 +19,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('function_definition, indent, expected_string', [
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '', 'def foo():return\n'),
+    (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()]), returns=Name('Bar')), '', 'def foo() -> Bar:return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo():return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    ')), '', 'def foo():\n    return\n'),
