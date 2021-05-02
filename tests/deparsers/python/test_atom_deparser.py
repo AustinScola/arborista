@@ -4,6 +4,7 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.atom_deparser import AtomDeparser
 from arborista.nodes.python.atom import Atom
+from arborista.nodes.python.dotted_name import DottedName
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
@@ -18,6 +19,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('atom, expected_string', [
     (String(None, SingleQuotedShortString('foo')), "'foo'"),
     (Name('foo'), 'foo'),
+    (DottedName(Name('foo'), []), 'foo'),
 ])
 # yapf: enable
 def test_deparse_atom(atom: Atom, expected_string: str) -> None:
