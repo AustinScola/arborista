@@ -18,14 +18,17 @@ def test_inheritance() -> None:
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('if_statement, expected_string', [
-    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), 'if foo:pass\n'),
-    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], Else(SimpleStatement([PassStatement()]))), 'if foo:pass\nelse:pass\n'),
-    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [Elif(Name('bar'), SimpleStatement([PassStatement()]))], None), 'if foo:pass\nelif bar:pass\n'),
+@pytest.mark.parametrize('if_statement, indent, expected_string', [
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '', 'if foo:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '    ', '    if foo:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], Else(SimpleStatement([PassStatement()]))), '', 'if foo:pass\nelse:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], Else(SimpleStatement([PassStatement()]))), '    ', '    if foo:pass\n    else:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [Elif(Name('bar'), SimpleStatement([PassStatement()]))], None), '', 'if foo:pass\nelif bar:pass\n'),
+    (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [Elif(Name('bar'), SimpleStatement([PassStatement()]))], None), '    ', '    if foo:pass\n    elif bar:pass\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
-def test_deparse_if_statement(if_statement: IfStatement, expected_string: str) -> None:
+def test_deparse_if_statement(if_statement: IfStatement, indent: str, expected_string: str) -> None:
     """Test arborista.deparsers.python.if_statement_deparser.IfStatementDeparser.deparse_if_statement."""  # pylint: disable=line-too-long, useless-suppression
-    string: str = IfStatementDeparser.deparse_if_statement(if_statement)
+    string: str = IfStatementDeparser.deparse_if_statement(if_statement, indent)
 
     assert string == expected_string

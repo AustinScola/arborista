@@ -14,21 +14,21 @@ from arborista.nodes.python.if_statement import IfStatement
 class IfStatementDeparser(Deparser):  # pylint: disable=too-few-public-methods
     """Deparser for a Python if statement."""
     @staticmethod
-    def deparse_if_statement(if_statement: IfStatement) -> str:
+    def deparse_if_statement(if_statement: IfStatement, indent: str) -> str:
         """Deparse a Python if statement."""
         string: str
 
         if_: If = if_statement.if_
-        if_string = IfDeparser.deparse_if(if_)
+        if_string = IfDeparser.deparse_if(if_, indent)
 
         elifs: List[Elif] = if_statement.elifs
-        elif_strings = (ElifDeparser.deparse_elif(elif_) for elif_ in elifs)
+        elif_strings = (ElifDeparser.deparse_elif(elif_, indent) for elif_ in elifs)
 
         else_: Optional[Else] = if_statement.else_
         if else_ is None:
             string = ''.join((if_string, *elif_strings))
         else:
-            else_string = ElseDeparser.deparse_else(else_)
+            else_string = ElseDeparser.deparse_else(else_, indent)
             string = ''.join((if_string, *elif_strings, else_string))
 
         return string

@@ -21,7 +21,7 @@ class CompoundStatementDeparser(Deparser):  # pylint: disable=too-few-public-met
         elif isinstance(compound_statement, IfStatement):
             if_statement: IfStatement = compound_statement
             if_statement_string: str = \
-                IfStatementDeparser.deparse_if_statement(if_statement)
+                IfStatementDeparser.deparse_if_statement(if_statement, indent)
             string = if_statement_string
         else:
             raise NotImplementedError  # pragma: no cover
