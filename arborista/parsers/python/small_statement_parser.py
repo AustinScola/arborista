@@ -3,12 +3,15 @@ from typing import Sequence
 
 import libcst
 
+from arborista.nodes.python.assignment_statement import AssignmentStatement
 from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
 from arborista.nodes.python.import_statement import ImportStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.small_statement import SmallStatement, SmallStatementList
 from arborista.parser import Parser
+from arborista.parsers.python.assignment_statement_parser import (AssignmentStatementParser,
+                                                                  LibcstAssignmentStatement)
 from arborista.parsers.python.expression_statement_parser import (ExpressionStatementParser,
                                                                   LibcstExpressionStatement)
 from arborista.parsers.python.flow_statement_parser import FlowStatementParser, LibcstFlowStatement
@@ -46,6 +49,11 @@ class SmallStatementParser(Parser):
             import_statement: ImportStatement = \
                 ImportStatementParser.parse_import_statement(libcst_import_statement)
             small_statement = import_statement
+        elif isinstance(libcst_small_statement, LibcstAssignmentStatement):
+            libcst_assignment_statement: LibcstAssignmentStatement = libcst_small_statement
+            assignment_statement: AssignmentStatement = \
+                AssignmentStatementParser.parse_assignment_statement(libcst_assignment_statement)
+            small_statement = assignment_statement
         else:
             raise NotImplementedError  # pragma: no cover
         return small_statement
