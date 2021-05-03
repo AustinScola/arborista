@@ -23,7 +23,7 @@ class ComparisonParser(Parser):  # pylint: disable=too-few-public-methods
         left: Expression = ExpressionParser.parse_expression(libcst_left)
 
         if len(libcst_comparison.comparisons) > 1:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError('Parsing of chained comparisons is not yet implemented.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         libcst_comparison_target: libcst.ComparisonTarget = libcst_comparison.comparisons[0]
 

@@ -46,5 +46,5 @@ class ExpressionParser(Parser):  # pylint: disable=too-few-public-methods
             subscription: Subscription = SubscriptionParser.parse_subscription(libcst_subscription)
             expression = subscription
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Parsing of {type(libcst_expression)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         return expression

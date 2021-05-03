@@ -22,6 +22,6 @@ class ComparisonOperatorParser(Parser):  # pylint: disable=too-few-public-method
             equals: Equals = EqualsParser.parse_equals(libcst_equals)
             comparison_operator = equals
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError('Parsing of comparison operators of type {type(libcst_comparison_operator)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return comparison_operator

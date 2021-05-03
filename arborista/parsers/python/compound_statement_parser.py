@@ -34,6 +34,6 @@ class CompoundStatementParser(Parser):  # pylint: disable=too-few-public-methods
             class_definition = ClassDefinitionParser.parse_class_definition(libcst_class_definition)
             compound_statement = class_definition
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError('Parsing of compound statements of type {type(libcst_compound_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return compound_statement

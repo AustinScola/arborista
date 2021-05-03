@@ -55,7 +55,7 @@ class SmallStatementParser(Parser):
                 AssignmentStatementParser.parse_assignment_statement(libcst_assignment_statement)
             small_statement = assignment_statement
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Parsing of {type(libcst_small_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         return small_statement
 
     @staticmethod

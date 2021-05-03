@@ -34,7 +34,7 @@ class DottedNameAsNameParser(Parser):  # pylint: disable=too-few-public-methods
             if isinstance(libcst_as_name_name, LibcstName):
                 name = NameParser.parse_name(libcst_as_name_name)
             else:
-                raise NotImplementedError  # pragma: no cover
+                raise NotImplementedError(f'Parsing of dotted name as a {type(libcst_as_name_name)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         else:
             name = None
 

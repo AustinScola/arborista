@@ -32,7 +32,7 @@ class DottedNameParser(Parser):  # pylint: disable=too-few-public-methods
             if isinstance(libcst_value, LibcstDottedName):
                 libcst_dotted_name = libcst_value
             else:
-                raise NotImplementedError  # pragma: no cover
+                raise ValueError(f'Dotted names should have a dotted name of a name as the value not a {type(libcst_value)}')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         dotted_name: DottedName = DottedName(first_name, rest_of_names)
         return dotted_name

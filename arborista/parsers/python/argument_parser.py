@@ -15,10 +15,10 @@ class ArgumentParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_argument(libcst_argument: LibcstArgument) -> Argument:
         """Parse a Python argument."""
         if libcst_argument.keyword:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError('Keyword argument parsing is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         if libcst_argument.star:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError('Star argument parsing is not implemented yet')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         libcst_expression: LibcstExpression = libcst_argument.value
         expression: Expression = ExpressionParser.parse_expression(libcst_expression)
