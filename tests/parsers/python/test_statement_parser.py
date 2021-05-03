@@ -2,6 +2,9 @@
 import libcst
 import pytest
 
+from arborista.nodes.python.empty_line import EmptyLine
+from arborista.nodes.python.expression_statement import ExpressionStatement
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.statement import Statement, StatementList
@@ -30,6 +33,7 @@ def test_parse_statement(libcst_statement: LibcstStatement, expected_statement: 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_statements, expected_statements', [
     ([libcst.SimpleStatementLine(body=[libcst.Return()])], [SimpleStatement(small_statements=[ReturnStatement()])]),
+    ([libcst.SimpleStatementLine([libcst.Expr(libcst.Name('a'))]), libcst.SimpleStatementLine([libcst.Expr(libcst.Name('b'))], leading_lines=[libcst.EmptyLine()])], [SimpleStatement([ExpressionStatement(Name('a'))]), EmptyLine(), SimpleStatement([ExpressionStatement(Name('b'))])]),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_statements(libcst_statements: LibcstStatements,
@@ -37,4 +41,7 @@ def test_parse_statements(libcst_statements: LibcstStatements,
     """Test arborista.parsers.python.statement_parser.StatementParser.parse_statements."""
     statements: StatementList = StatementParser.parse_statements(libcst_statements)
 
+    for statement, expected_statement in zip(statements, expected_statements):
+        if statement != expected_statement:
+            print(vars(statement), vars(expected_statement))
     assert statements == expected_statements
