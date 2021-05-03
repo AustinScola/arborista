@@ -3,6 +3,7 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.statement_deparser import StatementDeparser
+from arborista.nodes.python.empty_line import EmptyLine
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
@@ -19,7 +20,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('statement, indent, expected_string', [
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '', 'def foo():return\n'),
     (SimpleStatement([ReturnStatement()]), '', 'return\n'),
-
+    (EmptyLine(), '', '\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_statement(statement: Statement, indent: str, expected_string: str) -> None:
