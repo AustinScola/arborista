@@ -1,5 +1,7 @@
 Module = statements: [Statement]
-Statement = CompoundStatement | SimpleStatement
+Statement = EmptyLine | CompoundStatement | SimpleStatement
+
+EmptyLine = NEWLINE
 
 CompoundStatement = IfStatement | WhileStatement | ForStatement | TryStatement | WithStatement | FunctionDefinition | ClassDefinition | DecoratedDefinition | AsyncStatement
 

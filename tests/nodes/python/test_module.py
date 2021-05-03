@@ -4,6 +4,8 @@ from typing import Any, Dict, Optional
 import pytest
 
 from arborista.node import Node, NodeIterator, NodeList
+from arborista.nodes.python.empty_line import EmptyLine
+from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
@@ -22,6 +24,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('name, statements, pass_statements, parent, pass_parent, expected_statements', [
     ('foo', [], True, None, False, []),
+    ('foo', [SimpleStatement([ExpressionStatement(Name('foo'))]), EmptyLine()], True, None, False, [SimpleStatement([ExpressionStatement(Name('foo'))]), EmptyLine()]),
     ('foo', [], True, None, True, []),
     ('foo', [], True, Lizard(), True, []),
     ('foo', iter([]), True, None, False, []),
@@ -30,6 +33,7 @@ def test_inheritance() -> None:
     ('foo', None, False, None, False, []),
     ('foo', None, False, None, True, []),
     ('foo', None, False, Lizard(), True, []),
+    ('foo', [], True, None, False, []),
 ])
 # yapf: enable # pylint: enable=line-too-long
 # pylint: disable=too-many-arguments

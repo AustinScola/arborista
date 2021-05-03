@@ -1,6 +1,8 @@
 """Test arborista.parsing.python.module_parser."""
 import pytest
 
+from arborista.nodes.python.empty_line import EmptyLine
+from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
@@ -20,7 +22,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('string, name, expected_module', [
     ('', 'foo', Module('foo')),
     ('def foo(): return', 'foo', Module('foo', [FunctionDefinition(name=Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()]))])),
-
+    ('a\n\nb', 'foo', Module('foo', [SimpleStatement([ExpressionStatement(Name('a'))]), EmptyLine(), SimpleStatement([ExpressionStatement(Name('b'))])])),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_module(string: str, name: str, expected_module: Module) -> None:
