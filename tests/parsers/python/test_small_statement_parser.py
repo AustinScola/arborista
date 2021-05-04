@@ -2,6 +2,7 @@
 import libcst
 import pytest
 
+from arborista.nodes.python.annotated_assignment_statement import AnnotatedAssignmentStatement
 from arborista.nodes.python.assignment_statement import AssignmentStatement
 from arborista.nodes.python.assignment_targets import AssignmentTargets
 from arborista.nodes.python.dotted_name import DottedName
@@ -32,6 +33,7 @@ def test_inheritance() -> None:
     (libcst.Expr(libcst.Integer('5')), ExpressionStatement(Integer(5))),
     (libcst.Import([libcst.ImportAlias(libcst.Name('foo'))]), ImportDottedName(DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), []), None), []))),
     (libcst.Assign([libcst.AssignTarget(libcst.Name('foo'))], libcst.Name('bar')), AssignmentStatement(AssignmentTargets(Name('foo'), []), Name('bar'))),
+    (libcst.AnnAssign(libcst.Name('foo'), libcst.Annotation(libcst.Name('Foo')), libcst.Name('bar')), AnnotatedAssignmentStatement(Name('foo'), Name('Foo'), Name('bar'))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_small_statement(libcst_small_statement: LibcstSmallStatement,
