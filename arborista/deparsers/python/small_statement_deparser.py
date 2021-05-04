@@ -1,10 +1,13 @@
 """Deparser for a Python small statement."""
 from arborista.deparser import Deparser
+from arborista.deparsers.python.annotated_assignment_statement_deparser import \
+    AnnotatedAssignmentStatementDeparser
 from arborista.deparsers.python.assignment_statement_deparser import AssignmentStatementDeparser
 from arborista.deparsers.python.expression_statement_deparser import ExpressionStatementDeparser
 from arborista.deparsers.python.flow_statement_deparser import FlowStatementDeparser
 from arborista.deparsers.python.import_statement_deparser import ImportStatementDeparser
 from arborista.deparsers.python.pass_statement_deparser import PassStatementDeparser
+from arborista.nodes.python.annotated_assignment_statement import AnnotatedAssignmentStatement
 from arborista.nodes.python.assignment_statement import AssignmentStatement
 from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
@@ -35,6 +38,10 @@ class SmallStatementDeparser(Deparser):  # pylint: disable=too-few-public-method
         elif isinstance(small_statement, AssignmentStatement):
             assignment_statement: AssignmentStatement = small_statement
             string = AssignmentStatementDeparser.deparse_assignment_statement(assignment_statement)
+        elif isinstance(small_statement, AnnotatedAssignmentStatement):
+            annotated_assignment_statement: AnnotatedAssignmentStatement = small_statement
+            string = AnnotatedAssignmentStatementDeparser.deparse_annotated_assignment_statement(
+                annotated_assignment_statement)
         else:
             raise NotImplementedError(f'Deparsing of small statements of type {type(small_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 

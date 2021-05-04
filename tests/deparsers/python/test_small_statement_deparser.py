@@ -3,6 +3,7 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.small_statement_deparser import SmallStatementDeparser
+from arborista.nodes.python.annotated_assignment_statement import AnnotatedAssignmentStatement
 from arborista.nodes.python.assignment_statement import AssignmentStatement
 from arborista.nodes.python.assignment_targets import AssignmentTargets
 from arborista.nodes.python.dotted_name import DottedName
@@ -30,6 +31,7 @@ def test_inheritance() -> None:
     (PassStatement(), 'pass'),
     (ImportDottedName(DottedNameAsNames(DottedNameAsName(DottedName(Name('foo'), []), None), [])), 'import foo'),
     (AssignmentStatement(AssignmentTargets(Name('foo'), []), Name('bar')), 'foo = bar'),
+    (AnnotatedAssignmentStatement(Name('foo'), Name('Foo'), Name('bar')), 'foo: Foo = bar'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparser_small_statement(small_statement: SmallStatement, expected_string: str) -> None:
