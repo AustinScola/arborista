@@ -31,7 +31,7 @@ DecoratedDefinition = ...
 AsyncStatement = ...
 
 SimpleStatement = SmallStatement (";" SmallStatement)* ";" Newline
-SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowStatement | ImportStatement | GlobalStatement | NonlocalStatement | AssertStatement | AssignmentStatement
+SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowStatement | ImportStatement | GlobalStatement | NonlocalStatement | AssertStatement | AssignmentStatement | AnnotatedAssignmentStatement
 
 ExpressionStatement = Expression
 Expression = Ternary | Disjunction | Conjuction | Inversion | Comparison | LambdaDefinition | FunctionCall | Subscription | ... | Atom
@@ -132,3 +132,5 @@ AssertStatement = ...
 
 AssignmentStatement = targets: AssignmentTargets "=" value: Expression
 AssignmentTargets = first: Expression ("," rest: Expression)*
+
+AnnotatedAssignmentStatement = target: Expression ":" annotation: Expression ["=" value: Expression]

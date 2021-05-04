@@ -3,6 +3,7 @@ from typing import Sequence
 
 import libcst
 
+from arborista.nodes.python.annotated_assignment_statement import AnnotatedAssignmentStatement
 from arborista.nodes.python.assignment_statement import AssignmentStatement
 from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.flow_statement import FlowStatement
@@ -10,6 +11,8 @@ from arborista.nodes.python.import_statement import ImportStatement
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.small_statement import SmallStatement, SmallStatementList
 from arborista.parser import Parser
+from arborista.parsers.python.annotated_assignment_statement_parser import (
+    AnnotatedAssignmentStatementParser, LibcstAnnotatedAssignmentStatement)
 from arborista.parsers.python.assignment_statement_parser import (AssignmentStatementParser,
                                                                   LibcstAssignmentStatement)
 from arborista.parsers.python.expression_statement_parser import (ExpressionStatementParser,
@@ -54,6 +57,13 @@ class SmallStatementParser(Parser):
             assignment_statement: AssignmentStatement = \
                 AssignmentStatementParser.parse_assignment_statement(libcst_assignment_statement)
             small_statement = assignment_statement
+        elif isinstance(libcst_small_statement, LibcstAnnotatedAssignmentStatement):
+            libcst_annotated_assignment_statement: LibcstAnnotatedAssignmentStatement = \
+                libcst_small_statement
+            annotated_assignment_statement: AnnotatedAssignmentStatement = \
+                AnnotatedAssignmentStatementParser.parse_annotated_assignment_statement(
+                    libcst_annotated_assignment_statement)
+            small_statement = annotated_assignment_statement
         else:
             raise NotImplementedError(f'Parsing of {type(libcst_small_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         return small_statement
