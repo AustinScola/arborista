@@ -4,6 +4,8 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.compound_statement_deparser import CompoundStatementDeparser
 from arborista.nodes.python.compound_statement import CompoundStatement
+from arborista.nodes.python.expression_list import ExpressionList
+from arborista.nodes.python.for_statement import ForStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.if_ import If
 from arborista.nodes.python.if_statement import IfStatement
@@ -25,6 +27,8 @@ def test_inheritance() -> None:
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
     (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '', 'if foo:pass\n'),
     (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '    ', '    if foo:pass\n'),
+    (ForStatement(ExpressionList(Name('foo'), []), ExpressionList(Name('bar'), []), SimpleStatement([PassStatement()]), None), '', 'for foo in bar:pass\n'),
+    (ForStatement(ExpressionList(Name('foo'), []), ExpressionList(Name('bar'), []), SimpleStatement([PassStatement()]), None), '    ', '    for foo in bar:pass\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_compound_statement(compound_statement: CompoundStatement, indent: str,

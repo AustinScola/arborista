@@ -1,8 +1,10 @@
 """Deparser for a Python compound statement."""
 from arborista.deparser import Deparser
+from arborista.deparsers.python.for_statement_deparser import ForStatementDeparser
 from arborista.deparsers.python.function_definition_deparser import FunctionDefinitionDeparser
 from arborista.deparsers.python.if_statement_deparser import IfStatementDeparser
 from arborista.nodes.python.compound_statement import CompoundStatement
+from arborista.nodes.python.for_statement import ForStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.if_statement import IfStatement
 
@@ -23,6 +25,11 @@ class CompoundStatementDeparser(Deparser):  # pylint: disable=too-few-public-met
             if_statement_string: str = \
                 IfStatementDeparser.deparse_if_statement(if_statement, indent)
             string = if_statement_string
+        elif isinstance(compound_statement, ForStatement):
+            for_statement: ForStatement = compound_statement
+            for_statement_string: str = \
+                ForStatementDeparser.deparse_for_statement(for_statement, indent)
+            string = for_statement_string
         else:
             raise NotImplementedError(f'Deparsing of compound statements of type {type(compound_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         return string
