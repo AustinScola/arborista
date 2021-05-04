@@ -20,22 +20,23 @@ class FlowStatementParser(Parser):  # pylint: disable=too-few-public-methods
     def parse_flow_statement(libcst_flow_statement: LibcstFlowStatement) -> FlowStatement:
         """Parse a Python flow statement."""
         flow_statment: FlowStatement
+
         if isinstance(libcst_flow_statement, LibcstBreakStatement):
             libcst_break_statement: LibcstBreakStatement = libcst_flow_statement
             break_statement: BreakStatement = BreakStatementParser.parse_break_statement(
                 libcst_break_statement)
             flow_statment = break_statement
-            return flow_statment
-        if isinstance(libcst_flow_statement, LibcstContinueStatement):
+        elif isinstance(libcst_flow_statement, LibcstContinueStatement):
             libcst_continue_statement: LibcstContinueStatement = libcst_flow_statement
             continue_statement: ContinueStatement = \
                 ContinueStatementParser.parse_continue_statement(libcst_continue_statement)
             flow_statment = continue_statement
-            return flow_statment
-        if isinstance(libcst_flow_statement, LibcstReturnStatement):
+        elif isinstance(libcst_flow_statement, LibcstReturnStatement):
             libcst_return_statement: LibcstReturnStatement = libcst_flow_statement
             return_statement: ReturnStatement = ReturnStatementParser.parse_return_statement(
                 libcst_return_statement)
             flow_statment = return_statement
-            return flow_statment
-        raise NotImplementedError  # pragma: no cover
+        else:
+            raise NotImplementedError(f'Parsing of {type(libcst_flow_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
+
+        return flow_statment

@@ -24,5 +24,5 @@ class CompoundStatementDeparser(Deparser):  # pylint: disable=too-few-public-met
                 IfStatementDeparser.deparse_if_statement(if_statement, indent)
             string = if_statement_string
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Deparsing of compound statements of type {type(compound_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
         return string

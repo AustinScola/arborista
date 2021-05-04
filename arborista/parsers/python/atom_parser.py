@@ -44,6 +44,6 @@ class AtomParser(Parser):  # pylint: disable=too-few-public-methods
             string: String = StringParser.parse_string(libcst_string)
             atom = string
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Parsing of {type(libcst_atom)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return atom

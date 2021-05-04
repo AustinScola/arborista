@@ -67,6 +67,6 @@ class ComparisonOperatorDeparser(Deparser):  # pylint: disable=too-few-public-me
             is_not: IsNot = comparison_operator
             string = IsNotDeparser.deparse_is_not(is_not)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise ValueError(f'Expected comparison operator but received type {type(comparison_operator)} instead.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string

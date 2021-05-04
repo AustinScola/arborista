@@ -31,6 +31,6 @@ class StatementDeparser(Deparser):  # pylint: disable=too-few-public-methods
                 compound_statement, indent)
             string = compound_statement_string
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise ValueError(f'Expected an empty line, simple statement or compound statement not a {type(statement)}.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string

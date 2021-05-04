@@ -27,6 +27,6 @@ class SubscriptParser(Parser):  # pylint: disable=too-few-public-methods
             slice_: Slice = SliceParser.parse_slice(libcst_slice)
             subscript = slice_
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise ValueError(f'Expected a slice or index not a {type(libcst_subscript)}')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return subscript

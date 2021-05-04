@@ -44,7 +44,7 @@ class StringParser(Parser):  # pylint: disable=too-few-public-methods
                     libcst_simple_string.value[1:-1])
                 string_value = double_quoted_short_string
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Parsing of {type(libcst_string)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         string = String(string_prefix, string_value)
 

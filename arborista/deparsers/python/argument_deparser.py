@@ -18,5 +18,6 @@ class ArgumentDeparser(Deparser):  # pylint: disable=too-few-public-methods
             expression: Expression = argument
             string = ExpressionDeparser.deparse_expression(expression)
         else:
-            raise NotImplementedError  # pragma no cover
+            raise NotImplementedError('Deparsing of argument of type {type(argument)} is not implemented yet.')  # pragma no cover  # pylint: disable=line-too-long, useless-suppression
+
         return string

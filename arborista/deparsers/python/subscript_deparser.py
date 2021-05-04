@@ -21,6 +21,6 @@ class SubscriptDeparser(Deparser):  # pylint: disable=too-few-public-methods
             slice_: Slice = subscript
             string = SliceDeparser.deparse_slice(slice_)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise ValueError(f'Expected subscript but received a {type(subscript)} instead.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string
