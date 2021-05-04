@@ -2,10 +2,12 @@
 import libcst
 
 from arborista.nodes.python.compound_statement import CompoundStatement
+from arborista.nodes.python.for_statement import ForStatement
 from arborista.nodes.python.if_statement import IfStatement
 from arborista.parser import Parser
 from arborista.parsers.python.class_definition_parser import (ClassDefinitionParser,
                                                               LibcstClassDefinition)
+from arborista.parsers.python.for_statement_parser import ForStatementParser, LibcstForStatement
 from arborista.parsers.python.function_definition_parser import (FunctionDefinitionParser,
                                                                  LibcstFunctionDefinition)
 from arborista.parsers.python.if_statement_parser import IfStatementParser, LibcstIfStatement
@@ -33,6 +35,11 @@ class CompoundStatementParser(Parser):  # pylint: disable=too-few-public-methods
             libcst_class_definition: LibcstClassDefinition = libcst_compound_statement
             class_definition = ClassDefinitionParser.parse_class_definition(libcst_class_definition)
             compound_statement = class_definition
+        elif isinstance(libcst_compound_statement, LibcstForStatement):
+            libcst_for_statement: LibcstForStatement = libcst_compound_statement
+            for_statement: ForStatement = ForStatementParser.parse_for_statement(
+                libcst_for_statement)
+            compound_statement = for_statement
         else:
             raise NotImplementedError(f'Parsing of compound statements of type {type(libcst_compound_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
