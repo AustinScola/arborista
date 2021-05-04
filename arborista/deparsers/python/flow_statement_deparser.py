@@ -15,16 +15,17 @@ class FlowStatementDeparser(Deparser):  # pylint: disable=too-few-public-methods
     def deparse_flow_statement(flow_statement: FlowStatement) -> str:
         """Deparse a Python flow statement."""
         string: str
+
         if isinstance(flow_statement, BreakStatement):
             break_statement: BreakStatement = flow_statement
             string = BreakStatementDeparser.deparse_break_statement(break_statement)
-            return string
-        if isinstance(flow_statement, ContinueStatement):
+        elif isinstance(flow_statement, ContinueStatement):
             continue_statement: ContinueStatement = flow_statement
             string = ContinueStatementDeparser.deparse_continue_statement(continue_statement)
-            return string
-        if isinstance(flow_statement, ReturnStatement):
+        elif isinstance(flow_statement, ReturnStatement):
             return_statement: ReturnStatement = flow_statement
             string = ReturnStatementDeparser.deparse_return_statement(return_statement)
-            return string
-        raise NotImplementedError  # pragma: no cover
+        else:
+            raise NotImplementedError(f'Deparsing of flow statements of type {type(flow_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
+
+        return string

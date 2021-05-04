@@ -19,6 +19,7 @@ class SmallStatementDeparser(Deparser):  # pylint: disable=too-few-public-method
     def deparse_small_statement(small_statement: SmallStatement) -> str:
         """Deparse a Python small statement."""
         string: str
+
         if isinstance(small_statement, ExpressionStatement):
             expression_statement: ExpressionStatement = small_statement
             string = ExpressionStatementDeparser.deparse_expression_statement(expression_statement)
@@ -35,5 +36,6 @@ class SmallStatementDeparser(Deparser):  # pylint: disable=too-few-public-method
             assignment_statement: AssignmentStatement = small_statement
             string = AssignmentStatementDeparser.deparse_assignment_statement(assignment_statement)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Deparsing of small statements of type {type(small_statement)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
+
         return string

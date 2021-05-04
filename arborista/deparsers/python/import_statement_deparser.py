@@ -20,6 +20,6 @@ class ImportStatementDeparser(Deparser):  # pylint: disable=too-few-public-metho
             import_from: ImportFrom = import_statement
             string = ImportFromDeparser.deparse_import_from(import_from)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise ValueError(f'Expected an import statement but received a {type(import_statement)} instead.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string

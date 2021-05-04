@@ -31,6 +31,6 @@ class ExpressionDeparser(Deparser):  # pylint: disable=too-few-public-methods
             subscription = expression
             string = SubscriptionDeparser.deparse_subscription(subscription)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Deparsing of expression of type {type(expression)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string

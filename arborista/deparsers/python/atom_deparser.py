@@ -31,6 +31,6 @@ class AtomDeparser(Deparser):  # pylint: disable=too-few-public-methods
             integer: Integer = atom
             string = IntegerDeparser.deparse_integer(integer)
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError(f'Deparsing of atoms of type {type(atom)} is not implemented yet.')  # pragma: no cover  # pylint: disable=line-too-long, useless-suppression
 
         return string
