@@ -3,6 +3,7 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.return_statement_deparser import ReturnStatementDeparser
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
 
 
@@ -14,6 +15,7 @@ def test_inheritance() -> None:
 # yapf: disable
 @pytest.mark.parametrize('return_statement, expected_string', [
     (ReturnStatement(), 'return'),
+    (ReturnStatement(Name('foo')), 'return foo'),
 ])
 # yapf: enable
 def test_deparse_return_statement(return_statement: ReturnStatement, expected_string: str) -> None:
