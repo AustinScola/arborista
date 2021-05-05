@@ -1,9 +1,13 @@
 """Parser for a Python positional_parameter."""
+from typing import Optional
+
 import libcst
 
+from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.positional_parameter import PositionalParameter
 from arborista.parser import Parser
+from arborista.parsers.python.expression_parser import ExpressionParser, LibcstExpression
 from arborista.parsers.python.name_parser import LibcstName, NameParser
 
 LibcstPositionalParameter = libcst.Param
@@ -19,7 +23,14 @@ class PositionalParameterParser(Parser):  # pylint: disable=too-few-public-metho
         libcst_name: LibcstName = libcst_positional_parameter.name
         name: Name = NameParser.parse_name(libcst_name)
 
-        positional_parameter: PositionalParameter = PositionalParameter(name)
+        annotation: Optional[Expression]
+        if libcst_positional_parameter.annotation is None:
+            annotation = None
+        else:
+            libcst_annotation: LibcstExpression = libcst_positional_parameter.annotation.annotation
+            annotation = ExpressionParser.parse_expression(libcst_annotation)
+
+        positional_parameter: PositionalParameter = PositionalParameter(name, annotation)
         positional_parameter.set_parent_in_children()
 
         return positional_parameter

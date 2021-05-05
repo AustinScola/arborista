@@ -15,11 +15,11 @@ def test_inheritance() -> None:
     assert issubclass(PositionalParameterParser, Parser)
 
 
-# yapf: disable
+# yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_positional_parameter, expected_positional_parameter', [
-    (libcst.Param(libcst.Name('foo')), PositionalParameter(Name('foo'))),
+    (libcst.Param(libcst.Name('foo'), libcst.Annotation(libcst.Name('Foo'))), PositionalParameter(Name('foo'), Name('Foo'))),
 ])
-# yapf: enable
+# yapf: enable # pylint: enable=line-too-long
 def test_parse_positional_parameter(libcst_positional_parameter: LibcstPositionalParameter,
                                     expected_positional_parameter: PositionalParameter) -> None:
     """Test arborista.parsers.python.positional_parameter_parser.PositionalParameterParser.parse_positional_parameter."""  # pylint: disable=line-too-long, useless-suppression
