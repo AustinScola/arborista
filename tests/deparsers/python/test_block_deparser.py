@@ -4,6 +4,9 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.block_deparser import BlockDeparser
 from arborista.nodes.python.block import Block
+from arborista.nodes.python.if_ import If
+from arborista.nodes.python.if_statement import IfStatement
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 
@@ -21,6 +24,8 @@ def test_inheritance() -> None:
     (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], indent='    '), '', '    return\n    return\n'),
     (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], indent='    '), '    ', '        return\n        return\n'),
     (Block([SimpleStatement([ReturnStatement()]), SimpleStatement([ReturnStatement()])], indent='    '), '\t', '\t    return\n\t    return\n'),
+    (Block([IfStatement(If(Name('bar'), Block([SimpleStatement([ReturnStatement()])], '\t')), [], None)], '\t'), '\t', '\t\tif bar:\n\t\t\treturn\n'),
+
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_block(block: Block, indent: str, expected_string: str) -> None:
