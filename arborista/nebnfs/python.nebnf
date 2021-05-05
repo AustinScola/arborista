@@ -110,7 +110,7 @@ FlowStatement = BreakStatement | ContinueStatement | ReturnStatement | RaiseStat
 
 BreakStatement = "break"
 ContinueStatement = "continue"
-ReturnStatement = "return" expressions: [ExpressionList]
+ReturnStatement = "return" value: Expression
 YieldStatement = YieldExpression
 RaiseStatement = "raise" [exception: Expression ["from" source_excpetion: Expression]]
 

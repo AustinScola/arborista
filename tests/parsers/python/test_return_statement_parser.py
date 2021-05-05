@@ -2,6 +2,7 @@
 import libcst
 import pytest
 
+from arborista.nodes.python.name import Name
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.parser import Parser
 from arborista.parsers.python.return_statement_parser import (LibcstReturnStatement,
@@ -16,6 +17,7 @@ def test_inheritance() -> None:
 # yapf: disable
 @pytest.mark.parametrize('libcst_return_statement, expected_return_statement', [
     (libcst.Return(), ReturnStatement()),
+    (libcst.Return(libcst.Name('foo')), ReturnStatement(Name('foo'))),
 ])
 # yapf: enable
 def test_parse_return_statement(libcst_return_statement: LibcstReturnStatement,
