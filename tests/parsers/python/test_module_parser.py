@@ -6,6 +6,7 @@ from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.parser import Parser
@@ -21,7 +22,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('string, name, expected_module', [
     ('', 'foo', Module('foo')),
-    ('def foo(): return', 'foo', Module('foo', [FunctionDefinition(name=Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()]))])),
+    ('def foo(): return', 'foo', Module('foo', [FunctionDefinition(name=Name('foo'), parameters=Parameters(), body=SimpleStatement([ReturnStatement()]))])),
     ('a\n\nb', 'foo', Module('foo', [SimpleStatement([ExpressionStatement(Name('a'))]), EmptyLine(), SimpleStatement([ExpressionStatement(Name('b'))])])),
 ])
 # yapf: enable # pylint: enable=line-too-long

@@ -8,7 +8,8 @@ from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.if_ import If
 from arborista.nodes.python.if_statement import IfStatement
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import Parameter
+from arborista.nodes.python.parameters import Parameters
+from arborista.nodes.python.positional_parameter import PositionalParameter
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 
@@ -20,17 +21,17 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('function_definition, indent, expected_string', [
-    (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '', 'def foo():return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()]), returns=Name('Bar')), '', 'def foo() -> Bar:return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo():return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    ')), '', 'def foo():\n    return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    ')), '    ', '    def foo():\n        return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    ')), '\t', '\tdef foo():\n\t    return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a):return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a')), Parameter(Name('b'))], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a,b):return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a')), Parameter(Name('b')), Parameter(Name('c'))], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a,b,c):return\n'),
-    (FunctionDefinition(Name('foo'), parameters=[], body=Block([IfStatement(If(Name('bar'), Block([SimpleStatement([ReturnStatement()])], '\t')), [], None)], '\t')), '\t', '\tdef foo():\n\t\tif bar:\n\t\t\treturn\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=SimpleStatement([ReturnStatement()])), '', 'def foo():return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=SimpleStatement([ReturnStatement()]), returns=Name('Bar')), '', 'def foo() -> Bar:return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo():return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    ')), '', 'def foo():\n    return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    ')), '    ', '    def foo():\n        return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    ')), '\t', '\tdef foo():\n\t    return\n'),
+    (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('a'))]), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a):return\n'),
+    (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('a')), PositionalParameter(Name('b'))]), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a, b):return\n'),
+    (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('a')), PositionalParameter(Name('b')), PositionalParameter(Name('c'))]), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a, b, c):return\n'),
+    (FunctionDefinition(Name('foo'), Parameters(), body=Block([IfStatement(If(Name('bar'), Block([SimpleStatement([ReturnStatement()])], '\t')), [], None)], '\t')), '\t', '\tdef foo():\n\t\tif bar:\n\t\t\treturn\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_function_definition(function_definition: FunctionDefinition, indent: str,

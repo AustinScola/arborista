@@ -6,12 +6,12 @@ import libcst
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import ParameterList
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.suite import Suite
 from arborista.parser import Parser
 from arborista.parsers.python.expression_parser import ExpressionParser
 from arborista.parsers.python.name_parser import LibcstName, NameParser
-from arborista.parsers.python.parameter_parser import LibcstParameters, ParameterParser
+from arborista.parsers.python.parameters_parser import LibcstParameters, ParametersParser
 
 LibcstFunctionDefinition = libcst.FunctionDef
 
@@ -28,7 +28,7 @@ class FunctionDefinitionParser(Parser):  # pylint: disable=too-few-public-method
         name: Name = NameParser.parse_name(libcst_name)
 
         libcst_parameters: LibcstParameters = libcst_function_definition.params
-        parameters: ParameterList = ParameterParser.parse_parameters(libcst_parameters)
+        parameters: Parameters = ParametersParser.parse_parameters(libcst_parameters)
 
         libcst_body: LibcstSuite = libcst_function_definition.body
         body: Suite = SuiteParser.parse_suite(libcst_body)

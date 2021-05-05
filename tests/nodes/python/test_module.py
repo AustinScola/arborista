@@ -9,6 +9,7 @@ from arborista.nodes.python.expression_statement import ExpressionStatement
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
@@ -57,7 +58,7 @@ def test_module_init(name: str, statements: Optional[Statements], pass_statement
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('module, expected_children_list', [
     (Module('foo'), []),
-    (Module('foo', [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]), [FunctionDefinition(Name('bar'), [], SimpleStatement([ReturnStatement()]))]),
+    (Module('foo', [FunctionDefinition(Name('bar'), Parameters(), SimpleStatement([ReturnStatement()]))]), [FunctionDefinition(Name('bar'), Parameters(), SimpleStatement([ReturnStatement()]))]),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_iterate_children(module: Module, expected_children_list: NodeList) -> None:

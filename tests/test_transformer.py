@@ -9,6 +9,7 @@ from arborista.nodes.file_system.file import File
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.sequences.text.string import String
@@ -48,7 +49,7 @@ def _assert_transformer_has_node_type_to_transformations(
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('transformations, tree, expected_transformed_tree', [
-    ([TrimAfterReturn], Tree(root=FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement(), ReturnStatement()]))), Tree(root=FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])))),
+    ([TrimAfterReturn], Tree(root=FunctionDefinition(Name('foo'), parameters=Parameters(), body=SimpleStatement([ReturnStatement(), ReturnStatement()]))), Tree(root=FunctionDefinition(Name('foo'), parameters=Parameters(), body=SimpleStatement([ReturnStatement()])))),
     ([ModuleToString], Tree(root=File(Path('foo.py'), Module('foo', []))), Tree(root=File(Path('foo.py'), String()))),
     ([ModuleToString], Tree(root=Module('foo', [])), Tree(root=String())),
 ])

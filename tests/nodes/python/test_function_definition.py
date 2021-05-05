@@ -10,7 +10,8 @@ from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import Parameter, ParameterList, Parameters
+from arborista.nodes.python.parameters import Parameters
+from arborista.nodes.python.positional_parameter import PositionalParameter, PositionalParameterList
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.suite import Suite
@@ -23,25 +24,25 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('name, parameters, body, returns, parent, pass_parent, expected_parameters', [
-    (Name('f'), [], ReturnStatement(), None, None, False, []),
-    (Name('f'), [], ReturnStatement(), None, None, True, []),
-    (Name('f'), [], ReturnStatement(), None, Module('foo'), True, []),
-    (Name('f'), [], Block([SimpleStatement([ReturnStatement()])], '    '), None, None, False, []),
-    (Name('f'), [], Block([SimpleStatement([ReturnStatement()])], '    '), None, None, True, []),
-    (Name('f'), [], Block([SimpleStatement([ReturnStatement()])], '    '), None, Module('foo'), True, []),
-    (Name('f'), iter([]), ReturnStatement(), None, None, False, []),
-    (Name('f'), iter([]), ReturnStatement(), None, None, True, []),
-    (Name('f'), iter([]), ReturnStatement(), None, Module('foo'), True, []),
-    (Name('f'), iter([]), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, False, []),
-    (Name('f'), iter([]), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, True, []),
-    (Name('f'), iter([]), Block([SimpleStatement([ReturnStatement()])], '    '), None, Module('foo'), True, []),
-    (Name('f'), [], ReturnStatement(), Name('Foo'), None, False, []),
+    (Name('f'), Parameters(), ReturnStatement(), None, None, False, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), None, None, True, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), None, Module('foo'), True, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, False, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, True, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, Module('foo'), True, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), None, None, False, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), None, None, True, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), None, Module('foo'), True, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, False, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, None, True, Parameters()),
+    (Name('f'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    '), None, Module('foo'), True, Parameters()),
+    (Name('f'), Parameters(), ReturnStatement(), Name('Foo'), None, False, Parameters()),
 ])
 # yapf: enable # pylint: enable=line-too-long
 # pylint: disable=too-many-arguments
 def test_function_definition_init(name: Name, parameters: Parameters, body: Suite,
                                   returns: Expression, parent: Optional[Node], pass_parent: bool,
-                                  expected_parameters: ParameterList) -> None:
+                                  expected_parameters: PositionalParameterList) -> None:
     """Test arborista.nodes.python.function_definition.__init__."""
     keyword_arguments: Dict[str, Any] = {}
     if pass_parent:
@@ -59,12 +60,11 @@ def test_function_definition_init(name: Name, parameters: Parameters, body: Suit
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('function_definition, expected_children_list', [
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()])), [Name('foo'), SimpleStatement([ReturnStatement()])]),
-    (FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()]), Name('Bar')), [Name('foo'), SimpleStatement([ReturnStatement()]), Name('Bar')]),
-    (FunctionDefinition(Name('foo'), [], Block([SimpleStatement([ReturnStatement()])], '    ')), [Name('foo'), Block([SimpleStatement([ReturnStatement()])], '    ')]),
-    (FunctionDefinition(Name('foo'), [Parameter(Name('x'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), SimpleStatement([ReturnStatement()])]),
-    (FunctionDefinition(Name('foo'), [Parameter(Name('x'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), SimpleStatement([ReturnStatement()])]),
-    (FunctionDefinition(Name('foo'), [Parameter(Name('x')), Parameter(Name('y')), Parameter(Name('z'))], SimpleStatement([ReturnStatement()])), [Name('foo'), Parameter(Name('x')), Parameter(Name('y')), Parameter(Name('z')), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([ReturnStatement()])), [Name('foo'), Parameters(), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([ReturnStatement()]), Name('Bar')), [Name('foo'), Parameters(), SimpleStatement([ReturnStatement()]), Name('Bar')]),
+    (FunctionDefinition(Name('foo'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    ')), [Name('foo'), Parameters(), Block([SimpleStatement([ReturnStatement()])], '    ')]),
+    (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('x'))]), SimpleStatement([ReturnStatement()])), [Name('foo'), Parameters([PositionalParameter(Name('x'))]), SimpleStatement([ReturnStatement()])]),
+    (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('x')), PositionalParameter(Name('y')), PositionalParameter(Name('z'))]), SimpleStatement([ReturnStatement()])), [Name('foo'), Parameters([PositionalParameter(Name('x')), PositionalParameter(Name('y')), PositionalParameter(Name('z'))]), SimpleStatement([ReturnStatement()])]),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_iterate_children(function_definition: FunctionDefinition,

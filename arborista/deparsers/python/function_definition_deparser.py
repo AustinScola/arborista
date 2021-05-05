@@ -1,10 +1,10 @@
 """Deparser for a Python function definition."""
-from typing import Iterator, Optional
+from typing import Optional
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.expression_deparser import ExpressionDeparser
 from arborista.deparsers.python.name_deparser import NameDeparser
-from arborista.deparsers.python.parameter_deparser import ParameterDeparser
+from arborista.deparsers.python.parameters_deparser import ParametersDeparser
 from arborista.deparsers.python.suite_deparser import SuiteDeparser
 from arborista.nodes.python.block import Block
 from arborista.nodes.python.expression import Expression
@@ -24,9 +24,8 @@ class FunctionDefinitionDeparser(Deparser):  # pylint: disable=too-few-public-me
 
         string += '('
 
-        parameter_strings: Iterator[str] = (ParameterDeparser.deparse_parameter(parameter)
-                                            for parameter in function_definition.parameters)
-        parameters_string: str = ','.join(parameter_strings)
+        parameters_string: str = ParametersDeparser.deparse_parameters(
+            function_definition.parameters)
         string += parameters_string
 
         string += ')'

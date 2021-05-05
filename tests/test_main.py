@@ -14,6 +14,7 @@ from arborista.nodes.file_system.file import File
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
@@ -176,7 +177,7 @@ def test_parse(parsed_arguments: argparse.Namespace, file_contents: str,
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('tree, expected_transformed_tree', [
-    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement(), ReturnStatement()]))]))), Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()]))])))),
+    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([ReturnStatement(), ReturnStatement()]))]))), Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([ReturnStatement()]))])))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_transform(tree: Tree, expected_transformed_tree: Tree) -> None:
@@ -189,7 +190,7 @@ def test_transform(tree: Tree, expected_transformed_tree: Tree) -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('tree, expected_file_contents', [
     (Tree(File(Path('foo.py'), Module('foo', []))), ''),
-    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), [], SimpleStatement([ReturnStatement()]))]))), 'def foo():return\n'),
+    (Tree(File(Path('foo.py'), Module('foo', [FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([ReturnStatement()]))]))), 'def foo():return\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse(tree: Tree, expected_file_contents: str) -> None:

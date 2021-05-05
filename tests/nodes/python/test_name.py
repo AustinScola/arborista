@@ -1,12 +1,12 @@
 """Test arborista.nodes.python.name."""
 from typing import Any, Dict, Iterable, Optional
+from unittest.mock import MagicMock
 
 import pytest
 
 from arborista.node import Node
 from arborista.nodes.python.atom import Atom
 from arborista.nodes.python.name import Name, Names
-from arborista.nodes.python.parameter import Parameter
 
 
 def test_inheritance() -> None:
@@ -18,7 +18,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('value, parent, pass_parent', [
     ('f', None, False),
     ('f', None, True),
-    ('f', Parameter(Name('f')), True),
+    ('f', MagicMock(), True),
 ])
 # yapf: enable
 def test_init(value: str, parent: Optional[Node], pass_parent: bool) -> None:
