@@ -3,6 +3,7 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.compound_statement_deparser import CompoundStatementDeparser
+from arborista.nodes.python.class_definition import ClassDefinition
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.expression_list import ExpressionList
 from arborista.nodes.python.for_statement import ForStatement
@@ -25,6 +26,8 @@ def test_inheritance() -> None:
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '', 'def foo():return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '    ', '    def foo():return\n'),
     (FunctionDefinition(Name('foo'), parameters=[], body=SimpleStatement([ReturnStatement()])), '\t', '\tdef foo():return\n'),
+    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '', 'class Foo():pass\n'),
+    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '    ', '    class Foo():pass\n'),
     (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '', 'if foo:pass\n'),
     (IfStatement(If(Name('foo'), SimpleStatement([PassStatement()])), [], None), '    ', '    if foo:pass\n'),
     (ForStatement(ExpressionList(Name('foo'), []), ExpressionList(Name('bar'), []), SimpleStatement([PassStatement()]), None), '', 'for foo in bar:pass\n'),
