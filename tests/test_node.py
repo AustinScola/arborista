@@ -8,7 +8,7 @@ from arborista.exception import ArboristaException
 from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTypeException
 from arborista.node import Node, NodeType, NodeTypes
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import Parameter
+from arborista.nodes.python.positional_parameter import PositionalParameter
 from testing_helpers.animal_nodes import Animal, Bird, Cat, Dog, Lizard, Mammal
 from testing_helpers.assert_parent_set_in_children import assert_parent_set_in_children
 
@@ -82,7 +82,7 @@ def test_assert_is_type(node: Node, node_types: Union[NodeType, NodeTypes],
 
 # yapf: disable
 @pytest.mark.parametrize('node', [
-    (Parameter(Name('foo'))),
+    (PositionalParameter(Name('foo'))),
 ])
 # yapf: enable
 def test_set_parent_in_children(node: Node) -> None:

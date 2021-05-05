@@ -1,12 +1,11 @@
 """Test arborista.python.nodes.block."""
 from typing import Any, Dict, Optional
+from unittest.mock import MagicMock
 
 import pytest
 
 from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.block import Block
-from arborista.nodes.python.function_definition import FunctionDefinition
-from arborista.nodes.python.name import Name
 from arborista.nodes.python.python_node import PythonNode
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
@@ -22,28 +21,28 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('body, expected_body, indent, parent, pass_parent', [
     ([ReturnStatement()], [ReturnStatement()], '    ', None, False),
     ([ReturnStatement()], [ReturnStatement()], '    ', None, True),
-    ([ReturnStatement()], [ReturnStatement()], '    ', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    ([ReturnStatement()], [ReturnStatement()], '    ', MagicMock(), True),
     ([ReturnStatement()], [ReturnStatement()], '\t', None, False),
     ([ReturnStatement()], [ReturnStatement()], '\t', None, True),
-    ([ReturnStatement()], [ReturnStatement()], '\t', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    ([ReturnStatement()], [ReturnStatement()], '\t', MagicMock(), True),
     ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', None, False),
     ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', None, True),
-    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', MagicMock(), True),
     ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', None, False),
     ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', None, True),
-    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    ([ReturnStatement(), ReturnStatement(), ReturnStatement()], [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', MagicMock(), True),
     (iter([]), [], '   ', None, False),
     (iter([]), [], '   ', None, True),
-    (iter([]), [], '   ', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    (iter([]), [], '   ', MagicMock(), True),
     (iter([]), [], '\t', None, False),
     (iter([]), [], '\t', None, True),
-    (iter([]), [], '\t', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    (iter([]), [], '\t', MagicMock(), True),
     (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', None, False),
     (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', None, True),
-    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '    ', MagicMock(), True),
     (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', None, False),
     (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', None, True),
-    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', FunctionDefinition(Name('foo'), [], Block([], '    ')), True),
+    (iter([ReturnStatement(), ReturnStatement(), ReturnStatement()]), [ReturnStatement(), ReturnStatement(), ReturnStatement()], '\t', MagicMock(), True),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_init(body: Statements, expected_body: StatementList, indent: str, parent: Optional[Node],

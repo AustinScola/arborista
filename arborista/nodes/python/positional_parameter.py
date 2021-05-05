@@ -1,4 +1,4 @@
-"""A Python parameter."""
+"""A Python positional parameter."""
 from typing import Iterable, List, Optional
 
 from arborista.node import Node, NodeIterator
@@ -6,8 +6,8 @@ from arborista.nodes.python.name import Name
 from arborista.nodes.python.python_node import PythonNode
 
 
-class Parameter(PythonNode):
-    """A Python parameter."""
+class PositionalParameter(PythonNode):
+    """A Python positional parameter."""
     def __init__(self, name: Name, parent: Optional[Node] = None):
         super().__init__(parent)
 
@@ -17,5 +17,5 @@ class Parameter(PythonNode):
         yield self.name
 
 
-Parameters = Iterable[Parameter]
-ParameterList = List[Parameter]
+PositionalParameters = Iterable[PositionalParameter]
+PositionalParameterList = List[PositionalParameter]

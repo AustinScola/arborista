@@ -9,6 +9,7 @@ from arborista.exceptions.unexpected_node_type_exception import UnexpectedNodeTy
 from arborista.node import Node
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.transformation import Transformation
@@ -27,7 +28,7 @@ def test_inheritance() -> None:
     assert issubclass(TrimAfterReturn, Transformation)
 
 
-node_0: Node = FunctionDefinition(Name('foo'), [], SimpleStatement([]))
+node_0: Node = FunctionDefinition(Name('foo'), Parameters(), SimpleStatement([]))
 tree_0: Tree = Tree(root=node_0)
 expected_transformation_result_0: Optional[TransformationResult] = None
 expected_tree_0: Tree = Tree(root=node_0)

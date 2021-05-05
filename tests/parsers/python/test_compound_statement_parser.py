@@ -12,6 +12,7 @@ from arborista.nodes.python.if_ import If
 from arborista.nodes.python.if_statement import IfStatement
 from arborista.nodes.python.integer import Integer
 from arborista.nodes.python.name import Name
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
@@ -28,7 +29,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_compound_statement, expected_compound_statement', [
     (libcst.If(libcst.Integer('1'), libcst.SimpleStatementSuite([libcst.Pass()])), IfStatement(If(Integer(1), SimpleStatement([PassStatement()])), [], None)),
-    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=[], body=Block([SimpleStatement([ReturnStatement()])], '    '))),
+    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    '))),
     (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()])), ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()]))),
     (libcst.For(libcst.Name('foo'), libcst.Name('bar'), libcst.SimpleStatementSuite([libcst.Pass()])), ForStatement(ExpressionList(Name('foo'), []), ExpressionList(Name('bar'), []), SimpleStatement([PassStatement()]), None)),
 ])

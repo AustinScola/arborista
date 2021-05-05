@@ -5,7 +5,7 @@ from arborista.node import Node, NodeIterator
 from arborista.nodes.python.compound_statement import CompoundStatement
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import ParameterList, Parameters
+from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.suite import Suite
 
 
@@ -22,13 +22,13 @@ class FunctionDefinition(CompoundStatement):
         super().__init__(parent)
 
         self.name: Name = name
-        self.parameters: ParameterList = list(parameters)
+        self.parameters: Parameters = parameters
         self.body: Suite = body
         self.returns: Optional[Expression] = returns
 
     def iterate_children(self) -> NodeIterator:
         yield self.name
-        yield from self.parameters
+        yield self.parameters
         yield self.body
         if self.returns is not None:
             yield self.returns

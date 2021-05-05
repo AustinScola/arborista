@@ -7,7 +7,8 @@ from arborista.node import Node, NodeIterator, NodeList
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.module import Module
 from arborista.nodes.python.name import Name
-from arborista.nodes.python.parameter import Parameter
+from arborista.nodes.python.parameters import Parameters
+from arborista.nodes.python.positional_parameter import PositionalParameter
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.tree import Tree
@@ -57,7 +58,7 @@ def test_eq(tree: Tree, other: Any, expected_equality: bool) -> None:
     (Tree(SimpleStatement([ReturnStatement()])), [SimpleStatement([ReturnStatement()]), ReturnStatement()]),
     (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()])), [SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), ReturnStatement(), ReturnStatement(), ReturnStatement()]),
     (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()])), [SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), ReturnStatement(), ReturnStatement(), ReturnStatement()]),
-    (Tree(FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()]))), [FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()])), Name('foo'), Parameter(Name('a')), Name('a'), SimpleStatement([ReturnStatement()]), ReturnStatement()]),
+    (Tree(FunctionDefinition(Name('foo'), parameters=Parameters([PositionalParameter(Name('a'))]), body=SimpleStatement([ReturnStatement()]))), [FunctionDefinition(Name('foo'), parameters=Parameters([PositionalParameter(Name('a'))]), body=SimpleStatement([ReturnStatement()])), Name('foo'), Parameters([PositionalParameter(Name('a'))]), PositionalParameter(Name('a')), Name('a'), SimpleStatement([ReturnStatement()]), ReturnStatement()]),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_walk(tree: Tree, expected_nodes: NodeList) -> None:
@@ -74,7 +75,7 @@ def test_walk(tree: Tree, expected_nodes: NodeList) -> None:
     (Tree(SimpleStatement([ReturnStatement()]))),
     (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]))),
     (Tree(SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]))),
-    (Tree(FunctionDefinition(Name('foo'), parameters=[Parameter(Name('a'))], body=SimpleStatement([ReturnStatement()])))),
+    (Tree(FunctionDefinition(Name('foo'), parameters=Parameters([PositionalParameter(Name('a'))]), body=SimpleStatement([ReturnStatement()])))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_set_parents(tree: Tree) -> None:
