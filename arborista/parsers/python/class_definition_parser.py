@@ -25,10 +25,13 @@ class ClassDefinitionParser(Parser):  # pylint: disable=too-few-public-methods
 
         bases: Optional[Arguments]
         libcst_arguments = libcst_class_definition.bases
-        if libcst_arguments:
-            bases = ArgumentsParser.parse_arguments(libcst_arguments)
-        else:
+        if not libcst_arguments \
+            and libcst_class_definition.rpar is libcst.MaybeSentinel.DEFAULT \
+            and libcst_class_definition.lpar is libcst.MaybeSentinel.DEFAULT:
+
             bases = None
+        else:
+            bases = ArgumentsParser.parse_arguments(libcst_arguments)
 
         libcst_suite: LibcstSuite = libcst_class_definition.body
         body: Suite = SuiteParser.parse_suite(libcst_suite)

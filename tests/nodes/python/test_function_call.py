@@ -1,5 +1,5 @@
 """Test arborista.nodes.python.function_call."""
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from unittest.mock import MagicMock
 
 import pytest
@@ -17,24 +17,25 @@ def test_inheritance() -> None:
     assert issubclass(FunctionCall, Expression)
 
 
-# yapf: disable
-@pytest.mark.parametrize('function, arguments, parent, pass_parent', [
-    (Name('foo'), None, None, False),
-    (Name('foo'), None, None, True),
-    (Name('foo'), None, MagicMock(), True),
-    (Name('foo'), None, MagicMock(), True),
-    (Name('foo'), Arguments(Argument(Name('bar')), [Argument(Name('baz'))]), None, False),
+_PARENT = MagicMock()
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('arguments, keyword_arguments, expected_function, expected_arguments, expected_parent', [
+    ([Name('foo')], {}, Name('foo'), Arguments(), None),
+    ([Name('foo')], {'parent': None}, Name('foo'), Arguments(), None),
+    ([Name('foo')], {'parent': _PARENT}, Name('foo'), Arguments(), _PARENT),
+    ([Name('foo'), Arguments()], {'parent': _PARENT}, Name('foo'), Arguments(), _PARENT),
+    ([Name('foo'), Arguments([Argument(Name('bar'))])], {}, Name('foo'), Arguments([Argument(Name('bar'))]), None),
+    ([Name('foo'), Arguments([Argument(Name('bar')), Argument(Name('baz'))])], {}, Name('foo'), Arguments([Argument(Name('bar')), Argument(Name('baz'))]), None),
 ])
-# yapf: enable
-def test_init(function: Expression, arguments: Optional[Arguments], parent: Optional[Node],
-              pass_parent: bool) -> None:
+# yapf: enable # pylint: enable=line-too-long
+def test_init(arguments: List[Any], keyword_arguments: Dict[str,
+                                                            Any], expected_function: Expression,
+              expected_arguments: Arguments, expected_parent: Optional[Node]) -> None:
     """Test arborista.nodes.python.function_call.FunctionCall.__init__"""
-    keyword_arguments: Dict[str, Any] = {}
-    if pass_parent:
-        keyword_arguments['parent'] = parent
+    function_call: FunctionCall = FunctionCall(*arguments, **keyword_arguments)
 
-    function_call: FunctionCall = FunctionCall(function, arguments, **keyword_arguments)
-
-    assert function_call.function == function
-    assert function_call.arguments == arguments
-    assert function_call.parent is parent
+    assert function_call.function == expected_function
+    assert function_call.arguments == expected_arguments
+    assert function_call.parent is expected_parent

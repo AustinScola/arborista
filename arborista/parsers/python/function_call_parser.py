@@ -1,6 +1,4 @@
 """Parser for a Python function call."""
-from typing import Optional
-
 import libcst
 
 from arborista.nodes.python.arguments import Arguments
@@ -25,12 +23,8 @@ class FunctionCallParser(Parser):  # pylint: disable=too-few-public-methods
         from arborista.parsers.python.arguments_parser import (  # pylint: disable=import-outside-toplevel
             ArgumentsParser, LibcstArguments)
 
-        arguments: Optional[Arguments]
         libcst_arguments: LibcstArguments = libcst_function_call.args
-        if not libcst_arguments:
-            arguments = None
-        else:
-            arguments = ArgumentsParser.parse_arguments(libcst_arguments)
+        arguments: Arguments = ArgumentsParser.parse_arguments(libcst_arguments)
 
         function_call: FunctionCall = FunctionCall(function, arguments)
         return function_call

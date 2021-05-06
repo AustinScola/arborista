@@ -16,23 +16,22 @@ def test_inheritance() -> None:
     assert issubclass(Arguments, PythonNode)
 
 
+_PARENT = MagicMock()
+
+
 # yapf: disable
-@pytest.mark.parametrize('first, rest, parent, pass_parent', [
-    (Name('foo'), [], None, False),
-    (Name('foo'), [], None, True),
-    (Name('foo'), [], MagicMock(), True),
-    (Name('foo'), [Name('bar'), Name('baz')], None, False),
+@pytest.mark.parametrize('arguments, keyword_arguments, expected_arguments, expected_parent', [
+    ([], {}, [], None),
+    ([], {'parent': None}, [], None),
+    ([], {'parent': _PARENT}, [], _PARENT),
+    ([[Name('foo')]], {}, [Name('foo')], None),
+    ([[Name('foo'), Name('bar'), Name('baz')]], {}, [Name('foo'), Name('bar'), Name('baz')], None),
 ])
 # yapf: enable
-def test_init(first: Argument, rest: List[Argument], parent: Optional[Node],
-              pass_parent: bool) -> None:
+def test_init(arguments: List[Any], keyword_arguments: Dict[str, Any],
+              expected_arguments: List[Argument], expected_parent: Optional[Node]) -> None:
     """Test arborista.nodes.python.arguments.Arguments.__init__."""
-    keyword_arguments: Dict[str, Any] = {}
-    if pass_parent:
-        keyword_arguments['parent'] = parent
+    arguments_node: Arguments = Arguments(*arguments, **keyword_arguments)
 
-    arguments: Arguments = Arguments(first, rest, **keyword_arguments)
-
-    assert arguments.first == first
-    assert arguments.rest == rest
-    assert arguments.parent is parent
+    assert arguments_node.arguments == expected_arguments
+    assert arguments_node.parent is expected_parent

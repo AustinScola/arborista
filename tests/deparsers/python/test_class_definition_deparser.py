@@ -18,11 +18,12 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('class_definition, indent, expected_string', [
-    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '', 'class Foo():pass\n'),
-    (ClassDefinition(Name('Foo'), Arguments(Name('Bar'), []), SimpleStatement([PassStatement()])), '', 'class Foo(Bar):pass\n'),
-    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '    ', '    class Foo():pass\n'),
-    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '    ', '    class Foo():pass\n'),
-    (ClassDefinition(Name('Foo'), None, Block([SimpleStatement([PassStatement()])], '    ')), '    ', '    class Foo():\n        pass\n'),
+    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '', 'class Foo:pass\n'),
+    (ClassDefinition(Name('Foo'), Arguments(), SimpleStatement([PassStatement()])), '', 'class Foo():pass\n'),
+    (ClassDefinition(Name('Foo'), Arguments([Name('Bar')]), SimpleStatement([PassStatement()])), '', 'class Foo(Bar):pass\n'),
+    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '    ', '    class Foo:pass\n'),
+    (ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()])), '    ', '    class Foo:pass\n'),
+    (ClassDefinition(Name('Foo'), None, Block([SimpleStatement([PassStatement()])], '    ')), '    ', '    class Foo:\n        pass\n'),
 
 ])
 # yapf: enable # pylint: enable=line-too-long

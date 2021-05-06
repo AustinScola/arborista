@@ -1,9 +1,6 @@
 """Deparser for Python arguments."""
-from typing import List
-
 from arborista.deparser import Deparser
 from arborista.deparsers.python.argument_deparser import ArgumentDeparser
-from arborista.nodes.python.argument import Argument
 from arborista.nodes.python.arguments import Arguments
 
 
@@ -14,12 +11,9 @@ class ArgumentsDeparser(Deparser):  # pylint: disable=too-few-public-methods
         """Deparse Python arguments."""
         string: str
 
-        first: Argument = arguments.first
-        first_string = ArgumentDeparser.deparse_argument(first)
+        argument_strings = (ArgumentDeparser.deparse_argument(argument)
+                            for argument in arguments.arguments)
 
-        rest: List[Argument] = arguments.rest
-        rest_strings = (ArgumentDeparser.deparse_argument(argument) for argument in rest)
-
-        string = first_string + ''.join(', ' + argument_string for argument_string in rest_strings)
+        string = ', '.join(argument_strings)
 
         return string

@@ -23,8 +23,9 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_arguments, expected_arguments', [
-    ([libcst.Arg(libcst.Integer('5'))], Arguments(Integer(5), [])),
-    ([libcst.Arg(libcst.Integer('5')), libcst.Arg(libcst.Integer('7'))], Arguments(Integer(5), [Integer(7)])),
+    ([], Arguments([])),
+    ([libcst.Arg(libcst.Integer('5'))], Arguments([Integer(5)])),
+    ([libcst.Arg(libcst.Integer('5')), libcst.Arg(libcst.Integer('7'))], Arguments([Integer(5), Integer(7)])),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_arguments(libcst_arguments: LibcstArguments, expected_arguments: Arguments) -> None:

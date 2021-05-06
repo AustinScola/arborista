@@ -22,14 +22,14 @@ class ClassDefinitionDeparser(Deparser):  # pylint: disable=too-few-public-metho
         name: Name = class_definition.name
         name_string: str = NameDeparser.deparse_name(name)
 
-        string = indent + 'class ' + name_string + '('
+        string = indent + 'class ' + name_string
 
         bases: Optional[Arguments] = class_definition.bases
         if bases is not None:
             bases_string: str = ArgumentsDeparser.deparse_arguments(bases)
-            string += bases_string
+            string += '(' + bases_string + ')'
 
-        string += '):'
+        string += ':'
 
         body: Suite = class_definition.body
         if isinstance(body, Block):

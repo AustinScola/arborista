@@ -25,8 +25,9 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_class_definition, expected_class_definition', [
-    (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()])), ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()]))),
-    (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()]), [libcst.Arg(libcst.Integer('5'))]), ClassDefinition(Name('Foo'), Arguments(Integer(5), []), SimpleStatement([PassStatement()]))),
+    (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()]), lpar=libcst.MaybeSentinel.DEFAULT, rpar=libcst.MaybeSentinel.DEFAULT), ClassDefinition(Name('Foo'), None, SimpleStatement([PassStatement()]))),
+    (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()]), lpar=libcst.LeftParen(), rpar=libcst.RightParen()), ClassDefinition(Name('Foo'), Arguments(), SimpleStatement([PassStatement()]))),
+    (libcst.ClassDef(libcst.Name('Foo'), libcst.SimpleStatementSuite([libcst.Pass()]), [libcst.Arg(libcst.Integer('5'))]), ClassDefinition(Name('Foo'), Arguments([Integer(5)]), SimpleStatement([PassStatement()]))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_class_definition(libcst_class_definition: LibcstClassDefinition,
@@ -35,4 +36,5 @@ def test_parse_class_definition(libcst_class_definition: LibcstClassDefinition,
     class_definition: ClassDefinition = ClassDefinitionParser.parse_class_definition(
         libcst_class_definition)
 
+    assert class_definition.bases == expected_class_definition.bases
     assert class_definition == expected_class_definition
