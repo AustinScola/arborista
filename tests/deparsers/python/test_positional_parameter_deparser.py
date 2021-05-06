@@ -16,6 +16,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('positional_parameter, expected_string', [
     (PositionalParameter(Name('foo')), 'foo'),
     (PositionalParameter(Name('foo'), Name('Foo')), 'foo: Foo'),
+    (PositionalParameter(Name('foo'), Name('Foo'), Name('bar')), 'foo: Foo = bar'),
 ])
 # yapf: enable
 def test_deparse_positional_parameter(positional_parameter: PositionalParameter,

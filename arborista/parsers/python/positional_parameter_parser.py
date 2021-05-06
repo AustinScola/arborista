@@ -30,7 +30,14 @@ class PositionalParameterParser(Parser):  # pylint: disable=too-few-public-metho
             libcst_annotation: LibcstExpression = libcst_positional_parameter.annotation.annotation
             annotation = ExpressionParser.parse_expression(libcst_annotation)
 
-        positional_parameter: PositionalParameter = PositionalParameter(name, annotation)
+        default: Optional[Expression]
+        if libcst_positional_parameter.default is None:
+            default = None
+        else:
+            libcst_default: LibcstExpression = libcst_positional_parameter.default
+            default = ExpressionParser.parse_expression(libcst_default)
+
+        positional_parameter: PositionalParameter = PositionalParameter(name, annotation, default)
         positional_parameter.set_parent_in_children()
 
         return positional_parameter

@@ -18,6 +18,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_positional_parameter, expected_positional_parameter', [
     (libcst.Param(libcst.Name('foo'), libcst.Annotation(libcst.Name('Foo'))), PositionalParameter(Name('foo'), Name('Foo'))),
+    (libcst.Param(libcst.Name('foo'), libcst.Annotation(libcst.Name('Foo')), default=libcst.Name('bar')), PositionalParameter(Name('foo'), Name('Foo'), Name('bar'))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_positional_parameter(libcst_positional_parameter: LibcstPositionalParameter,
