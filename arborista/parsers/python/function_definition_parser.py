@@ -3,12 +3,14 @@ from typing import Optional
 
 import libcst
 
+from arborista.nodes.python.decorator import Decorators
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameters import Parameters
 from arborista.nodes.python.suite import Suite
 from arborista.parser import Parser
+from arborista.parsers.python.decorator_parser import DecoratorParser, LibcstDecorators
 from arborista.parsers.python.expression_parser import ExpressionParser
 from arborista.parsers.python.name_parser import LibcstName, NameParser
 from arborista.parsers.python.parameters_parser import LibcstParameters, ParametersParser
@@ -33,6 +35,9 @@ class FunctionDefinitionParser(Parser):  # pylint: disable=too-few-public-method
         libcst_body: LibcstSuite = libcst_function_definition.body
         body: Suite = SuiteParser.parse_suite(libcst_body)
 
+        libcst_decorators: LibcstDecorators = libcst_function_definition.decorators
+        decorotors: Decorators = DecoratorParser.parse_decorators(libcst_decorators)
+
         returns: Optional[Expression]
         if libcst_function_definition.returns is None:
             returns = None
@@ -40,10 +45,8 @@ class FunctionDefinitionParser(Parser):  # pylint: disable=too-few-public-method
             libcst_returns = libcst_function_definition.returns.annotation
             returns = ExpressionParser.parse_expression(libcst_returns)
 
-        function_definition: FunctionDefinition = FunctionDefinition(name,
-                                                                     parameters,
-                                                                     body,
-                                                                     returns=returns)
+        function_definition: FunctionDefinition = FunctionDefinition(name, parameters, body,
+                                                                     decorotors, returns)
         function_definition.set_parent_in_children()
 
         return function_definition

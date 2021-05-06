@@ -3,6 +3,8 @@ import libcst
 import pytest
 
 from arborista.nodes.python.block import Block
+from arborista.nodes.python.decorator import Decorator
+from arborista.nodes.python.dotted_name import DottedName
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.name import Name
 from arborista.nodes.python.parameters import Parameters
@@ -23,6 +25,7 @@ def test_inheritance() -> None:
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_function_definition, expected_function_definition', [
     (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    '))),
+    (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), decorators=[libcst.Decorator(libcst.Name('bar'))]), FunctionDefinition(name=Name('foo'), parameters=Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    '), decorators=[Decorator(DottedName(Name('bar'), []))])),
     (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters(), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), returns=libcst.Annotation(libcst.Name('Bar'))), FunctionDefinition(name=Name('foo'), parameters=Parameters(), body=Block([SimpleStatement([ReturnStatement()])], '    '), returns=Name('Bar'))),
     (libcst.FunctionDef(name=libcst.Name(value='foo'), params=libcst.Parameters([libcst.Param(libcst.Name('bar'))]), body=libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])])), FunctionDefinition(name=Name('foo'), parameters=Parameters([PositionalParameter(Name('bar'))]), body=Block([SimpleStatement([ReturnStatement()])], '    '))),
 ])
