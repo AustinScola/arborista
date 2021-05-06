@@ -12,11 +12,13 @@ class PositionalParameter(PythonNode):
     def __init__(self,
                  name: Name,
                  annotation: Optional[Expression] = None,
+                 default: Optional[Expression] = None,
                  parent: Optional[Node] = None):
         super().__init__(parent)
 
         self.name: Name = name
         self.annotation: Optional[Expression] = annotation
+        self.default: Optional[Expression] = default
 
     def iterate_children(self) -> NodeIterator:
         yield self.name
