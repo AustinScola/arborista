@@ -40,8 +40,10 @@ class FunctionDefinitionParser(Parser):  # pylint: disable=too-few-public-method
             libcst_returns = libcst_function_definition.returns.annotation
             returns = ExpressionParser.parse_expression(libcst_returns)
 
-        function_definition: FunctionDefinition = FunctionDefinition(name, parameters, body,
-                                                                     returns)
+        function_definition: FunctionDefinition = FunctionDefinition(name,
+                                                                     parameters,
+                                                                     body,
+                                                                     returns=returns)
         function_definition.set_parent_in_children()
 
         return function_definition
