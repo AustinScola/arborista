@@ -4,6 +4,8 @@ import pytest
 from arborista.deparser import Deparser
 from arborista.deparsers.python.function_definition_deparser import FunctionDefinitionDeparser
 from arborista.nodes.python.block import Block
+from arborista.nodes.python.decorator import Decorator
+from arborista.nodes.python.dotted_name import DottedName
 from arborista.nodes.python.function_definition import FunctionDefinition
 from arborista.nodes.python.if_ import If
 from arborista.nodes.python.if_statement import IfStatement
@@ -32,6 +34,8 @@ def test_inheritance() -> None:
     (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('a')), PositionalParameter(Name('b'))]), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a, b):return\n'),
     (FunctionDefinition(Name('foo'), Parameters([PositionalParameter(Name('a')), PositionalParameter(Name('b')), PositionalParameter(Name('c'))]), body=SimpleStatement([ReturnStatement()])), '    ', '    def foo(a, b, c):return\n'),
     (FunctionDefinition(Name('foo'), Parameters(), body=Block([IfStatement(If(Name('bar'), Block([SimpleStatement([ReturnStatement()])], '\t')), [], None)], '\t')), '\t', '\tdef foo():\n\t\tif bar:\n\t\t\treturn\n'),
+    (FunctionDefinition(Name('bar'), Parameters(), SimpleStatement([ReturnStatement()]), [Decorator(DottedName(Name('foo'), []))]), '', '@foo\ndef bar():return\n'),
+    (FunctionDefinition(Name('bar'), Parameters(), SimpleStatement([ReturnStatement()]), [Decorator(DottedName(Name('foo'), []))]), '\t', '\t@foo\n\tdef bar():return\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_function_definition(function_definition: FunctionDefinition, indent: str,

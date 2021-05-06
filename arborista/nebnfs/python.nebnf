@@ -3,6 +3,8 @@ Statement = EmptyLine | CompoundStatement | SimpleStatement
 
 EmptyLine = NEWLINE
 
+Decorator = "@" name: DottedName [ "(" arguments: Arguments ")" ]
+
 CompoundStatement = IfStatement | WhileStatement | ForStatement | TryStatement | WithStatement | FunctionDefinition | ClassDefinition | DecoratedDefinition | AsyncStatement
 
 IfStatement = if: If elifs: (Elif)* [else: Else]
@@ -16,7 +18,7 @@ ForStatement = "for" values: ExpressionList "in" sources: ExpressionList ":" bod
 
 TryStatement = ...
 WithStatement = ...
-FunctionDefinition = "def" name: Name "(" parameters: Parameters ")" [ "->" returns: Expression] ":" body: Suite
+FunctionDefinition = decorators: Decorator+ "def" name: Name "(" parameters: Parameters ")" [ "->" returns: Expression] ":" body: Suite
 
 Parameters = positional: PositionalParameter* ...
 

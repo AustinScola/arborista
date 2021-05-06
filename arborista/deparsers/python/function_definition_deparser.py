@@ -2,11 +2,13 @@
 from typing import Optional
 
 from arborista.deparser import Deparser
+from arborista.deparsers.python.decorator_deparser import DecoratorDeparser
 from arborista.deparsers.python.expression_deparser import ExpressionDeparser
 from arborista.deparsers.python.name_deparser import NameDeparser
 from arborista.deparsers.python.parameters_deparser import ParametersDeparser
 from arborista.deparsers.python.suite_deparser import SuiteDeparser
 from arborista.nodes.python.block import Block
+from arborista.nodes.python.decorator import Decorators
 from arborista.nodes.python.expression import Expression
 from arborista.nodes.python.function_definition import FunctionDefinition
 
@@ -16,8 +18,14 @@ class FunctionDefinitionDeparser(Deparser):  # pylint: disable=too-few-public-me
     @staticmethod
     def deparse_function_definition(function_definition: FunctionDefinition, indent: str) -> str:
         """Deparse a Python function definition."""
-        string: str = indent
-        string += 'def '
+        string: str = ''
+
+        decorators: Decorators = function_definition.decorators
+        if decorators:
+            decorators_string = DecoratorDeparser.deparse_decorators(decorators, indent)
+            string += decorators_string
+
+        string += indent + 'def '
 
         name_string: str = NameDeparser.deparse_name(function_definition.name)
         string += name_string
