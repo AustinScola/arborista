@@ -3,6 +3,7 @@ import libcst
 import pytest
 
 from arborista.nodes.python.block import Block
+from arborista.nodes.python.empty_line import EmptyLine
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.parser import Parser
@@ -19,6 +20,7 @@ def test_inheritance() -> None:
 @pytest.mark.parametrize('libcst_block, expected_block', [
     (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])]), Block([SimpleStatement(small_statements=[ReturnStatement()])], '    ')),
     (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()])], indent='    '), Block([SimpleStatement(small_statements=[ReturnStatement()])], '    ')),
+    (libcst.IndentedBlock([libcst.SimpleStatementLine([libcst.Return()], [libcst.EmptyLine()])]), Block([EmptyLine(), SimpleStatement(small_statements=[ReturnStatement()])], '    ')),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_block(libcst_block: LibcstBlock, expected_block: Block) -> None:
