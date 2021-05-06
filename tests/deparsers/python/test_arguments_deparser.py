@@ -14,9 +14,10 @@ def test_inheritance() -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('arguments, expected_string', [
-    (Arguments(Name('foo'), []), 'foo'),
-    (Arguments(Name('foo'), [Name('bar')]), 'foo, bar'),
-    (Arguments(Name('foo'), [Name('bar'), Name('baz'),]), 'foo, bar, baz'),
+    (Arguments([]), ''),
+    (Arguments([Name('foo')]), 'foo'),
+    (Arguments([Name('foo'), Name('bar')]), 'foo, bar'),
+    (Arguments([Name('foo'), Name('bar'), Name('baz')]), 'foo, bar, baz'),
 ])
 # yapf: enable
 def test_deparse_arguments(arguments: Arguments, expected_string: str) -> None:

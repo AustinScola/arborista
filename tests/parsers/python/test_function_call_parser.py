@@ -21,8 +21,8 @@ def test_inheritance() -> None:
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('libcst_function_call, expected_function_call', [
-    (libcst.Call(libcst.Name('foo')), FunctionCall(Name('foo'), None)),
-    (libcst.Call(libcst.Name('foo'), [libcst.Arg(libcst.Name('bar'))]), FunctionCall(Name('foo'), Arguments(Name('bar'), []))),
+    (libcst.Call(libcst.Name('foo')), FunctionCall(Name('foo'), Arguments())),
+    (libcst.Call(libcst.Name('foo'), [libcst.Arg(libcst.Name('bar'))]), FunctionCall(Name('foo'), Arguments([Name('bar')]))),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_parse_function_call(libcst_function_call: LibcstFunctionCall,

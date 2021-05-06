@@ -1,6 +1,4 @@
 """Deparser for a Python function call."""
-from typing import Optional
-
 from arborista.deparser import Deparser
 from arborista.deparsers.python.arguments_deparser import ArgumentsDeparser
 from arborista.nodes.python.arguments import Arguments
@@ -21,11 +19,9 @@ class FunctionCallDeparser(Deparser):  # pylint: disable=too-few-public-methods
         function: Expression = function_call.function
         function_string: str = ExpressionDeparser.deparse_expression(function)
 
-        arguments: Optional[Arguments] = function_call.arguments
-        if arguments is None:
-            string = function_string + '()'
-        else:
-            arguments_string: str = ArgumentsDeparser.deparse_arguments(arguments)
-            string = function_string + '(' + arguments_string + ')'
+        arguments: Arguments = function_call.arguments
+        arguments_string: str = ArgumentsDeparser.deparse_arguments(arguments)
+
+        string = function_string + '(' + arguments_string + ')'
 
         return string

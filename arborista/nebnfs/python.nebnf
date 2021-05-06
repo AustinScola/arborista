@@ -20,8 +20,8 @@ FunctionDefinition = "def" name: Name "(" parameters: Parameters ")" [ "->" retu
 
 Parameters = positional: PositionalParameter* ...
 
-ClassDefinition = "class" name: Name ["(" [bases: Arguments] ")"] ":" body: Suite
-Arguments = first: Argument ("," rest: Argument)*
+ClassDefinition = "class" name: Name ["(" bases: Arguments ")"] ":" body: Suite
+Arguments = arguments: <Argument ",">*
 Argument = Expression | KeywordArugment | UnpackedIterable | UnpackedDictionary
 KeywordArugment = Expression "=" Expression
 UnpackedIterable = "*" Expression

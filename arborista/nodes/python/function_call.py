@@ -10,9 +10,9 @@ class FunctionCall(Expression):
     """A Python function call."""
     def __init__(self,
                  function: Expression,
-                 arguments: Optional[Arguments],
+                 arguments: Optional[Arguments] = None,
                  parent: Optional[Node] = None):
         super().__init__(parent)
 
         self.function: Expression = function
-        self.arguments: Optional[Arguments] = arguments
+        self.arguments: Arguments = Arguments() if arguments is None else arguments
