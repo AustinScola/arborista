@@ -3,11 +3,15 @@ import pytest
 
 from arborista.deparser import Deparser
 from arborista.deparsers.python.simple_statement_deparser import SimpleStatementDeparser
+from arborista.nodes.python.comment import Comment
 from arborista.nodes.python.expression_statement import ExpressionStatement
+from arborista.nodes.python.newline import Newline
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
+from arborista.nodes.python.simple_whitespace import SimpleWhitespace
 from arborista.nodes.python.single_quoted_short_string import SingleQuotedShortString
 from arborista.nodes.python.string import String
+from arborista.nodes.python.trailing_whitespace import TrailingWhitespace
 
 
 def test_inheritance() -> None:
@@ -27,6 +31,9 @@ def test_inheritance() -> None:
     (SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), '    ', '    return; return; return\n'),
     (SimpleStatement([ReturnStatement(), ReturnStatement(), ReturnStatement()]), '\t', '\treturn; return; return\n'),
     (SimpleStatement([ExpressionStatement(String(None, SingleQuotedShortString('foo')))]), '', "'foo'\n"),
+    (SimpleStatement([ReturnStatement()], TrailingWhitespace(SimpleWhitespace(' '))), '', 'return \n'),
+    (SimpleStatement([ReturnStatement()], TrailingWhitespace(newline=Newline('\r\n'))), '', 'return\r\n'),
+    (SimpleStatement([ReturnStatement()], TrailingWhitespace(SimpleWhitespace(' '), Comment('# foo'))), '', 'return # foo\n'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_deparse_simple_statement(simple_statement: SimpleStatement, indent: str,

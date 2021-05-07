@@ -35,7 +35,7 @@ Block = NEWLINE INDENT body: Statement+ DEDENT
 DecoratedDefinition = ...
 AsyncStatement = ...
 
-SimpleStatement = SmallStatement (";" SmallStatement)* ";" Newline
+SimpleStatement = SmallStatement (";" SmallStatement)* ";" TrailingWhitespace
 SmallStatement = ExpressionStatement | DeleteStatement | PassStatement | FlowStatement | ImportStatement | GlobalStatement | NonlocalStatement | AssertStatement | AssignmentStatement | AnnotatedAssignmentStatement
 
 ExpressionStatement = Expression
@@ -139,3 +139,5 @@ AssignmentStatement = targets: AssignmentTargets "=" value: Expression
 AssignmentTargets = first: Expression ("," rest: Expression)*
 
 AnnotatedAssignmentStatement = target: Expression ":" annotation: Expression ["=" value: Expression]
+
+TrailingWhitespace = [whitespace: SIMPLE_WHITESPACE] [comment: COMMENT] newline: NEWLINE

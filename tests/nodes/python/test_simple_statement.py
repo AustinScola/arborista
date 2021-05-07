@@ -1,14 +1,16 @@
 """Test arborista.nodes.python.simple_statement."""
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
+from unittest.mock import MagicMock
 
 import pytest
 
 from arborista.node import Node, NodeIterator, NodeList
-from arborista.nodes.python.block import Block
+from arborista.nodes.python.pass_statement import PassStatement
 from arborista.nodes.python.return_statement import ReturnStatement
 from arborista.nodes.python.simple_statement import SimpleStatement
 from arborista.nodes.python.small_statement import SmallStatements
 from arborista.nodes.python.statement import Statement
+from arborista.nodes.python.trailing_whitespace import TrailingWhitespace
 
 
 def test_inheritance() -> None:
@@ -16,24 +18,28 @@ def test_inheritance() -> None:
     assert issubclass(SimpleStatement, Statement)
 
 
-# yapf: disable
-@pytest.mark.parametrize('small_statements, parent, pass_parent', [
-    ([], None, False),
-    ([], None, True),
-    ([], Block([SimpleStatement([])], '    '), True),
+_PARENT = MagicMock()
+
+
+# yapf: disable # pylint: disable=line-too-long
+@pytest.mark.parametrize('arguments, keyword_arguments, expected_small_statements, expected_trailing_whitespace, expected_parent', [
+    ([[]], {}, [], TrailingWhitespace(), None),
+    ([[]], {'parent': None}, [], TrailingWhitespace(), None),
+    ([[]], {'parent': _PARENT}, [], TrailingWhitespace(), _PARENT),
+    ([[PassStatement()]], {'parent': _PARENT}, [PassStatement()], TrailingWhitespace(), _PARENT),
+    ([[PassStatement()]], {'trailing_whitespace': TrailingWhitespace()}, [PassStatement()], TrailingWhitespace(), None),
 ])
-# yapf: enable
-def test_simple_statement_init(small_statements: SmallStatements, parent: Optional[Node],
-                               pass_parent: bool) -> None:
+# yapf: enable # pylint: enable=line-too-long
+def test_simple_statement_init(arguments: List[Any], keyword_arguments: Dict[str, Any],
+                               expected_small_statements: SmallStatements,
+                               expected_trailing_whitespace: Optional[TrailingWhitespace],
+                               expected_parent: Optional[Node]) -> None:
     """Test arborista.nodes.python.simple_statement.__init__."""
-    keyword_arguments: Dict[str, Any] = {}
-    if pass_parent:
-        keyword_arguments['parent'] = parent
+    simple_statement: SimpleStatement = SimpleStatement(*arguments, **keyword_arguments)
 
-    simple_statement: SimpleStatement = SimpleStatement(small_statements, **keyword_arguments)
-
-    assert simple_statement.small_statements == small_statements
-    assert id(simple_statement.parent) == id(parent)
+    assert simple_statement.small_statements == expected_small_statements
+    assert simple_statement.trailing_whitespace == expected_trailing_whitespace
+    assert simple_statement.parent is expected_parent
 
 
 # yapf: disable # pylint: disable=line-too-long
