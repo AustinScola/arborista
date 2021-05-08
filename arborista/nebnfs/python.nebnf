@@ -24,8 +24,8 @@ Parameters = positional: PositionalParameter* ...
 
 ClassDefinition = "class" name: Name ["(" bases: Arguments ")"] ":" body: Suite
 Arguments = arguments: <Argument ",">*
-Argument = Expression | KeywordArugment | UnpackedIterable | UnpackedDictionary
-KeywordArugment = Name "=" Expression
+Argument = Expression | KeywordArgument | UnpackedIterable | UnpackedDictionary
+KeywordArgument = Name "=" Expression
 UnpackedIterable = "*" Expression
 UnpackedDictionary = "**" Expression
 
